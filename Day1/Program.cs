@@ -7,8 +7,15 @@ namespace Day1
     {
         static void Main(string[] args)
         {
-            var input = AOC2020Library.PuzzleInputStore.GetPuzzleInputList("1");
+            List<string> input = AOC2020Library.PuzzleInputStore.GetPuzzleInputList("1");
+            string puzzleOneAnswer = PuzzleOne(input);
+            Console.WriteLine(puzzleOneAnswer);
+        }
+
+        static string PuzzleOne(List<string> input)
+        {
             Dictionary<int, int> puzzleItems = new Dictionary<int, int>();
+            string answer = "";
 
             int turn = 1;
             foreach (var item in input)
@@ -17,7 +24,7 @@ namespace Day1
                 int pairedNumber = 2020 - number;
                 if (puzzleItems.ContainsKey(pairedNumber))
                 {
-                    Console.WriteLine($"Found on turn {turn}, pair is {number},{pairedNumber}, which multiplied equal: {number * pairedNumber}");
+                    answer = $"Found on turn {turn}, pair is {number},{pairedNumber}, which multiplied equal: {number * pairedNumber}";
                     break;
                 }
                 else
@@ -26,6 +33,7 @@ namespace Day1
                 }
                 turn++;
             }
+            return answer;
         }
     }
 }
