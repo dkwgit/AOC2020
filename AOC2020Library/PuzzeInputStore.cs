@@ -14,14 +14,16 @@ namespace AOC2020Library
 
             using (System.IO.StringReader reader = new System.IO.StringReader(input))
             {
-                while (reader.Peek() != -1)
+                string line = "";
+                line = reader.ReadLine();
+                do
                 {
-                    string line = reader.ReadLine();
-                    if (line.Trim().Length > 0)
+                    if (string.Empty.CompareTo(line) != 0)
                     {
                         list.Add(line);
                     }
-                }
+                    line = reader.ReadLine();
+                } while (null != line);
             }
             return list;
         }
