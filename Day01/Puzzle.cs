@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using AOC2020Library;
 
-namespace Day1
+namespace Day01
 {
     public class Puzzle : IPuzzle
     {
         private List<string> _input = null;
         private SortedDictionary<int, int> _sortedInput = new SortedDictionary<int, int>();
-
 
         public void SetInput(List<string> input)
         {
@@ -19,6 +18,8 @@ namespace Day1
                 _sortedInput.Add(int.Parse(input[i]), i);
             }
         }
+
+        public string Day => "01";
 
         public List<String> Input 
         {
@@ -78,7 +79,14 @@ namespace Day1
 
         private IEnumerable<int> TripletFinder(int first)
         {
-            IEnumerable<int> list = _sortedInput.Keys.Where(second => second > first && 2020 - first - second > 0 && _sortedInput.ContainsKey(2020 - first - second)).Select(item => item);
+            IEnumerable<int> list = _sortedInput.Keys.
+                Where(
+                    second => second > first && 
+                    2020 - first - second > 0 && 
+                    _sortedInput.ContainsKey(2020 - first - second)
+                ).
+                Select(item => item);
+
             foreach(int item in list)
             {
                 yield return item;

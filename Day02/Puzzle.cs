@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using AOC2020Library;
 
-namespace Day2
+namespace Day02
 {
     public class Puzzle : IPuzzle
     {
@@ -86,6 +86,7 @@ namespace Day2
             return false;
         }
 
+        public string Day => "02";
 
         public List<String> Input
         {

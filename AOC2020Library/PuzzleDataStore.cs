@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Resources;
 
 
 namespace AOC2020Library
 {
-    public class PuzzleInputStore
+    public class PuzzleDataStore
     {
         public static List<string> GetPuzzleInputList(string dayNumber)
         {
@@ -33,6 +34,12 @@ namespace AOC2020Library
             PropertyInfo propertyToGet = resources.GetProperty($"Day{dayNumber}_PuzzleInput", BindingFlags.Static | BindingFlags.NonPublic);
             string input = propertyToGet.GetValue(null) as string;
             return input;
+        }
+
+        public static string GetPuzzleAnswer(string dayNumber, string PartNumber)
+        {
+            ResourceManager rm = new ResourceManager(typeof(Resources));
+            return rm.GetString($"Day{dayNumber}Part{PartNumber}_Answer");
         }
     }
 }

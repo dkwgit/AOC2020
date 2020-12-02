@@ -146,12 +146,29 @@ namespace AOC2020Library {
         ///1767
         ///1270
         ///1037
-        ///1198
-        /// [rest of string was truncated]&quot;;.
+        ///1198        /// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Day1_PuzzleInput {
+        internal static string Day01_PuzzleInput {
             get {
-                return ResourceManager.GetString("Day1_PuzzleInput", resourceCulture);
+                return ResourceManager.GetString("Day01_PuzzleInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 935419.
+        /// </summary>
+        internal static string Day01Part1_Answer {
+            get {
+                return ResourceManager.GetString("Day01Part1_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 49880012.
+        /// </summary>
+        internal static string Day01Part2_Answer {
+            get {
+                return ResourceManager.GetString("Day01Part2_Answer", resourceCulture);
             }
         }
         
@@ -180,9 +197,27 @@ namespace AOC2020Library {
         ///15-16 r: rrrrrrrrrrrlrrphrr
         ///6-11 j: j [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Day2_PuzzleInput {
+        internal static string Day02_PuzzleInput {
             get {
-                return ResourceManager.GetString("Day2_PuzzleInput", resourceCulture);
+                return ResourceManager.GetString("Day02_PuzzleInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 600.
+        /// </summary>
+        internal static string Day02Part1_Answer {
+            get {
+                return ResourceManager.GetString("Day02Part1_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 245.
+        /// </summary>
+        internal static string Day02Part2_Answer {
+            get {
+                return ResourceManager.GetString("Day02Part2_Answer", resourceCulture);
             }
         }
     }
