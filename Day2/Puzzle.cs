@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 using AOC2020Library;
 
 namespace Day2
@@ -14,15 +15,6 @@ namespace Day2
             private int _max = -1;
             private char _letter = '\0';
             private string _password = null;
-
-            public bool IsValid
-            {
-                get
-                {
-                    int countInPassword = _password.Count(x => x == _letter);
-                    return (_min <= countInPassword && countInPassword <= _max);
-                }
-            }
 
             public int Min
             {
@@ -39,7 +31,7 @@ namespace Day2
                 }
             }
 
-            public int Letter
+            public char Letter
             {
                 get
                 {
@@ -66,6 +58,35 @@ namespace Day2
         private List<string> _input = null;
         private List<PasswordEntry> _passwords = new List<PasswordEntry>();
 
+        private bool Part1Predicate(PasswordEntry entry)
+        {
+            int countInPassword = entry.Password.Count(x => x == entry.Letter);
+            if (entry.Min <= countInPassword && countInPassword <= entry.Max)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool Part2Predicate(PasswordEntry entry)
+        {
+            int min = entry.Min;
+            int max = entry.Max;
+            int passwordLength = entry.Password.Length;
+            char letter = entry.Letter;
+            string password = entry.Password;
+
+            if (min <= passwordLength && max <= passwordLength)
+            {
+                if (password[min-1] == letter  ^ password[max-1] == letter)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
         public List<String> Input
         {
             get
@@ -78,13 +99,21 @@ namespace Day2
         {
             get
             {
-                string answer = $"{_passwords.Where(x => x.IsValid).Count()}";
+                string answer = $"{_passwords.Where(x => Part1Predicate(x)).Count()}";
                 Console.WriteLine($"Found {answer} passwords that were valid out of {_passwords.Count()}");
                 return answer;
             }
         }
 
-        public string Part2 => throw new NotImplementedException();
+        public string Part2
+        {
+            get
+            {
+                string answer = $"{_passwords.Where(x => Part2Predicate(x)).Count()}";
+                Console.WriteLine($"Found {answer} passwords that were valid out of {_passwords.Count()}");
+                return answer;
+            }
+        }
 
         public void SetInput(List<string> input)
         {

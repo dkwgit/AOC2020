@@ -19,6 +19,8 @@ namespace Driver
             day2.SetInput(PuzzleInputStore.GetPuzzleInputList("2"));
             var day2Answer1 = day2.Part1;
             Debug.Assert(day2Answer1 == "600");
+            var day2Answer2 = day2.Part2;
+            Debug.Assert(day2Answer2 == "86");
         }
     }
 }
