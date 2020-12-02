@@ -14,6 +14,9 @@ namespace Driver
             Debug.Assert(day1Answer == "935419");
             var day2Answer = day1.Part2;
             Debug.Assert(day2Answer == "49880012");
+
+            Day2.Puzzle day2 = new Day2.Puzzle();
+            day2.SetInput(PuzzleInputStore.GetPuzzleInputList("2"));
         }
     }
 }

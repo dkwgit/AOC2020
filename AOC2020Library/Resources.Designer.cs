@@ -154,5 +154,36 @@ namespace AOC2020Library {
                 return ResourceManager.GetString("Day1_PuzzleInput", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1-13 r: gqdrspndrpsrjfjx
+        ///5-16 j: jjjjkjjzjjjjjfjzjjj
+        ///14-16 r: rrrnrrrrrcnrgxrr
+        ///1-3 k: bkktwhgktv
+        ///3-5 q: dxqqqzmqvs
+        ///11-14 s: sssssssssssssv
+        ///1-3 d: cdzdq
+        ///13-16 q: scdqpdgpkvbwwqbv
+        ///9-10 d: ddrdddlddd
+        ///15-17 v: jvvvvvvgcvvvvrcvnv
+        ///2-3 s: xssx
+        ///8-15 j: jwjjjjkhjjjltjmjjjr
+        ///7-15 m: wqspfmtpjftmplwp
+        ///1-11 s: swdgzhgsxtssndzfm
+        ///3-4 b: bgjrg
+        ///1-12 x: jxgxxxpjwpsht
+        ///5-15 x: xxjxwshpxjxxxxsnxvz
+        ///4-11 r: bjnrpswfprrng
+        ///12-14 j: wjjzmwnmmvzsjhnnkj
+        ///3-4 d: dddv
+        ///2-4 b: bfxx
+        ///15-16 r: rrrrrrrrrrrlrrphrr
+        ///6-11 j: j [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day2_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day2_PuzzleInput", resourceCulture);
+            }
+        }
     }
 }
