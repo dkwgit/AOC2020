@@ -19,7 +19,7 @@ namespace AOC2020.Sledding
             _width = forestSquares.GetLength(1);
         }
 
-        public List<Square> Run(Tuple<int, int> slope)
+        public List<Square> Run((int,int) slope)
         {
             bool run = true;
             List<Square> path = new List<Square>();
@@ -30,7 +30,7 @@ namespace AOC2020.Sledding
                 {
                     int offset = _width * ((slope.Item1 >= 0) ? (1) : (-1));
                     _columnOffset += offset;
-                    _sledPoint = _sledPoint.AddOffset(new Tuple<int, int>((-1) * offset, 0));
+                    _sledPoint = _sledPoint.AddOffset(((-1) * offset, 0));
                 }
                 Square s = _squares[_sledPoint.Y, _sledPoint.X];
                 path.Add(s);

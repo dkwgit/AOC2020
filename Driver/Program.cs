@@ -10,10 +10,10 @@ namespace AOC2020.Driver
         {
             RunRegressionTests();
 
-            Day03.Puzzle puzzle = new AOC2020.Day03.Puzzle();
+            /*Day03.Puzzle puzzle = new AOC2020.Day03.Puzzle();
             puzzle.SetInput(PuzzleDataStore.GetPuzzleInputList(puzzle.Day));
             string part1Answer = puzzle.Part1;
-            string part2Answer = puzzle.Part2;
+            string part2Answer = puzzle.Part2;*/
         }
 
         static void RunRegressionTests()
@@ -22,7 +22,7 @@ namespace AOC2020.Driver
             {
                 new AOC2020.Day01.Puzzle(),
                 new AOC2020.Day02.Puzzle(),
-                //list.Add(new AOC2020.Day03.Puzzle())
+                new AOC2020.Day03.Puzzle()
             };
 
             RegressionTests.RunRegressionTests(list);

@@ -18,7 +18,7 @@ namespace AOC2020.Sledding
             _y = y;
         }
 
-        public Point AddOffset(Tuple<int,int> offset)
+        public Point AddOffset((int,int) offset)
         {
             return new Point(X + offset.Item1, Y + offset.Item2);
         }
