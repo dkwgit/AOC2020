@@ -52,7 +52,24 @@ namespace AOC2020.Sledding
                 previousRow = currentRow;
             }
 
-            Forest forest = new Forest(new Point(0, 0), _forestSquares);
+            int maxColumns = _forestSquares.Max(x => x.Count);
+            if (_forestSquares.Any(x=>x.Count != maxColumns))
+            {
+                throw new Exception("Unexpected column count in the list of squares for forest");
+            }
+
+            Square[,] squares = new Square[_forestSquares.Count, maxColumns];
+
+            for (int row = 0; row < _forestSquares.Count; row++)
+            {
+                for(int column = 0; column < maxColumns; column++)
+                {
+                    squares[row, column] = _forestSquares[row][column];
+                }
+            }
+
+
+            Forest forest = new Forest(new Point(0, 0), squares);
             return forest;
         }
     }

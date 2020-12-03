@@ -11,8 +11,7 @@ namespace AOC2020.Sledding
         private Square _down = null;
         private Square _left = null;
         private readonly bool _tree = false;
-        private Point _originalLocation = null;
-        private Point _wrappedAroundLocation = null;
+        private Point _location = null;
 
         public Square Up => _up;
         public Square Right => _right;
@@ -20,11 +19,10 @@ namespace AOC2020.Sledding
         public Square Left => _left;
         public bool HasTree => _tree;
 
-        public Point OriginalLocation => _originalLocation;
-        public Point WrappedAroundLocation => _wrappedAroundLocation;
-        public Square(Point original, bool tree)
+        public Point OriginalLocation => _location;
+        public Square(Point location, bool tree)
         {
-            _originalLocation = original;
+            _location = location;
             _tree = tree;
         }
 
