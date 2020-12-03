@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Resources;
 
 
-namespace AOC2020Library
+namespace AOC2020.Utilities
 {
     public class PuzzleDataStore
     {

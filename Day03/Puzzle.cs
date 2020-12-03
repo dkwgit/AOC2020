@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using AOC2020Library;
+using AOC2020.Utilities;
+using AOC2020.Sledding;
 
-namespace Day03
+namespace AOC2020.Day03
 {
     public class Puzzle : IPuzzle
     {
         private List<string> _input = null;
+        private Forest _forest = null;
 
         public List<string> Input => _input;
 
@@ -19,7 +21,7 @@ namespace Day03
         public void SetInput(List<string> input)
         {
             _input = input;
-
+            _forest = new ForestBuilder(input).Build();
         }
     }
 }

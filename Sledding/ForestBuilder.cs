@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Forest
+namespace AOC2020.Sledding
 {
     public class ForestBuilder
     {
@@ -26,7 +26,7 @@ namespace Forest
                 for (int columnNumber = 0; columnNumber < row.Length; columnNumber++)
                 {
                     var cell = row[columnNumber];
-                    Square square = new Square(new Point(currentRowNumber, columnNumber), cell == '#');
+                    Square square = new Square(new Point(columnNumber, currentRowNumber), cell == '#');
                     if (previousRow != null)
                     {
                         Square above = previousRow[columnNumber];

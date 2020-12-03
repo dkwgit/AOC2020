@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOC2020Library", "AOC2020Library\AOC2020Library.csproj", "{6BF4A9AC-03C3-4C1C-9181-5A74336E3A3C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Driver", "Driver\Driver.csproj", "{4100C916-EED2-49AC-974A-4A05B324852F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day01", "Day01\Day01.csproj", "{ED4638EA-CAB4-4E1B-8B4D-23409861732B}"
@@ -13,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day02", "Day02\Day02.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day03", "Day03\Day03.csproj", "{DB2F29D4-0019-48F3-A1EE-F91C3A3B6DE5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forest", "Forest\Forest.csproj", "{4482ED50-5326-42AA-9A80-1308B7577F6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sledding", "Sledding\Sledding.csproj", "{CDE1DE1F-22E1-4514-BFC6-7725260BDC0D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{86F7BCF0-2022-46F6-9041-ED7F6E872E97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6BF4A9AC-03C3-4C1C-9181-5A74336E3A3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BF4A9AC-03C3-4C1C-9181-5A74336E3A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BF4A9AC-03C3-4C1C-9181-5A74336E3A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BF4A9AC-03C3-4C1C-9181-5A74336E3A3C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4100C916-EED2-49AC-974A-4A05B324852F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4100C916-EED2-49AC-974A-4A05B324852F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4100C916-EED2-49AC-974A-4A05B324852F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,10 +37,14 @@ Global
 		{DB2F29D4-0019-48F3-A1EE-F91C3A3B6DE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB2F29D4-0019-48F3-A1EE-F91C3A3B6DE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB2F29D4-0019-48F3-A1EE-F91C3A3B6DE5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4482ED50-5326-42AA-9A80-1308B7577F6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4482ED50-5326-42AA-9A80-1308B7577F6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4482ED50-5326-42AA-9A80-1308B7577F6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4482ED50-5326-42AA-9A80-1308B7577F6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDE1DE1F-22E1-4514-BFC6-7725260BDC0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDE1DE1F-22E1-4514-BFC6-7725260BDC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDE1DE1F-22E1-4514-BFC6-7725260BDC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDE1DE1F-22E1-4514-BFC6-7725260BDC0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F7BCF0-2022-46F6-9041-ED7F6E872E97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F7BCF0-2022-46F6-9041-ED7F6E872E97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F7BCF0-2022-46F6-9041-ED7F6E872E97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F7BCF0-2022-46F6-9041-ED7F6E872E97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Forest
+namespace AOC2020.Sledding
 {
     public class Forest
     {

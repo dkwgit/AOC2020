@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Forest
+namespace AOC2020.Sledding
 {
     public class Point
     {

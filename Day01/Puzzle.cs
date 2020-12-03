@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AOC2020Library;
+using AOC2020.Utilities;
 
-namespace Day01
+namespace AOC2020.Day01
 {
     public class Puzzle : IPuzzle
     {

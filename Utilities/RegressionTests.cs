@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace AOC2020Library
+namespace AOC2020.Utilities
 {
     public class RegressionTests
     {

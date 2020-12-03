@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AOC2020Library
+namespace AOC2020.Utilities
 {
     public interface IPuzzle
     {

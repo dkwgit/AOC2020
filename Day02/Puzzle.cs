@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
-using AOC2020Library;
+using AOC2020.Utilities;
 
-namespace Day02
+namespace AOC2020.Day02
 {
     public class Puzzle : IPuzzle
     {
