@@ -78,7 +78,7 @@ namespace Day02
 
             if (min <= passwordLength && max <= passwordLength)
             {
-                if (password[min-1] == letter  ^ password[max-1] == letter)
+                if (password[min - 1] == letter ^ password[max - 1] == letter)
                 {
                     return true;
                 }

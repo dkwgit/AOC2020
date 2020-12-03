@@ -220,5 +220,14 @@ namespace AOC2020Library {
                 return ResourceManager.GetString("Day02Part2_Answer", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kilroy was here.
+        /// </summary>
+        internal static string Day03_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day03_PuzzleInput", resourceCulture);
+            }
+        }
     }
 }
