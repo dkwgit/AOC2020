@@ -6,7 +6,7 @@ namespace Forest
 {
     public class Point
     {
-        readonly int _x = -1
+        readonly int _x = -1;
         readonly int _y = -1;
 
         public int X => _x;

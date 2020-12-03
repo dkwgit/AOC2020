@@ -4,17 +4,15 @@ using System.Text;
 
 namespace Forest
 {
-    class Square
+    public class Square
     {
         private Square _up = null;
         private Square _right = null;
         private Square _down = null;
         private Square _left = null;
-        private bool _tree = false;
-        private int _x = -1;
-        private int _y = -1;
-        private int _totalX = -1;
-        private int _totalY = -1;
+        private readonly bool _tree = false;
+        private Point _originalLocation = null;
+        private Point _wrappedAroundLocation = null;
 
         public Square Up => _up;
         public Square Right => _right;
@@ -22,16 +20,30 @@ namespace Forest
         public Square Left => _left;
         public bool HasTree => _tree;
 
-        public int X => _x;
-        public int Y => _y;
-        public int TotalX => _totalX;
-        public int TotalY => _totalY;
-
-        public Square(int x, int y, bool tree)
+        public Point OriginalLocation => _originalLocation;
+        public Point WrappedAroundLocation => _wrappedAroundLocation;
+        public Square(Point original, bool tree)
         {
-            _x =_totalX = x;
-            _y =_totalY = y;
-            _treee = tree;
+            _originalLocation = original;
+            _tree = tree;
         }
+
+        public void SetDown(Square s)
+        {
+            _down = s;
+        }
+        public void SetUp(Square s)
+        {
+            _up = s;
+        }
+        public void SetRight(Square s)
+        {
+            _right = s;
+        }
+        public void SetLeft(Square s)
+        {
+            _left = s;
+        }
+
     }
 }
