@@ -9,10 +9,13 @@
         {
             RunRegressionTests();
 
-            /*Day03.Puzzle puzzle = new AOC2020.Day03.Puzzle();
-            puzzle.SetInput(PuzzleDataStore.GetPuzzleInputList(puzzle.Day));
+            Day04.Puzzle puzzle = new ();
+
+            puzzle.SetInput(new PuzzleDataStore().GetPuzzleInputAsList(puzzle.Day, false));
+
             string part1Answer = puzzle.Part1;
-            string part2Answer = puzzle.Part2;*/
+
+            string part2Answer = puzzle.Part2;
         }
 
         public static void RunRegressionTests()
@@ -22,6 +25,8 @@
                 new AOC2020.Day01.Puzzle(),
                 new AOC2020.Day02.Puzzle(),
                 new AOC2020.Day03.Puzzle(),
+
+                // new AOC2020.Day04.Puzzle(),
             };
 
             RegressionTests.RunRegressionTests(list);

@@ -4,7 +4,7 @@
 
     public interface IPuzzleDataStore
     {
-        public List<string> GetPuzzleInputAsList(string dayNumber);
+        public List<string> GetPuzzleInputAsList(string dayNumber, bool suppressEmpty = true);
 
         public string GetPuzzleInput(string dayNumber);
 

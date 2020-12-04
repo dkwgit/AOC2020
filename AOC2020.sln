@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		StyleCopAnalyzersDefault.ruleset = StyleCopAnalyzersDefault.ruleset
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day04", "Day04\Day04.csproj", "{7F5A32CE-5BBC-4843-B28C-E24DA52A2C15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{86F7BCF0-2022-46F6-9041-ED7F6E872E97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86F7BCF0-2022-46F6-9041-ED7F6E872E97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86F7BCF0-2022-46F6-9041-ED7F6E872E97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F5A32CE-5BBC-4843-B28C-E24DA52A2C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F5A32CE-5BBC-4843-B28C-E24DA52A2C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F5A32CE-5BBC-4843-B28C-E24DA52A2C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F5A32CE-5BBC-4843-B28C-E24DA52A2C15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

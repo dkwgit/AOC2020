@@ -7,7 +7,7 @@
 
     public class PuzzleDataStore : IPuzzleDataStore
     {
-        public List<string> GetPuzzleInputAsList(string dayNumber)
+        public List<string> GetPuzzleInputAsList(string dayNumber, bool suppressEmpty = true)
         {
             List<string> list = new List<string>(1000);
             string input = GetPuzzleInput(dayNumber).Trim();
@@ -18,7 +18,7 @@
                 line = reader.ReadLine();
                 do
                 {
-                    if (string.Empty.CompareTo(line) != 0)
+                    if (!suppressEmpty || string.Empty.CompareTo(line) != 0)
                     {
                         list.Add(line);
                     }

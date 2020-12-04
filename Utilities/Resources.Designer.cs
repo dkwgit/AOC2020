@@ -262,5 +262,48 @@ namespace AOC2020.Utilities {
                 return ResourceManager.GetString("Day03Part2_Answer", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hgt:159cm
+        ///pid:561068005 eyr:2025 iyr:2017 cid:139 ecl:blu hcl:#ceb3a1
+        ///byr:1940
+        ///
+        ///iyr:2014
+        ///byr:1986 pid:960679613 eyr:2025 ecl:hzl
+        ///
+        ///cid:211 ecl:blu hcl:#7d3b0c iyr:2011 pid:006632702
+        ///byr:1982 eyr:2023 hgt:68in
+        ///
+        ///hcl:#341e13 hgt:192 iyr:2028
+        ///ecl:utc
+        ///eyr:2027 byr:1979 pid:653515689
+        ///
+        ///eyr:2026 hgt:161cm ecl:#1850b8
+        ///pid:298779494 hcl:b2114e iyr:1953
+        ///
+        ///hgt:155cm
+        ///hcl:#a97842 iyr:2019
+        ///ecl:gry byr:1939
+        ///pid:935099157 eyr:2027
+        ///
+        ///eyr:2024 ecl:grn
+        ///pid:102781360 byr:1962 iyr:2013 hcl:#602927
+        ///
+        ///hcl:#602 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day04_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day04_PuzzleInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 202.
+        /// </summary>
+        internal static string Day04Part1_Answer {
+            get {
+                return ResourceManager.GetString("Day04Part1_Answer", resourceCulture);
+            }
+        }
     }
 }
