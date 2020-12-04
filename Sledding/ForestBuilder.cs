@@ -7,7 +7,7 @@ namespace AOC2020.Sledding
 {
     public class ForestBuilder
     {
-        private readonly List<List<Square>> _forestSquares = new List<List<Square>>();
+        private readonly List<List<Square>> _forestSquares = new();
         private readonly List<String> _input = null;
         public ForestBuilder(List<String> input)
         {
@@ -22,7 +22,7 @@ namespace AOC2020.Sledding
 
             foreach(var row in _input)
             {
-                currentRow = new List<Square>();
+                currentRow = new();
                 for (int columnNumber = 0; columnNumber < row.Length; columnNumber++)
                 {
                     var cell = row[columnNumber];

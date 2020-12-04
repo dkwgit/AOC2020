@@ -32,7 +32,7 @@ namespace AOC2020.Sledding
         public List<Square> Run((int,int) slope)
         {
             bool run = true;
-            List<Square> path = new List<Square>();
+            List<Square> path = new();
             while (run)
             {
                 MoveOnce(slope);

@@ -10,7 +10,5 @@ namespace AOC2020.Day02
         public int Max { get; init; }
         public char Letter { get; init; }
         public string Password { get; init; }
-
-        public PasswordEntry(int min, int max, char letter, string password) => (Min, Max, Letter, Password) = (min, max, letter, password);
     }
 }

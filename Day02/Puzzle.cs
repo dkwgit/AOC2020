@@ -10,7 +10,7 @@ namespace AOC2020.Day02
     public class Puzzle : IPuzzle
     {
         private List<string> _input = null;
-        private List<PasswordEntry> _passwords = new List<PasswordEntry>();
+        private List<PasswordEntry> _passwords = new();
 
         private bool Part1Predicate(PasswordEntry entry)
         {
@@ -54,8 +54,8 @@ namespace AOC2020.Day02
         {
             get
             {
-                string answer = $"{_passwords.Where(x => Part1Predicate(x)).Count()}";
-                Console.WriteLine($"Found {answer} passwords that were valid out of {_passwords.Count()}");
+                string answer = $"{_passwords.Count(x => Part1Predicate(x))}";
+                Console.WriteLine($"Found {answer} passwords that were valid out of {_passwords.Count}");
                 return answer;
             }
         }
@@ -65,7 +65,7 @@ namespace AOC2020.Day02
             get
             {
                 string answer = $"{_passwords.Where(x => Part2Predicate(x)).Count()}";
-                Console.WriteLine($"Found {answer} passwords that were valid out of {_passwords.Count()}");
+                Console.WriteLine($"Found {answer} passwords that were valid out of {_passwords.Count}");
                 return answer;
             }
         }
@@ -80,11 +80,13 @@ namespace AOC2020.Day02
                 Match match = regex.Match(p);
                 if (match.Success)
                 {
-                    int min = int.Parse(match.Groups[1].Value);
-                    int max = int.Parse(match.Groups[2].Value);
-                    char letter = char.Parse(match.Groups[3].Value);
-                    string password = match.Groups[4].Value;
-                    PasswordEntry entry = new PasswordEntry(min, max, letter, password);
+                    PasswordEntry entry = new PasswordEntry
+                    {
+                        Min = int.Parse(match.Groups[1].Value),
+                        Max = int.Parse(match.Groups[2].Value),
+                        Letter = char.Parse(match.Groups[3].Value),
+                        Password = match.Groups[4].Value
+                    };
                     _passwords.Add(entry);
                 }
                 else

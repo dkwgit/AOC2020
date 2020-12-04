@@ -12,7 +12,7 @@ namespace AOC2020.Utilities
     {
         public static void RunRegressionTests(List<IPuzzle> puzzles)
         {
-            PuzzleDataStore puzzleDataStore = new PuzzleDataStore();
+            PuzzleDataStore puzzleDataStore = new();
             foreach(var puzzle in puzzles)
             {
                 puzzle.SetInput(puzzleDataStore.GetPuzzleInputAsList(puzzle.Day));

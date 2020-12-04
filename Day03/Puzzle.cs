@@ -30,7 +30,7 @@ namespace AOC2020.Day03
             get
             {
                 _forest.ResetForest(new Point(0, 0));
-                List<(int, int)> slopesToCheck = new List<(int, int)>
+                List<(int, int)> slopesToCheck = new()
                 {
                     (1,1),
                     (3,1),
@@ -38,7 +38,7 @@ namespace AOC2020.Day03
                     (7,1),
                     (1,2)
                 };
-                List<(int, (int, int))> slopeResults = new List<(int, (int, int))>();
+                List<(int, (int, int))> slopeResults = new();
                 foreach (var slope in slopesToCheck)
                 {
                     List<Square> path = _forest.Run(slope);
