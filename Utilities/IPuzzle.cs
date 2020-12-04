@@ -13,6 +13,6 @@
 
         string Day { get; }
 
-        void SetInput(List<string> input);
+        void ProcessPuzzleInput();
     }
 }

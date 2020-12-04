@@ -11,7 +11,7 @@
 
             /*Day04.Puzzle puzzle = new ();
 
-            puzzle.SetInput(new PuzzleDataStore().GetPuzzleInputAsList(puzzle.Day, false));
+            puzzle.ProcessPuzzleInput();
 
             string part1Answer = puzzle.Part1;
 

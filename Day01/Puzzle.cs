@@ -74,12 +74,12 @@
             }
         }
 
-        public void SetInput(List<string> input)
+        public void ProcessPuzzleInput()
         {
-            _input = input;
-            for (int i = 0; i < input.Count; i++)
+            _input = new PuzzleDataStore().GetPuzzleInputAsList(Day);
+            for (int i = 0; i < _input.Count; i++)
             {
-                _sortedInput.Add(int.Parse(input[i]), i);
+                _sortedInput.Add(int.Parse(_input[i]), i);
             }
         }
 

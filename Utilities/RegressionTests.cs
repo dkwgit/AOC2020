@@ -10,7 +10,7 @@
             PuzzleDataStore puzzleDataStore = new ();
             foreach (var puzzle in puzzles)
             {
-                puzzle.SetInput(puzzleDataStore.GetPuzzleInputAsList(puzzle.Day));
+                puzzle.ProcessPuzzleInput();
 
                 string part1Answer = puzzle.Part1;
                 string part2Answer = puzzle.Part2;

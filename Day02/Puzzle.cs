@@ -42,10 +42,10 @@
             }
         }
 
-        public void SetInput(List<string> input)
+        public void ProcessPuzzleInput()
         {
-            _input = input;
-            foreach (var p in input)
+            _input = new PuzzleDataStore().GetPuzzleInputAsList(Day, false);
+            foreach (var p in _input)
             {
                 string pattern = @"^(\d+)-(\d+)\s+(.):\s+(.*)$";
                 Regex regex = new Regex(pattern);

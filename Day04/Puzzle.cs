@@ -3,16 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using AOC2020.Utilities;
-    
 
     public class Puzzle : IPuzzle
     {
-        private readonly List<PassportData> _passportData = new();
+        private readonly List<PassportData> _passportData = new ();
 
         private List<string> _input;
-        
+
         public List<string> Input => _input;
 
         public string Part1
@@ -37,14 +35,14 @@
 
         public string Day => "04";
 
-        public void SetInput(List<string> input)
+        public void ProcessPuzzleInput()
         {
-            _input = input;
-            List<string> dataItems = new();
+            _input = new PuzzleDataStore().GetPuzzleInputAsList(Day, false);
+            List<string> dataItems = new ();
 
-            for (int index = 0; index < input.Count; index++)
+            for (int index = 0; index < _input.Count; index++)
             {
-                string line = input[index].Trim();
+                string line = _input[index].Trim();
 
                 if (!string.IsNullOrEmpty(line))
                 {
@@ -100,7 +98,6 @@
                 }
             }
 
-
             return new PassportData
             {
                 BirthYear = birthYear,
@@ -128,7 +125,7 @@
             {
                 valid = true;
             }
-            
+
             return valid;
         }
 
@@ -149,6 +146,5 @@
 
             return valid;
         }
-
     }
 }

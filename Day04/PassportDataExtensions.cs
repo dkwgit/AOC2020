@@ -1,14 +1,12 @@
 ﻿namespace AOC2020.Day04
 {
-
     using System;
     using System.Text.RegularExpressions;
 
-    static class PassportDataExtensions
+    internal static class PassportDataExtensions
     {
         public static bool ValidBirthYear(this PassportData data)
         {
-
             return ValidYear(data.BirthYear, 1920, 2002);
         }
 
@@ -28,11 +26,14 @@
             {
                 return false;
             }
+
             var match = new Regex(@"^(\d{2,3})(cm|in)$").Match(data.Height);
+
             if (!match.Success)
             {
                 return false;
             }
+
             int height = int.Parse(match.Groups[1].Value);
             string suffix = match.Groups[2].Value;
 
@@ -40,10 +41,12 @@
             {
                 return true;
             }
+
             if (suffix == "in" && 59 <= height && height <= 76)
             {
                 return true;
             }
+
             return false;
         }
 
@@ -53,7 +56,9 @@
             {
                 return false;
             }
+
             bool match = new Regex(@"^#[0-9a-f]{6}$").IsMatch(data.HairColor);
+
             return match;
         }
 
@@ -63,6 +68,7 @@
             {
                 return false;
             }
+
             return new Regex(@"^(amb|blu|brn|gry|grn|hzl|oth)$").IsMatch(data.EyeColor);
         }
 
@@ -72,20 +78,24 @@
             {
                 return false;
             }
+
             return new Regex(@"^\d{9}$").IsMatch(data.PassportId);
         }
 
-        private static bool ValidYear(String year, int min, int max)
+        private static bool ValidYear(string year, int min, int max)
         {
             if (year == string.Empty)
             {
                 return false;
             }
+
             if (!new Regex(@"^\d{4}$").IsMatch(year))
             {
                 return false;
             }
+
             int yearNumber = int.Parse(year);
+
             return (min <= yearNumber) && (yearNumber <= max);
         }
     }
