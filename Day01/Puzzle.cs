@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AOC2020.Utilities;
-
-namespace AOC2020.Day01
+﻿namespace AOC2020.Day01
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using AOC2020.Utilities;
+
     public class Puzzle : IPuzzle
     {
-        private List<string> _input = null;
-        private readonly SortedDictionary<int, int> _sortedInput = new();
+        private readonly SortedDictionary<int, int> _sortedInput = new ();
 
-        public void SetInput(List<string> input)
-        {
-            _input = input;
-            for(int i = 0; i < input.Count;i++)
-            {
-                _sortedInput.Add(int.Parse(input[i]), i);
-            }
-        }
+        private List<string> _input = null;
 
         public string Day => "01";
 
-        public List<String> Input 
+        public List<string> Input
         {
             get
             {
@@ -33,34 +25,37 @@ namespace AOC2020.Day01
         {
             get
             {
-                string answer = "";
+                string answer = string.Empty;
 
                 int turn = 1;
                 foreach (int number in _sortedInput.Keys)
                 {
                     int pairedNumber = 2020 - number;
+
                     if (_sortedInput.ContainsKey(pairedNumber))
                     {
                         answer = $"{number * pairedNumber}";
                         Console.WriteLine($"Found on turn {turn}, pair is {number},{pairedNumber}, which multiplied equal: {answer}");
                         break;
                     }
+
                     turn++;
                 }
+
                 return answer;
             }
         }
-
 
         public string Part2
         {
             get
             {
-                string answer = "";
+                string answer = string.Empty;
                 int turn = 1;
+
                 foreach (int first in _sortedInput.Keys)
                 {
-                    foreach(int second in TripletFinder(first))
+                    foreach (int second in TripletFinder(first))
                     {
                         int third = 2020 - (first + second);
                         answer = $"{first * second * third}";
@@ -68,12 +63,23 @@ namespace AOC2020.Day01
                         turn++;
                         break;
                     }
-                    if (string.Empty.CompareTo(answer)!=0)
+
+                    if (string.Empty.CompareTo(answer) != 0)
                     {
                         break;
                     }
                 }
+
                 return answer;
+            }
+        }
+
+        public void SetInput(List<string> input)
+        {
+            _input = input;
+            for (int i = 0; i < input.Count; i++)
+            {
+                _sortedInput.Add(int.Parse(input[i]), i);
             }
         }
 
@@ -81,17 +87,17 @@ namespace AOC2020.Day01
         {
             IEnumerable<int> list = _sortedInput.Keys.
                 Where(
-                    second => second > first && 
-                    2020 - first - second > 0 && 
-                    _sortedInput.ContainsKey(2020 - first - second)
-                ).
-                Select(item => item);
+                    second => second > first &&
+                    2020 - first - second > 0 &&
+                    _sortedInput.ContainsKey(2020 - first - second)).
+               Select(item => item);
 
-            foreach(int item in list)
+            foreach (int item in list)
             {
                 yield return item;
             }
-            yield break;    
+
+            yield break;
         }
     }
 }
