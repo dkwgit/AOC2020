@@ -8,7 +8,7 @@ namespace AOC2020.Day01
     public class Puzzle : IPuzzle
     {
         private List<string> _input = null;
-        private SortedDictionary<int, int> _sortedInput = new SortedDictionary<int, int>();
+        private readonly SortedDictionary<int, int> _sortedInput = new SortedDictionary<int, int>();
 
         public void SetInput(List<string> input)
         {

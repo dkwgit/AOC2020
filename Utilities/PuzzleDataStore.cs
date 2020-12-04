@@ -6,9 +6,9 @@ using System.Resources;
 
 namespace AOC2020.Utilities
 {
-    public class PuzzleDataStore
+    public class PuzzleDataStore : IPuzzleDataStore
     {
-        public static List<string> GetPuzzleInputList(string dayNumber)
+        public List<string> GetPuzzleInputAsList(string dayNumber)
         {
             List<string> list = new List<string>(1000);
             string input = GetPuzzleInput(dayNumber).Trim();
@@ -28,7 +28,7 @@ namespace AOC2020.Utilities
             }
             return list;
         }
-        public static string GetPuzzleInput(string dayNumber)
+        public string GetPuzzleInput(string dayNumber)
         {
             Type resources = typeof(Resources);
             PropertyInfo propertyToGet = resources.GetProperty($"Day{dayNumber}_PuzzleInput", BindingFlags.Static | BindingFlags.NonPublic);
@@ -36,7 +36,7 @@ namespace AOC2020.Utilities
             return input;
         }
 
-        public static string GetPuzzleAnswer(string dayNumber, string PartNumber)
+        public string GetPuzzleAnswer(string dayNumber, string PartNumber)
         {
             ResourceManager rm = new ResourceManager(typeof(Resources));
             return rm.GetString($"Day{dayNumber}Part{PartNumber}_Answer");

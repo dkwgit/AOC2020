@@ -42,6 +42,5 @@ namespace AOC2020.Sledding
         {
             _left = s;
         }
-
     }
 }

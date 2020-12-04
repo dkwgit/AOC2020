@@ -4,21 +4,14 @@ using System.Text;
 
 namespace AOC2020.Sledding
 {
-    public class Point
+    public record Point
     {
-        readonly int _x = -1;
-        readonly int _y = -1;
+        public int X { get; init; }
+        public int Y { get; init; }
 
-        public int X => _x;
-        public int Y => _y;
+        public Point(int x, int y) => (X, Y) = (x, y);
 
-        public Point(int x, int y)
-        {
-            _x = x;
-            _y = y;
-        }
-
-        public Point AddOffset((int,int) offset)
+        public Point PointFromOffset((int,int) offset)
         {
             return new Point(X + offset.Item1, Y + offset.Item2);
         }

@@ -9,52 +9,6 @@ namespace AOC2020.Day02
 {
     public class Puzzle : IPuzzle
     {
-        class PasswordEntry
-        {
-            private int _min = -1;
-            private int _max = -1;
-            private char _letter = '\0';
-            private string _password = null;
-
-            public int Min
-            {
-                get
-                {
-                    return _min;
-                }
-            }
-            public int Max
-            {
-                get
-                {
-                    return _max;
-                }
-            }
-
-            public char Letter
-            {
-                get
-                {
-                    return _letter;
-                }
-            }
-
-            public string Password
-            {
-                get
-                {
-                    return _password;
-                }
-            }
-
-            public PasswordEntry(int min, int max, char letter, string password)
-            {
-                _min = min;
-                _max = max;
-                _letter = letter;
-                _password = password;
-            }
-        }
         private List<string> _input = null;
         private List<PasswordEntry> _passwords = new List<PasswordEntry>();
 

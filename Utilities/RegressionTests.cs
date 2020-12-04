@@ -12,21 +12,15 @@ namespace AOC2020.Utilities
     {
         public static void RunRegressionTests(List<IPuzzle> puzzles)
         {
-            /* var dayTypes = AppDomain.CurrentDomain.GetAssemblies().
-                Where(a => a.ExportedTypes.Any(t => t.Name == "Puzzle")).
-                Select(a => new { Assembly = a, TypeInfo = a.ExportedTypes.Where(t => t.Name == "Puzzle").Select(t => t).First() }).
-                OrderBy(x => x.TypeInfo.Name).
-                ToList();
-            */
-
+            PuzzleDataStore puzzleDataStore = new PuzzleDataStore();
             foreach(var puzzle in puzzles)
             {
-                
-                puzzle.SetInput(PuzzleDataStore.GetPuzzleInputList(puzzle.Day));
+                puzzle.SetInput(puzzleDataStore.GetPuzzleInputAsList(puzzle.Day));
+
                 string part1Answer = puzzle.Part1;
                 string part2Answer = puzzle.Part2;
-                string part1StoredAnswer = PuzzleDataStore.GetPuzzleAnswer(puzzle.Day, "1");
-                string part2StoredAnswer = PuzzleDataStore.GetPuzzleAnswer(puzzle.Day, "2");
+                string part1StoredAnswer = puzzleDataStore.GetPuzzleAnswer(puzzle.Day, "1");
+                string part2StoredAnswer = puzzleDataStore.GetPuzzleAnswer(puzzle.Day, "2");
 
                 if (part1StoredAnswer != null)
                 {
