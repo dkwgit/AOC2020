@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AOC2020.Day02
+﻿namespace AOC2020.Day02
 {
     record PasswordEntry
     {

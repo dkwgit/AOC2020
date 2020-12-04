@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AOC2020.Utilities
+﻿namespace AOC2020.Utilities
 {
+    using System.Collections.Generic;
+
     public interface IPuzzleDataStore
     {
         public List<string> GetPuzzleInputAsList(string dayNumber);
+
         public string GetPuzzleInput(string dayNumber);
 
-        public string GetPuzzleAnswer(string dayNumber, string PartNumber);
+        public string GetPuzzleAnswer(string dayNumber, string partNumber);
     }
 }

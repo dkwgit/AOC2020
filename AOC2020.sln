@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F9358771-93CD-40BF-831A-CAD4EFD6BF60}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
+		StyleCopAnalyzersDefault.ruleset = StyleCopAnalyzersDefault.ruleset
 	EndProjectSection
 EndProject
 Global

@@ -1,5 +1,7 @@
 <Project>
  <PropertyGroup>
    <LangVersion>9.0</LangVersion>
+   <CodeAnalysisRuleSet>..\StyleCopAnalyzersDefault.ruleset</CodeAnalysisRuleSet>
+   <GenerateDocumentationFile>true</GenerateDocumentationFile>
  </PropertyGroup>
 </Project>

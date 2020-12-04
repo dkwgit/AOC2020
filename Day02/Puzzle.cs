@@ -1,48 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
-using AOC2020.Utilities;
-
-namespace AOC2020.Day02
+﻿namespace AOC2020.Day02
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using AOC2020.Utilities;
+
     public class Puzzle : IPuzzle
     {
+        private readonly List<PasswordEntry> _passwords = new ();
+
         private List<string> _input = null;
-        private List<PasswordEntry> _passwords = new();
-
-        private bool Part1Predicate(PasswordEntry entry)
-        {
-            int countInPassword = entry.Password.Count(x => x == entry.Letter);
-            if (entry.Min <= countInPassword && countInPassword <= entry.Max)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        private bool Part2Predicate(PasswordEntry entry)
-        {
-            int min = entry.Min;
-            int max = entry.Max;
-            int passwordLength = entry.Password.Length;
-            char letter = entry.Letter;
-            string password = entry.Password;
-
-            if (min <= passwordLength && max <= passwordLength)
-            {
-                if (password[min - 1] == letter ^ password[max - 1] == letter)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
 
         public string Day => "02";
 
-        public List<String> Input
+        public List<string> Input
         {
             get
             {
@@ -73,19 +45,19 @@ namespace AOC2020.Day02
         public void SetInput(List<string> input)
         {
             _input = input;
-            foreach(var p in input)
+            foreach (var p in input)
             {
                 string pattern = @"^(\d+)-(\d+)\s+(.):\s+(.*)$";
                 Regex regex = new Regex(pattern);
                 Match match = regex.Match(p);
                 if (match.Success)
                 {
-                    PasswordEntry entry = new PasswordEntry
+                    PasswordEntry entry = new ()
                     {
                         Min = int.Parse(match.Groups[1].Value),
                         Max = int.Parse(match.Groups[2].Value),
                         Letter = char.Parse(match.Groups[3].Value),
-                        Password = match.Groups[4].Value
+                        Password = match.Groups[4].Value,
                     };
                     _passwords.Add(entry);
                 }
@@ -94,6 +66,37 @@ namespace AOC2020.Day02
                     throw new Exception($"Regex match failure on input {p}");
                 }
             }
+        }
+
+        private static bool Part1Predicate(PasswordEntry entry)
+        {
+            int countInPassword = entry.Password.Count(x => x == entry.Letter);
+
+            if (entry.Min <= countInPassword && countInPassword <= entry.Max)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private static bool Part2Predicate(PasswordEntry entry)
+        {
+            int min = entry.Min;
+            int max = entry.Max;
+            int passwordLength = entry.Password.Length;
+            char letter = entry.Letter;
+            string password = entry.Password;
+
+            if (min <= passwordLength && max <= passwordLength)
+            {
+                if (password[min - 1] == letter ^ password[max - 1] == letter)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

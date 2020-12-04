@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-
-namespace AOC2020.Utilities
+﻿namespace AOC2020.Utilities
 {
+    using System;
+    using System.Collections.Generic;
+
     public class RegressionTests
     {
         public static void RunRegressionTests(List<IPuzzle> puzzles)
         {
-            PuzzleDataStore puzzleDataStore = new();
-            foreach(var puzzle in puzzles)
+            PuzzleDataStore puzzleDataStore = new ();
+            foreach (var puzzle in puzzles)
             {
                 puzzle.SetInput(puzzleDataStore.GetPuzzleInputAsList(puzzle.Day));
 

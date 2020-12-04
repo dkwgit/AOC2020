@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using AOC2020.Utilities;
-
-namespace AOC2020.Driver
+﻿namespace AOC2020.Driver
 {
-    class Program
+    using System.Collections.Generic;
+    using AOC2020.Utilities;
+
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
             RunRegressionTests();
 
@@ -16,13 +15,13 @@ namespace AOC2020.Driver
             string part2Answer = puzzle.Part2;*/
         }
 
-        static void RunRegressionTests()
+        public static void RunRegressionTests()
         {
             List<IPuzzle> list = new List<IPuzzle>
             {
                 new AOC2020.Day01.Puzzle(),
                 new AOC2020.Day02.Puzzle(),
-                new AOC2020.Day03.Puzzle()
+                new AOC2020.Day03.Puzzle(),
             };
 
             RegressionTests.RunRegressionTests(list);

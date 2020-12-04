@@ -1,26 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AOC2020.Sledding
+﻿namespace AOC2020.Sledding
 {
+    using System.Collections.Generic;
+
     public class Forest
     {
-        private int _columnOffset = 0;
-        private Point _sledPoint = null;
         private readonly Square[,] _squares = null;
-        private readonly int _width = -1;
-        public Point SledPoint => _sledPoint;
 
-        private void MoveOnce((int, int) slope)
-        {
-            _sledPoint = _sledPoint.PointFromOffset(slope);
-            if (_sledPoint.X + 1 > _width || _sledPoint.X < 0)
-            {
-                int offset = _width * ((slope.Item1 >= 0) ? (1) : (-1));
-                _columnOffset += offset;
-                _sledPoint = _sledPoint.PointFromOffset(((-1) * offset, 0));
-            }
-        }
+        private readonly int _width = -1;
+
+#pragma warning disable IDE0052 // Remove unread private members
+        private int _columnOffset = 0;
+#pragma warning restore IDE0052 // Remove unread private members
+
+        private Point _sledPoint = null;
 
         public Forest(Point sledPoint, Square[,] forestSquares)
         {
@@ -29,10 +21,12 @@ namespace AOC2020.Sledding
             _width = forestSquares.GetLength(1);
         }
 
-        public List<Square> Run((int,int) slope)
+        public Point SledPoint => _sledPoint;
+
+        public List<Square> Run((int, int) slope)
         {
             bool run = true;
-            List<Square> path = new();
+            List<Square> path = new ();
             while (run)
             {
                 MoveOnce(slope);
@@ -43,6 +37,7 @@ namespace AOC2020.Sledding
                     run = false;
                 }
             }
+
             return path;
         }
 
@@ -50,6 +45,17 @@ namespace AOC2020.Sledding
         {
             _sledPoint = sledPoint;
             _columnOffset = 0;
+        }
+
+        private void MoveOnce((int, int) slope)
+        {
+            _sledPoint = _sledPoint.PointFromOffset(slope);
+            if (_sledPoint.X + 1 > _width || _sledPoint.X < 0)
+            {
+                int offset = _width * ((slope.Item1 >= 0) ? 1 : -1);
+                _columnOffset += offset;
+                _sledPoint = _sledPoint.PointFromOffset(((-1) * offset, 0));
+            }
         }
     }
 }

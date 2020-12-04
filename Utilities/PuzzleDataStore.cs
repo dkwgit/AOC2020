@@ -1,11 +1,10 @@
-﻿using System;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Resources;
-
-
-namespace AOC2020.Utilities
+﻿namespace AOC2020.Utilities
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Resources;
+
     public class PuzzleDataStore : IPuzzleDataStore
     {
         public List<string> GetPuzzleInputAsList(string dayNumber)
@@ -15,7 +14,7 @@ namespace AOC2020.Utilities
 
             using (System.IO.StringReader reader = new System.IO.StringReader(input))
             {
-                string line = "";
+                string line = string.Empty;
                 line = reader.ReadLine();
                 do
                 {
@@ -23,11 +22,15 @@ namespace AOC2020.Utilities
                     {
                         list.Add(line);
                     }
+
                     line = reader.ReadLine();
-                } while (null != line);
+                }
+                while (line != null);
             }
+
             return list;
         }
+
         public string GetPuzzleInput(string dayNumber)
         {
             Type resources = typeof(Resources);
@@ -36,10 +39,10 @@ namespace AOC2020.Utilities
             return input;
         }
 
-        public string GetPuzzleAnswer(string dayNumber, string PartNumber)
+        public string GetPuzzleAnswer(string dayNumber, string partNumber)
         {
             ResourceManager rm = new ResourceManager(typeof(Resources));
-            return rm.GetString($"Day{dayNumber}Part{PartNumber}_Answer");
+            return rm.GetString($"Day{dayNumber}Part{partNumber}_Answer");
         }
     }
 }
