@@ -305,5 +305,14 @@ namespace AOC2020.Utilities {
                 return ResourceManager.GetString("Day04Part1_Answer", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 137.
+        /// </summary>
+        internal static string Day04Part2_Answer {
+            get {
+                return ResourceManager.GetString("Day04Part2_Answer", resourceCulture);
+            }
+        }
     }
 }

@@ -148,6 +148,9 @@
   <data name="Day04Part1_Answer" xml:space="preserve">
     <value>202</value>
   </data>
+  <data name="Day04Part2_Answer" xml:space="preserve">
+    <value>137</value>
+  </data>
   <data name="Day04_PuzzleInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Day04_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

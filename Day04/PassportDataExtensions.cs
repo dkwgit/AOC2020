@@ -4,7 +4,7 @@
     using System;
     using System.Text.RegularExpressions;
 
-    static class Extensions
+    static class PassportDataExtensions
     {
         public static bool ValidBirthYear(this PassportData data)
         {
