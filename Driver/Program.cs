@@ -7,7 +7,7 @@
     {
         public static void Main()
         {
-            RunRegressionTests();
+            RunPuzzleRegressionTests();
 
             /*Day05.Puzzle puzzle = new ();
 
@@ -18,18 +18,17 @@
             string part2Answer = puzzle.Part2;*/
         }
 
-        public static void RunRegressionTests()
+        public static void RunPuzzleRegressionTests()
         {
-            List<IPuzzle> list = new List<IPuzzle>
-            {
-                new AOC2020.Day01.Puzzle(),
-                new AOC2020.Day02.Puzzle(),
-                new AOC2020.Day03.Puzzle(),
-                new AOC2020.Day04.Puzzle(),
-                new AOC2020.Day05.Puzzle(),
-            };
-
-            RegressionTests.RunRegressionTests(list);
+            RegressionTesting.RunPuzzleRegressionTests(
+                new List<IPuzzle>
+                {
+                    new AOC2020.Day01.Puzzle(),
+                    new AOC2020.Day02.Puzzle(),
+                    new AOC2020.Day03.Puzzle(),
+                    new AOC2020.Day04.Puzzle(),
+                    new AOC2020.Day05.Puzzle(),
+                });
         }
     }
 }

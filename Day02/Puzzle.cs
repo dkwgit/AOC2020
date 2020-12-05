@@ -26,7 +26,7 @@
         {
             get
             {
-                string answer = $"{_passwords.Count(x => Part1Predicate(x))}";
+                string answer = $"{_passwords.Count(x => x.ValidByLetterCount())}";
                 Console.WriteLine($"Found {answer} passwords that were valid out of {_passwords.Count}");
                 return answer;
             }
@@ -36,7 +36,7 @@
         {
             get
             {
-                string answer = $"{_passwords.Where(x => Part2Predicate(x)).Count()}";
+                string answer = $"{_passwords.Where(x => x.ValidByLetterPosition()).Count()}";
                 Console.WriteLine($"Found {answer} passwords that were valid out of {_passwords.Count}");
                 return answer;
             }
@@ -66,37 +66,6 @@
                     throw new Exception($"Regex match failure on input {p}");
                 }
             }
-        }
-
-        private static bool Part1Predicate(PasswordEntry entry)
-        {
-            int countInPassword = entry.Password.Count(x => x == entry.Letter);
-
-            if (entry.Min <= countInPassword && countInPassword <= entry.Max)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private static bool Part2Predicate(PasswordEntry entry)
-        {
-            int min = entry.Min;
-            int max = entry.Max;
-            int passwordLength = entry.Password.Length;
-            char letter = entry.Letter;
-            string password = entry.Password;
-
-            if (min <= passwordLength && max <= passwordLength)
-            {
-                if (password[min - 1] == letter ^ password[max - 1] == letter)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
     }
 }
