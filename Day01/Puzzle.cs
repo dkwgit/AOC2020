@@ -25,13 +25,12 @@
         {
             get
             {
-                string answer = string.Empty;
+                (int, int) result = (from x in _sortedInput.Keys
+                                     where x < (2020 - x) && _sortedInput.ContainsKey(2020 - x)
+                                     select (x, 2020 - x)).Single();
 
-                int number = _sortedInput.Keys.Where(x => _sortedInput.ContainsKey(2020 - x)).Select(x => x).First();
-                int pairedNumber = 2020 - number;
-
-                answer = $"{number * pairedNumber}";
-                Console.WriteLine($"Found pair is {number},{pairedNumber}, which multiplied equal: {answer}");
+                string answer = $"{result.Item1 * result.Item2}";
+                Console.WriteLine($"Found pair is ({result.Item1}, {result.Item2}), which multiplied equal: {answer}");
 
                 return answer;
             }
@@ -41,25 +40,9 @@
         {
             get
             {
-                string answer = string.Empty;
-                int turn = 1;
-
-                foreach (int first in _sortedInput.Keys)
-                {
-                    foreach (int second in TripletFinder(first))
-                    {
-                        int third = 2020 - (first + second);
-                        answer = $"{first * second * third}";
-                        Console.WriteLine($"Found on turn {turn}, triplet is {first},{second},{third} which multiplied equal: {answer}");
-                        turn++;
-                        break;
-                    }
-
-                    if (string.Empty.CompareTo(answer) != 0)
-                    {
-                        break;
-                    }
-                }
+                (int, int, int) triplet = TripletFinder();
+                string answer = $"{triplet.Item1 * triplet.Item2 * triplet.Item3}";
+                Console.WriteLine($"Found triplet ({triplet.Item1}, {triplet.Item2}, {triplet.Item3}) which multiplied equal: {answer}");
 
                 return answer;
             }
@@ -74,21 +57,17 @@
             }
         }
 
-        private IEnumerable<int> TripletFinder(int first)
+        private (int, int, int) TripletFinder()
         {
-            IEnumerable<int> list = _sortedInput.Keys.
-                Where(
-                    second => second > first &&
-                    2020 - first - second > 0 &&
-                    _sortedInput.ContainsKey(2020 - first - second)).
-               Select(item => item);
+            var result =
+                (from x in _sortedInput.Keys
+                from y in _sortedInput.Keys
+                where x < y && x + y < 2020
+                from z in _sortedInput.Keys
+                where y < z && x + y + z == 2020
+                select (x, y, z)).Single();
 
-            foreach (int item in list)
-            {
-                yield return item;
-            }
-
-            yield break;
+            return result;
         }
     }
 }
