@@ -17,7 +17,7 @@
         {
             get
             {
-                string answer = _passportData.Count(x => Part1Predicate(x)).ToString();
+                string answer = _passportData.Count(x => x.HasAllRequiredFields()).ToString();
                 Console.WriteLine($"Found {answer} passports that were valid for part1 out of {_passportData.Count}");
                 return answer;
             }
@@ -27,7 +27,7 @@
         {
             get
             {
-                string answer = _passportData.Count(x => Part2Predicate(x)).ToString();
+                string answer = _passportData.Count(x => x.HasAllRequiredFields() && x.ValidateFields()).ToString();
                 Console.WriteLine($"Found {answer} passports that were valid for part2 out of {_passportData.Count}");
                 return answer;
             }
@@ -109,42 +109,6 @@
                 PassportId = passportId,
                 CountryId = countryId,
             };
-        }
-
-        private static bool Part1Predicate(PassportData data)
-        {
-            bool valid = false;
-
-            if (data.BirthYear != string.Empty &&
-                data.IssueYear != string.Empty &&
-                data.ExpirationYear != string.Empty &&
-                data.Height != string.Empty &&
-                data.HairColor != string.Empty &&
-                data.EyeColor != string.Empty &&
-                data.PassportId != string.Empty)
-            {
-                valid = true;
-            }
-
-            return valid;
-        }
-
-        private static bool Part2Predicate(PassportData data)
-        {
-            bool valid = false;
-
-            if (data.ValidBirthYear() &&
-                data.ValidIssueYear() &&
-                data.ValidExpirationYear() &&
-                data.ValidHeight() &&
-                data.ValidHairColor() &&
-                data.ValidEyeColor() &&
-                data.ValidPassportId())
-            {
-                valid = true;
-            }
-
-            return valid;
         }
     }
 }
