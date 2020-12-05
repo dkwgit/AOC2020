@@ -9,7 +9,7 @@
         {
             RunRegressionTests();
 
-            /*Day04.Puzzle puzzle = new ();
+            /*Day05.Puzzle puzzle = new ();
 
             puzzle.ProcessPuzzleInput();
 
@@ -26,6 +26,7 @@
                 new AOC2020.Day02.Puzzle(),
                 new AOC2020.Day03.Puzzle(),
                 new AOC2020.Day04.Puzzle(),
+                new AOC2020.Day05.Puzzle(),
             };
 
             RegressionTests.RunRegressionTests(list);
