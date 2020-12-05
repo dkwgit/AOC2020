@@ -314,5 +314,56 @@ namespace AOC2020.Utilities {
                 return ResourceManager.GetString("Day04Part2_Answer", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FFBBFFFLLL
+        ///BFBFBFBLLR
+        ///BFFBBBBRRR
+        ///FBFBFFFLLL
+        ///FFFBFBBRRL
+        ///FBBFFBBLLR
+        ///FBBBFBFRRR
+        ///FBFBBFFLLL
+        ///FBFBFBFRRR
+        ///FFBFFFFLRL
+        ///FBFBFBBLRL
+        ///FBFFFBBLLR
+        ///FBBBBBFLLL
+        ///BBFBFFFLLL
+        ///FBBBBFBLRL
+        ///FBBBBFBRRR
+        ///FBFFBBBLLL
+        ///FBFFFFFLLR
+        ///BFBFFFFRRL
+        ///BFFFBBBLRL
+        ///FBBBBFBRLL
+        ///BFBFBBBRLR
+        ///BFBBFFFLRR
+        ///BBFFFFBRRR
+        ///FFBFBBFRRR
+        ///FFBFBFBLRR
+        ///BBFBBFBRRL
+        ///BBFBFBFLRR
+        ///FBBBBFFLRR
+        ///BFBFBBBLRL
+        ///BFBFFFFRLL
+        ///BBFFFBFRLR
+        ///BBFFFBBLRR
+        ///FBFBBBFRRL
+        ///BFBFBBFLRL
+        ///BBFFBBBRLL
+        ///BBFFBBBLRL
+        ///FBFFFFFRLR
+        ///FBFBFBFRRL
+        ///FBBFBFBLLR
+        ///BFBBFFBLLL
+        ///BFFFFBFRLR
+        ///FBBFFFFL [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day05_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day05_PuzzleInput", resourceCulture);
+            }
+        }
     }
 }

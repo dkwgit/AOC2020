@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>AOC2020.Day05</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,11 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Day01\Day01.csproj" />
-    <ProjectReference Include="..\Day02\Day02.csproj" />
-    <ProjectReference Include="..\Day03\Day03.csproj" />
-    <ProjectReference Include="..\Day04\Day04.csproj" />
-    <ProjectReference Include="..\Day05\Day05.csproj" />
+    <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
 </Project>
