@@ -92,9 +92,6 @@
                         break;
                     default:
                         throw new System.Exception($"Bad value {prefix} in switch statement");
-#pragma warning disable CS0162 // Unreachable code detected
-                        break;
-#pragma warning restore CS0162 // Unreachable code detected
                 }
             }
 
