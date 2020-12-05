@@ -27,20 +27,11 @@
             {
                 string answer = string.Empty;
 
-                int turn = 1;
-                foreach (int number in _sortedInput.Keys)
-                {
-                    int pairedNumber = 2020 - number;
+                int number = _sortedInput.Keys.Where(x => _sortedInput.ContainsKey(2020 - x)).Select(x => x).First();
+                int pairedNumber = 2020 - number;
 
-                    if (_sortedInput.ContainsKey(pairedNumber))
-                    {
-                        answer = $"{number * pairedNumber}";
-                        Console.WriteLine($"Found on turn {turn}, pair is {number},{pairedNumber}, which multiplied equal: {answer}");
-                        break;
-                    }
-
-                    turn++;
-                }
+                answer = $"{number * pairedNumber}";
+                Console.WriteLine($"Found pair is {number},{pairedNumber}, which multiplied equal: {answer}");
 
                 return answer;
             }
