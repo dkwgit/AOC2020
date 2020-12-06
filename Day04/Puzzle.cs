@@ -57,7 +57,8 @@
                     var array = line.Split(" ", System.StringSplitOptions.None);
                     dataItems.AddRange(array);
                 }
-                else
+
+                if (string.IsNullOrEmpty(line) || index + 1 >= _input.Count)
                 {
                     _passportData.Add(GetPassportData(dataItems));
                     dataItems.Clear();
