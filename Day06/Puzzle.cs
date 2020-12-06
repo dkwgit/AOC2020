@@ -46,9 +46,9 @@
                     questionCountsPerGroup.Add(questionsInGroup.Keys.Count);
                     questionsInGroup.Clear();
                 }
-                int totalQuestions = questionCountsPerGroup.Sum(x => x);
-                answer = totalQuestions.ToString();
-                _logger.LogInformation("{Day}/Part1: Found {answer} total unique questions per group, summed by all groups", Day, answer);
+                int totalUniqueAnswerOccurrences = questionCountsPerGroup.Sum(x => x);
+                answer = totalUniqueAnswerOccurrences.ToString();
+                _logger.LogInformation("{Day}/Part1: Found {answer} total count of unique answered questions per group, summing that across all groups", Day, answer);
                 return answer;
             }
         }
@@ -81,9 +81,9 @@
                     iGroup++;
                 }
 
-                int totalQuestions = allQuestionsAnswered.Sum(x => x);
-                answer = totalQuestions.ToString();
-                _logger.LogInformation("{Day}/Part1: Found {answer} total all questions answered by group, summed by all groups", Day, answer);
+                int totalAnswersByAllGroupMembers = allQuestionsAnswered.Sum(x => x);
+                answer = totalAnswersByAllGroupMembers.ToString();
+                _logger.LogInformation("{Day}/Part2: Found {answer} total count of all questions answered by all members of a group, summing that across all groups", Day, answer);
                 return answer;
             }
         }
