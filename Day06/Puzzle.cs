@@ -10,10 +10,9 @@
     {
         private readonly ILogger _logger;
 
-        private List<string> _input = null;
+        private readonly List<GroupInfo> _groups = new ();
 
-        private List<string> _groups = new();
-        private List<int> _peopleInGroups = new();
+        private List<string> _input = null;
 
         public Puzzle(ILogger<Puzzle> logger)
         {
@@ -27,26 +26,8 @@
             get
             {
                 string answer = string.Empty;
-                List<int> questionCountsPerGroup = new();
-                Dictionary<char, int> questionsInGroup = new();
 
-                foreach (var group in _groups)
-                {
-                    for (int i = 0; i < group.Length; i++)
-                    {
-                        if (!questionsInGroup.ContainsKey(group[i]))
-                        {
-                            questionsInGroup[group[i]] = 1;
-                        }
-                        else
-                        {
-                            questionsInGroup[group[i]] = questionsInGroup[group[i]] + 1;
-                        }
-                    }
-                    questionCountsPerGroup.Add(questionsInGroup.Keys.Count);
-                    questionsInGroup.Clear();
-                }
-                int totalUniqueAnswerOccurrences = questionCountsPerGroup.Sum(x => x);
+                int totalUniqueAnswerOccurrences = _groups.Sum(x => x.QuestionsWithAnAnswer);
                 answer = totalUniqueAnswerOccurrences.ToString();
                 _logger.LogInformation("{Day}/Part1: Found {answer} total count of unique answered questions per group, summing that across all groups", Day, answer);
                 return answer;
@@ -58,30 +39,8 @@
             get
             {
                 string answer = string.Empty;
-                Dictionary<char, int> questionsInGroup = new();
-                List<int> allQuestionsAnswered = new();
 
-                int iGroup = 0;
-                foreach (var group in _groups)
-                {
-                    for (int i = 0; i < group.Length; i++)
-                    {
-                        if (!questionsInGroup.ContainsKey(group[i]))
-                        {
-                            questionsInGroup[group[i]] = 1;
-                        }
-                        else
-                        {
-                            questionsInGroup[group[i]] = questionsInGroup[group[i]] + 1;
-                        }
-                    }
-
-                    allQuestionsAnswered.Add(questionsInGroup.Values.Where(x => x == _peopleInGroups[iGroup]).ToList().Count);
-                    questionsInGroup.Clear();
-                    iGroup++;
-                }
-
-                int totalAnswersByAllGroupMembers = allQuestionsAnswered.Sum(x => x);
+                int totalAnswersByAllGroupMembers = _groups.Sum(x => x.QuestionsAnsweredByAll);
                 answer = totalAnswersByAllGroupMembers.ToString();
                 _logger.LogInformation("{Day}/Part2: Found {answer} total count of all questions answered by all members of a group, summing that across all groups", Day, answer);
                 return answer;
@@ -107,14 +66,32 @@
                     group.Append(line);
                 }
 
+                // We finish a group either because of a blank line or end of file
                 if (string.IsNullOrEmpty(line) || index + 1 >= _input.Count)
                 {
-                    _groups.Add(group.ToString());
-                    _peopleInGroups.Add(peopleInGroup);
+                    _groups.Add(GetGroupInfo(group.ToString(), peopleInGroup));
                     peopleInGroup = 0;
-                    group = new StringBuilder();
+                    group.Clear();
                 }
             }
+        }
+
+        private static GroupInfo GetGroupInfo(string groupAnswers, int peopleInGroup)
+        {
+            Dictionary<char, int> questionsInGroup = new ();
+            for (int i = 0; i < groupAnswers.Length; i++)
+            {
+                if (!questionsInGroup.ContainsKey(groupAnswers[i]))
+                {
+                    questionsInGroup[groupAnswers[i]] = 1;
+                }
+                else
+                {
+                    questionsInGroup[groupAnswers[i]] = questionsInGroup[groupAnswers[i]] + 1;
+                }
+            }
+
+            return new GroupInfo(questionsInGroup, peopleInGroup);
         }
     }
 }
