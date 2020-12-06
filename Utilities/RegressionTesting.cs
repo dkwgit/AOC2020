@@ -15,7 +15,7 @@
                     puzzle.RegressionTest();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 testsPass = false;
             }

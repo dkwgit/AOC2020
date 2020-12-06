@@ -5,12 +5,20 @@
     using System.Linq;
     using System.Text.RegularExpressions;
     using AOC2020.Utilities;
+    using Microsoft.Extensions.Logging;
 
     public class Puzzle : IPuzzle
     {
+        private readonly ILogger _logger;
+
         private readonly List<PasswordEntry> _passwords = new ();
 
         private List<string> _input = null;
+
+        public Puzzle(ILogger<Puzzle> logger)
+        {
+            _logger = logger;
+        }
 
         public string Day => "02";
 
@@ -27,7 +35,7 @@
             get
             {
                 string answer = $"{_passwords.Count(x => x.ValidByLetterCount())}";
-                Console.WriteLine($"Found {answer} passwords that were valid out of {_passwords.Count}");
+                _logger.LogInformation("{Day}/Part1: Found {answer} passwords that were valid out of {Count}", Day, answer, _passwords.Count);
                 return answer;
             }
         }
@@ -37,7 +45,7 @@
             get
             {
                 string answer = $"{_passwords.Where(x => x.ValidByLetterPosition()).Count()}";
-                Console.WriteLine($"Found {answer} passwords that were valid out of {_passwords.Count}");
+                _logger.LogInformation("{Day}/Part2: Found {answer} passwords that were valid out of {Count}", Day, answer, _passwords.Count);
                 return answer;
             }
         }

@@ -4,12 +4,20 @@
     using System.Collections.Generic;
     using System.Linq;
     using AOC2020.Utilities;
+    using Microsoft.Extensions.Logging;
 
     public class Puzzle : IPuzzle
     {
+        private readonly ILogger _logger;
+
         private readonly SortedDictionary<int, int> _sortedInput = new ();
 
         private List<string> _input = null;
+
+        public Puzzle(ILogger<Puzzle> logger)
+        {
+            _logger = logger;
+        }
 
         public string Day => "01";
 
@@ -30,7 +38,7 @@
                                      select (x, 2020 - x)).Single();
 
                 string answer = $"{result.Item1 * result.Item2}";
-                Console.WriteLine($"Found pair is ({result.Item1}, {result.Item2}), which multiplied equal: {answer}");
+                _logger.LogInformation("{Day}/Part1: Found pair is ({x}, {y}), which multiplied equal: {answer}", Day, result.Item1, result.Item2, answer);
 
                 return answer;
             }
@@ -42,7 +50,7 @@
             {
                 (int, int, int) triplet = TripletFinder();
                 string answer = $"{triplet.Item1 * triplet.Item2 * triplet.Item3}";
-                Console.WriteLine($"Found triplet ({triplet.Item1}, {triplet.Item2}, {triplet.Item3}) which multiplied equal: {answer}");
+                _logger.LogInformation("{Day}/Part2: Found triplet ({x}, {y}, {z}) which multiplied equal: {answer}", Day, triplet.Item1, triplet.Item2, triplet.Item3, answer);
 
                 return answer;
             }

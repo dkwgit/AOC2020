@@ -5,11 +5,20 @@
     using System.Linq;
     using AOC2020.Sledding;
     using AOC2020.Utilities;
+    using Microsoft.Extensions.Logging;
 
     public class Puzzle : IPuzzle
     {
+        private readonly ILogger _logger;
+
         private List<string> _input = null;
+
         private Forest _forest = null;
+
+        public Puzzle(ILogger<Puzzle> logger)
+        {
+            _logger = logger;
+        }
 
         public List<string> Input => _input;
 
@@ -20,7 +29,7 @@
                 (int, int) slope = (3, 1);
                 List<Square> path = _forest.Run(slope);
                 string answer = path.Where(x => x.HasTree).Count().ToString();
-                Console.WriteLine($"Found {answer} trees sledding through the forest on slope {slope}");
+                _logger.LogInformation("{Day}/Part1: Found {answer} trees while sledding through the forest on slope {slope}", Day, answer, slope);
                 return answer;
             }
         }
@@ -57,7 +66,7 @@
                 }
 
                 string answer = answerNumber.ToString();
-                Console.WriteLine($"Trees multiplied for all the slopes checked are {answer}");
+                _logger.LogInformation("{Day}/Part2: Found multiplied tree counts for all slopes checked: {answer}", Day, answer);
 
                 return answer;
             }

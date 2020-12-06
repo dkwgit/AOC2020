@@ -4,12 +4,20 @@
     using System.Collections.Generic;
     using System.Linq;
     using AOC2020.Utilities;
+    using Microsoft.Extensions.Logging;
 
     public class Puzzle : IPuzzle
     {
+        private readonly ILogger _logger;
+
         private readonly List<PassportData> _passportData = new ();
 
         private List<string> _input;
+
+        public Puzzle(ILogger<Puzzle> logger)
+        {
+            _logger = logger;
+        }
 
         public List<string> Input => _input;
 
@@ -18,7 +26,7 @@
             get
             {
                 string answer = _passportData.Count(x => x.HasAllRequiredFields()).ToString();
-                Console.WriteLine($"Found {answer} passports that were valid for part1 out of {_passportData.Count}");
+                _logger.LogInformation("{Day}/Part1: Found {answer} passports that were valid of total {count}", Day, answer, _passportData.Count);
                 return answer;
             }
         }
@@ -28,7 +36,7 @@
             get
             {
                 string answer = _passportData.Count(x => x.HasAllRequiredFields() && x.ValidateFields()).ToString();
-                Console.WriteLine($"Found {answer} passports that were valid for part2 out of {_passportData.Count}");
+                _logger.LogInformation("{Day}/Part2: Found {answer} passports that were valid for part2 out of {count}", Day, answer, _passportData.Count);
                 return answer;
             }
         }

@@ -1,34 +1,40 @@
 ﻿namespace AOC2020.Driver
 {
-    using System.Collections.Generic;
-    using AOC2020.Utilities;
+    using System;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
 
     public class Program
     {
         public static void Main()
         {
-            RunPuzzleRegressionTests();
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+            using var serviceProvider = serviceCollection.BuildServiceProvider();
+            Driver driver = serviceProvider.GetService<AOC2020.Driver.Driver>();
 
-            /*Day05.Puzzle puzzle = new ();
-
-            puzzle.ProcessPuzzleInput();
-
-            string part1Answer = puzzle.Part1;
-
-            string part2Answer = puzzle.Part2;*/
+            driver.Run();
         }
 
-        public static void RunPuzzleRegressionTests()
+        public static void ConfigureServices(IServiceCollection collection)
         {
-            RegressionTesting.RunPuzzleRegressionTests(
-                new List<IPuzzle>
-                {
-                    new AOC2020.Day01.Puzzle(),
-                    new AOC2020.Day02.Puzzle(),
-                    new AOC2020.Day03.Puzzle(),
-                    new AOC2020.Day04.Puzzle(),
-                    new AOC2020.Day05.Puzzle(),
-                });
+            collection
+            .AddLogging(builder =>
+             {
+                 builder
+                     .ClearProviders()
+                     .SetMinimumLevel(LogLevel.Information)
+                     .AddFilter("Microsoft", LogLevel.Warning)
+                     .AddFilter("System", LogLevel.Warning)
+                     .AddConsole()
+                     .AddDebug();
+             })
+            .AddSingleton<AOC2020.Driver.Driver>()
+            .AddSingleton<AOC2020.Day01.Puzzle>()
+            .AddSingleton<AOC2020.Day02.Puzzle>()
+            .AddSingleton<AOC2020.Day03.Puzzle>()
+            .AddSingleton<AOC2020.Day04.Puzzle>()
+            .AddSingleton<AOC2020.Day05.Puzzle>();
         }
     }
 }
