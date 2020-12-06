@@ -12,11 +12,7 @@
 
         private readonly IServiceProvider _serviceProvider;
 
-        public Driver(IServiceProvider serviceProvider, ILogger<Driver> logger)
-        {
-            _serviceProvider = serviceProvider;
-            _logger = logger;
-        }
+        public Driver(IServiceProvider serviceProvider, ILogger<Driver> logger) => (_serviceProvider, _logger) = (serviceProvider, logger);
 
         public void Run()
         {
