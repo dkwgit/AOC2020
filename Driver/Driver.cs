@@ -9,6 +9,7 @@
     public class Driver
     {
         private readonly ILogger _logger;
+
         private readonly IServiceProvider _serviceProvider;
 
         public Driver(IServiceProvider serviceProvider, ILogger<Driver> logger)
@@ -19,7 +20,9 @@
 
         public void Run()
         {
+            _logger.LogInformation("Starting regression tests");
             RunPuzzleRegressionTests();
+            _logger.LogInformation("Done with regression tests");
         }
 
         public void RunPuzzleRegressionTests()

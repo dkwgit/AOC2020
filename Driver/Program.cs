@@ -26,10 +26,15 @@
                      .SetMinimumLevel(LogLevel.Information)
                      .AddFilter("Microsoft", LogLevel.Warning)
                      .AddFilter("System", LogLevel.Warning)
-                     .AddConsole()
+                     .AddSimpleConsole(options =>
+                         {
+                             options.IncludeScopes = true;
+                             options.SingleLine = true;
+                             options.TimestampFormat = "yyyy-MM-dd HH:mm:ss.fff ";
+                         })
                      .AddDebug();
              })
-            .AddSingleton<AOC2020.Driver.Driver>()
+            .AddSingleton<Driver>()
             .AddSingleton<AOC2020.Day01.Puzzle>()
             .AddSingleton<AOC2020.Day02.Puzzle>()
             .AddSingleton<AOC2020.Day03.Puzzle>()

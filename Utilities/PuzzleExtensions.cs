@@ -12,6 +12,7 @@
 
             string part1Answer = puzzle.Part1;
             string part2Answer = puzzle.Part2;
+
             string part1StoredAnswer = puzzleDataStore.GetPuzzleAnswer(puzzle.Day, "1");
             string part2StoredAnswer = puzzleDataStore.GetPuzzleAnswer(puzzle.Day, "2");
 
