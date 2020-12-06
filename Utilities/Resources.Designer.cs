@@ -385,11 +385,86 @@ namespace AOC2020.Utilities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to psyjxulrdtfe
+        ///jeusdrlxyftp
+        ///ufdpjsxrlztye
+        ///yeorabxsdnhftujlp
+        ///pedfxtsryujl
+        ///
+        ///tauc
+        ///bauptcr
+        ///uact
+        ///cuat
+        ///tacu
+        ///
+        ///xyadvrniqso
+        ///mquglwtczhvpnb
+        ///bmfnuqkvz
+        ///
+        ///fzynq
+        ///yqznf
+        ///qfynz
+        ///zfnqy
+        ///
+        ///kisfzpdjecowv
+        ///rkivjpqwomzsced
+        ///
+        ///prjbzgwkhoqcyxvnd
+        ///vfsietlaqmu
+        ///
+        ///jucif
+        ///cukfsji
+        ///jicduf
+        ///ficuhj
+        ///cfjiu
+        ///
+        ///netxwkjlgmv
+        ///nxjkgdvle
+        ///nxhbylvqjek
+        ///
+        ///ejpfqsc
+        ///rvewqcpsjmond
+        ///ejspcq
+        ///qsecjp
+        ///
+        ///i
+        ///mc
+        ///s
+        ///s
+        ///
+        ///kbem
+        ///eqh
+        ///ep
+        ///ehfp
+        ///
+        ///fgjmp
+        ///jgoac
+        ///
+        ///hrulfeqm
+        ///rlmfeqc
+        ///lerfmjbq
+        ///lebmqsrf
+        ///zxflemqdirkya
+        ///
+        ///zlhc
+        ///lhv
+        ///lcvgh
+        ///hlrq
+        ///
+        ///x [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Day06_PuzzleInput {
             get {
                 return ResourceManager.GetString("Day06_PuzzleInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 6686.
+        /// </summary>
+        internal static string Day06Part2_Answer {
+            get {
+                return ResourceManager.GetString("Day06Part2_Answer", resourceCulture);
             }
         }
     }
