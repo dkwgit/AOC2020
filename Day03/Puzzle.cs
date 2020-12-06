@@ -11,6 +11,15 @@
     {
         private readonly ILogger _logger;
 
+        private readonly List<(int, int)> _part2Slopes = new ()
+        {
+            (1, 1),
+            (3, 1),
+            (5, 1),
+            (7, 1),
+            (1, 2),
+        };
+
         private List<string> _input = null;
 
         private Forest _forest = null;
@@ -38,31 +47,14 @@
         {
             get
             {
-                _forest.ResetForest(new Point(0, 0));
-
-                List<(int, int)> slopesToCheck = new ()
-                {
-                    (1, 1),
-                    (3, 1),
-                    (5, 1),
-                    (7, 1),
-                    (1, 2),
-                };
-
-                List<(int, (int, int))> slopeResults = new ();
-
-                foreach (var slope in slopesToCheck)
-                {
-                    List<Square> path = _forest.Run(slope);
-                    slopeResults.Add((path.Where(x => x.HasTree).Count(), slope));
-                    _forest.ResetForest(new Point(0, 0));
-                }
-
+                // overflowed an int first time around
                 long answerNumber = 1;
 
-                foreach (var result in slopeResults)
+                foreach (var slope in _part2Slopes)
                 {
-                    answerNumber *= result.Item1;
+                    _forest.ResetForest(new Point(0, 0));
+                    List<Square> path = _forest.Run(slope);
+                    answerNumber *= path.Where(x => x.HasTree).Count();
                 }
 
                 string answer = answerNumber.ToString();
