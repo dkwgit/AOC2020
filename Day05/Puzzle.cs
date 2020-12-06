@@ -1,6 +1,5 @@
 ﻿namespace AOC2020.Day05
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using AOC2020.Utilities;

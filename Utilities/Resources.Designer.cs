@@ -146,8 +146,7 @@ namespace AOC2020.Utilities {
         ///1767
         ///1270
         ///1037
-        ///1198
-        /// [rest of string was truncated]&quot;;.
+        ///1198        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Day01_PuzzleInput {
             get {
@@ -382,6 +381,15 @@ namespace AOC2020.Utilities {
         internal static string Day05Part2_Answer {
             get {
                 return ResourceManager.GetString("Day05Part2_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Day06_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day06_PuzzleInput", resourceCulture);
             }
         }
     }
