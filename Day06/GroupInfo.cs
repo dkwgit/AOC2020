@@ -9,21 +9,9 @@
 
         public int MemberCount { get; init; }
 
-        public int QuestionsWithAnAnswer
-        {
-            get
-            {
-                return AllAnswersWithCount.Keys.Count;
-            }
-        }
+        public int QuestionsWithAnAnswer => AllAnswersWithCount.Keys.Count;
 
-        public int QuestionsAnsweredByAll
-        {
-            get
-            {
-                return AllAnswersWithCount.Values.Where(x => x == MemberCount).Count();
-            }
-        }
+        public int QuestionsAnsweredByAll => AllAnswersWithCount.Values.Where(x => x == MemberCount).Count();
 
         public GroupInfo(Dictionary<char, int> allAnswersWithCount, int memberCount) => (AllAnswersWithCount, MemberCount) = (allAnswersWithCount, memberCount);
     }

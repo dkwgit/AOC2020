@@ -21,13 +21,7 @@
 
         public string Day => "01";
 
-        public List<string> Input
-        {
-            get
-            {
-                return _input;
-            }
-        }
+        public List<string> Input => _input;
 
         public string Part1
         {
