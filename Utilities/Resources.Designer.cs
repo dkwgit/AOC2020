@@ -476,5 +476,38 @@ namespace AOC2020.Utilities {
                 return ResourceManager.GetString("Day06Part2_Answer", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dark orange bags contain 3 dark chartreuse bags.
+        ///striped fuchsia bags contain 5 striped lavender bags.
+        ///dull gray bags contain 4 muted cyan bags, 3 light maroon bags.
+        ///dull chartreuse bags contain 3 light tan bags, 3 dotted bronze bags, 4 dark crimson bags, 4 dull gold bags.
+        ///shiny teal bags contain 3 muted maroon bags, 1 bright salmon bag, 2 dark chartreuse bags.
+        ///dull crimson bags contain 1 clear cyan bag, 1 dark chartreuse bag, 1 drab gold bag, 1 dim black bag.
+        ///plaid silver bags contain 2 muted bronze  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day07_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day07_PuzzleInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 213.
+        /// </summary>
+        internal static string Day07Part1_Answer {
+            get {
+                return ResourceManager.GetString("Day07Part1_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 38426.
+        /// </summary>
+        internal static string Day07Part2_Answer {
+            get {
+                return ResourceManager.GetString("Day07Part2_Answer", resourceCulture);
+            }
+        }
     }
 }

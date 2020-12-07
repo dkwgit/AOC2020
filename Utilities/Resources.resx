@@ -172,4 +172,13 @@
   <data name="Day06_PuzzleInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Day06_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="Day07Part1_Answer" xml:space="preserve">
+    <value>213</value>
+  </data>
+  <data name="Day07Part2_Answer" xml:space="preserve">
+    <value>38426</value>
+  </data>
+  <data name="Day07_PuzzleInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Day07_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
 </root>
