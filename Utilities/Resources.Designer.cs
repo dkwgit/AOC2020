@@ -591,5 +591,157 @@ namespace AOC2020.Utilities {
                 return ResourceManager.GetString("Day08Part2_Answer", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 30
+        ///16
+        ///33
+        ///40
+        ///41
+        ///25
+        ///2
+        ///29
+        ///37
+        ///4
+        ///11
+        ///1
+        ///42
+        ///10
+        ///21
+        ///13
+        ///48
+        ///28
+        ///19
+        ///5
+        ///46
+        ///49
+        ///24
+        ///8
+        ///34
+        ///3
+        ///6
+        ///30
+        ///7
+        ///22
+        ///9
+        ///12
+        ///14
+        ///15
+        ///16
+        ///27
+        ///4
+        ///11
+        ///60
+        ///10
+        ///17
+        ///56
+        ///13
+        ///18
+        ///19
+        ///20
+        ///21
+        ///23
+        ///29
+        ///24
+        ///25
+        ///39
+        ///47
+        ///71
+        ///34
+        ///22
+        ///26
+        ///28
+        ///30
+        ///14
+        ///15
+        ///27
+        ///31
+        ///32
+        ///35
+        ///38
+        ///37
+        ///48
+        ///33
+        ///36
+        ///40
+        ///64
+        ///41
+        ///66
+        ///49
+        ///42
+        ///58
+        ///45
+        ///83
+        ///29
+        ///75
+        ///60
+        ///44
+        ///51
+        ///53
+        ///46
+        ///68
+        ///69
+        ///70
+        ///62
+        ///113
+        ///65
+        ///71
+        ///76
+        ///95
+        ///73
+        ///74
+        ///78
+        ///139
+        ///86
+        ///106
+        ///80
+        ///82
+        ///89
+        ///119
+        ///112
+        ///90
+        ///133
+        ///159
+        ///99
+        ///127
+        ///140
+        ///147
+        ///169
+        ///135
+        ///136
+        ///212
+        ///144
+        ///149
+        ///160
+        ///208
+        ///188
+        ///222
+        ///162
+        ///166
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day09_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day09_PuzzleInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to data1.
+        /// </summary>
+        internal static string Day09Part1_Answer {
+            get {
+                return ResourceManager.GetString("Day09Part1_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to data2.
+        /// </summary>
+        internal static string Day09Part2_Answer {
+            get {
+                return ResourceManager.GetString("Day09Part2_Answer", resourceCulture);
+            }
+        }
     }
 }

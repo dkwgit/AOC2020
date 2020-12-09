@@ -1,15 +1,12 @@
-﻿namespace AOC2020.Day08
+﻿namespace AOC2020.Day09
 {
     using System.Collections.Generic;
-    using AOC2020.Computer;
     using AOC2020.Utilities;
     using Microsoft.Extensions.Logging;
 
     public class Puzzle : IPuzzle
     {
         private readonly ILogger _logger;
-
-        private Processor _processor;
 
         private List<string> _input = null;
 
@@ -18,7 +15,7 @@
             _logger = logger;
         }
 
-        public string Day => "08";
+        public string Day => "09";
 
         public List<string> Input => _input;
 
@@ -26,9 +23,8 @@
         {
             get
             {
-                string answer = _processor.Run(out bool _).ToString();
-                _logger.LogInformation("{Day}/Part1: Found {answer} as accumulator value just before program would start to loop", Day, answer);
-
+                string answer = string.Empty;
+                _logger.LogInformation("{Day}/Part1: Found {answer}", Day, answer);
                 return answer;
             }
         }
@@ -37,8 +33,8 @@
         {
             get
             {
-                string answer = _processor.Fix().ToString();
-                _logger.LogInformation("{Day}/Part2: Found {answer} as accumulator value when the program is patched to not loop", Day, answer);
+                string answer = string.Empty;
+                _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
                 return answer;
             }
         }
@@ -46,14 +42,6 @@
         public void ProcessPuzzleInput(List<string> input)
         {
             _input = input;
-
-            Program p = new Program();
-            foreach (var line in _input)
-            {
-                p.AddInstruction(line);
-            }
-
-            _processor = new Processor(p);
         }
     }
 }

@@ -42,7 +42,8 @@
             .AddSingleton<AOC2020.Day05.Puzzle>()
             .AddSingleton<AOC2020.Day06.Puzzle>()
             .AddSingleton<AOC2020.Day07.Puzzle>()
-            .AddSingleton<AOC2020.Day08.Puzzle>();
+            .AddSingleton<AOC2020.Day08.Puzzle>()
+            .AddSingleton<AOC2020.Day09.Puzzle>();
         }
     }
 }
