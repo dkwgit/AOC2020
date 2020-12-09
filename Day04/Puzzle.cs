@@ -43,9 +43,9 @@
 
         public string Day => "04";
 
-        public void ProcessPuzzleInput()
+        public void ProcessPuzzleInput(List<string> input)
         {
-            _input = new PuzzleDataStore().GetPuzzleInputAsList(Day, false);
+            _input = input;
             List<string> dataItems = new ();
 
             for (int index = 0; index < _input.Count; index++)

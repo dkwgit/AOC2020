@@ -44,9 +44,9 @@
             }
         }
 
-        public void ProcessPuzzleInput()
+        public void ProcessPuzzleInput(List<string> input)
         {
-            _input = new PuzzleDataStore().GetPuzzleInputAsList(Day, false);
+            _input = input;
             foreach (var p in _input)
             {
                 string pattern = @"^(\d+)-(\d+)\s+(.):\s+(.*)$";

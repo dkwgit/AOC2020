@@ -66,9 +66,9 @@
 
         public string Day => "03";
 
-        public void ProcessPuzzleInput()
+        public void ProcessPuzzleInput(List<string> input)
         {
-            _input = new PuzzleDataStore().GetPuzzleInputAsList(Day, false);
+            _input = input;
             _forest = new ForestBuilder(_input).Build();
         }
     }

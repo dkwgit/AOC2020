@@ -1,6 +1,5 @@
 ﻿namespace AOC2020.Utilities
 {
-    using System;
     using System.Collections.Generic;
 
     public interface IPuzzle
@@ -13,6 +12,6 @@
 
         string Day { get; }
 
-        void ProcessPuzzleInput();
+        void ProcessPuzzleInput(List<string> input);
     }
 }

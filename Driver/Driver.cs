@@ -33,6 +33,7 @@
                     _serviceProvider.GetService<AOC2020.Day05.Puzzle>(),
                     _serviceProvider.GetService<AOC2020.Day06.Puzzle>(),
                     _serviceProvider.GetService<AOC2020.Day07.Puzzle>(),
+                    _serviceProvider.GetService<AOC2020.Day08.Puzzle>(),
                 });
         }
     }

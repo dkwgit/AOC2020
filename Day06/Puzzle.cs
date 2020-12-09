@@ -49,9 +49,9 @@
 
         public string Day => "06";
 
-        public void ProcessPuzzleInput()
+        public void ProcessPuzzleInput(List<string> input)
         {
-            _input = new PuzzleDataStore().GetPuzzleInputAsList(Day, false);
+            _input = input;
 
             StringBuilder group = new StringBuilder();
             int peopleInGroup = 0;

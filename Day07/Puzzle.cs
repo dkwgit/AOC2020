@@ -50,9 +50,9 @@
             }
         }
 
-        public void ProcessPuzzleInput()
+        public void ProcessPuzzleInput(List<string> input)
         {
-            _input = new PuzzleDataStore().GetPuzzleInputAsList(Day);
+            _input = input;
 
             BagFactory factory = new BagFactory(_bagManager);
 

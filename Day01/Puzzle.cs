@@ -50,9 +50,10 @@
             }
         }
 
-        public void ProcessPuzzleInput()
+        public void ProcessPuzzleInput(List<string> input)
         {
-            _input = new PuzzleDataStore().GetPuzzleInputAsList(Day);
+            _input = input;
+
             for (int i = 0; i < _input.Count; i++)
             {
                 _sortedInput.Add(int.Parse(_input[i]), i);

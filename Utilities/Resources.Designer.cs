@@ -509,5 +509,87 @@ namespace AOC2020.Utilities {
                 return ResourceManager.GetString("Day07Part2_Answer", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to jmp +336
+        ///jmp +593
+        ///jmp +121
+        ///acc -8
+        ///nop +459
+        ///jmp +451
+        ///acc -6
+        ///acc +23
+        ///acc +23
+        ///acc -2
+        ///jmp +113
+        ///acc -11
+        ///acc +25
+        ///jmp +529
+        ///acc +0
+        ///jmp +1
+        ///jmp +313
+        ///acc +30
+        ///nop +235
+        ///jmp +45
+        ///nop +195
+        ///acc -11
+        ///jmp +491
+        ///acc +6
+        ///nop +425
+        ///nop +68
+        ///acc +9
+        ///jmp -25
+        ///jmp +507
+        ///jmp +456
+        ///acc -1
+        ///acc +49
+        ///acc +5
+        ///jmp +31
+        ///acc +30
+        ///nop +513
+        ///jmp +499
+        ///nop +533
+        ///acc +18
+        ///acc +28
+        ///acc -2
+        ///jmp +170
+        ///acc -5
+        ///jmp +180
+        ///nop +179
+        ///acc +15
+        ///acc +33
+        ///nop +27
+        ///jmp +424
+        ///acc +30
+        ///acc +33
+        ///acc +50
+        ///jmp +348
+        ///jmp +435
+        ///acc +21
+        ///acc + [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day08_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day08_PuzzleInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1766.
+        /// </summary>
+        internal static string Day08Part1_Answer {
+            get {
+                return ResourceManager.GetString("Day08Part1_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1639.
+        /// </summary>
+        internal static string Day08Part2_Answer {
+            get {
+                return ResourceManager.GetString("Day08Part2_Answer", resourceCulture);
+            }
+        }
     }
 }

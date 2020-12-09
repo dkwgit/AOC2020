@@ -4,17 +4,15 @@
 
     public static class PuzzleExtensions
     {
-        public static void RegressionTest(this IPuzzle puzzle)
+        public static void RegressionTest(this IPuzzle puzzle, PuzzleData testData)
         {
-            PuzzleDataStore puzzleDataStore = new ();
+            puzzle.ProcessPuzzleInput(testData.Input);
 
-            puzzle.ProcessPuzzleInput();
+            string part1StoredAnswer = testData.AnswerPart1;
+            string part2StoredAnswer = testData.AnswerPart2;
 
             string part1Answer = puzzle.Part1;
-            string part2Answer = puzzle.Part2;
-
-            string part1StoredAnswer = puzzleDataStore.GetPuzzleAnswer(puzzle.Day, "1");
-            string part2StoredAnswer = puzzleDataStore.GetPuzzleAnswer(puzzle.Day, "2");
+            string part2Answer = (part2StoredAnswer != string.Empty) ? puzzle.Part2 : string.Empty;
 
             if (part1StoredAnswer != null)
             {

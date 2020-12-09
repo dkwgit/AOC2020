@@ -1,7 +1,7 @@
-﻿namespace AOC2020.Day05
+﻿namespace AOC2020.Day08
 {
     using System.Collections.Generic;
-    using System.Linq;
+    using AOC2020.Computer;
     using AOC2020.Utilities;
     using Microsoft.Extensions.Logging;
 
@@ -9,7 +9,7 @@
     {
         private readonly ILogger _logger;
 
-        private readonly List<BoardingPass> _boardingPasses = new ();
+        private Processor _processor;
 
         private List<string> _input = null;
 
@@ -18,14 +18,17 @@
             _logger = logger;
         }
 
+        public string Day => "08";
+
         public List<string> Input => _input;
 
         public string Part1
         {
             get
             {
-                string answer = _boardingPasses.Max(x => x.SeatId).ToString();
-                _logger.LogInformation("{Day}/Part1: Found max seats: {answer}", Day, answer);
+                string answer = _processor.Run(out bool looped).ToString();
+                _logger.LogInformation("{Day}/Part1: Found {answer} as accumulator value just before program would start to loop", Day, answer);
+
                 return answer;
             }
         }
@@ -34,23 +37,23 @@
         {
             get
             {
-                int seatId = _boardingPasses.Where(x => _boardingPasses.Any(y => y.SeatId == x.SeatId + 2) && !_boardingPasses.Any(y => y.SeatId == x.SeatId + 1)).Single().SeatId + 1;
-                string answer = seatId.ToString();
-                _logger.LogInformation("{Day}/Part2: Found seat id: {answer}", Day, answer);
-                return seatId.ToString();
+                string answer = _processor.Fix().ToString();
+                _logger.LogInformation("{Day}/Part1: Found {answer} as accumulator value when the program is patched to not loop", Day, answer);
+                return answer;
             }
         }
-
-        public string Day => "05";
 
         public void ProcessPuzzleInput(List<string> input)
         {
             _input = input;
 
+            Program p = new Program();
             foreach (var line in _input)
             {
-                _boardingPasses.Add(new BoardingPass(line));
+                p.AddInstruction(line);
             }
+
+            _processor = new Processor(p);
         }
     }
 }

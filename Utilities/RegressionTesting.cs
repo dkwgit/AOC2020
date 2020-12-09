@@ -8,11 +8,17 @@
         public static bool RunPuzzleRegressionTests(List<IPuzzle> puzzles)
         {
             bool testsPass = true;
+            DataFixture fixture = new ();
+
             try
             {
                 foreach (var puzzle in puzzles)
                 {
-                    puzzle.RegressionTest();
+                    List<PuzzleData> list = fixture.GetPuzzleData(puzzle.Day);
+                    foreach (var puzzleData in list)
+                    {
+                        puzzle.RegressionTest(puzzleData);
+                    }
                 }
             }
 #pragma warning disable CS0168 // Variable is declared but never used
