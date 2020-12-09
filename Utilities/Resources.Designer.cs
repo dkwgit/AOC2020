@@ -743,5 +743,32 @@ namespace AOC2020.Utilities {
                 return ResourceManager.GetString("Day09Part2_Answer", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to input.
+        /// </summary>
+        internal static string Day10_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day10_PuzzleInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to data1.
+        /// </summary>
+        internal static string Day10Part1_Answer {
+            get {
+                return ResourceManager.GetString("Day10Part1_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to data2.
+        /// </summary>
+        internal static string Day10Part2_Answer {
+            get {
+                return ResourceManager.GetString("Day10Part2_Answer", resourceCulture);
+            }
+        }
     }
 }
