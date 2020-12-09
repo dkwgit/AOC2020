@@ -38,7 +38,7 @@
             get
             {
                 string answer = _processor.Fix().ToString();
-                _logger.LogInformation("{Day}/Part1: Found {answer} as accumulator value when the program is patched to not loop", Day, answer);
+                _logger.LogInformation("{Day}/Part2: Found {answer} as accumulator value when the program is patched to not loop", Day, answer);
                 return answer;
             }
         }
