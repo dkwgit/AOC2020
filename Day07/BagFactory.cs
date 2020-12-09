@@ -28,9 +28,7 @@
 
             string bagName = GetBagName(match);
 
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
-            bag = _bagManager.GetOrInsertBagByName(bagName, out bool newBag);
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
+            bag = _bagManager.GetOrInsertBagByName(bagName, out bool _);
 
             if (hasChildren)
             {
@@ -83,9 +81,7 @@
             {
                 (string childBagName, int childBagCount) = GetChildBagInfo(match, i);
 
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
-                Bag childBag = _bagManager.GetOrInsertBagByName(childBagName, out bool newBag);
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
+                Bag childBag = _bagManager.GetOrInsertBagByName(childBagName, out bool _);
 
                 bag.AddChild(childBag, childBagCount);
                 childBag.AddParent(bag);

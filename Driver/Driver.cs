@@ -35,7 +35,7 @@
                     _serviceProvider.GetService<AOC2020.Day07.Puzzle>(),
                     _serviceProvider.GetService<AOC2020.Day08.Puzzle>(),
                     _serviceProvider.GetService<AOC2020.Day09.Puzzle>(),
-                    //_serviceProvider.GetService<AOC2020.Day10.Puzzle>(),
+                    _serviceProvider.GetService<AOC2020.Day10.Puzzle>(),
                 });
         }
     }

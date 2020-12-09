@@ -21,7 +21,11 @@
                 new PuzzleData("06", "Actual", puzzleDataStore.GetPuzzleInputAsList("06"), puzzleDataStore.GetPuzzleAnswer("06", "1"), puzzleDataStore.GetPuzzleAnswer("06", "2")),
                 new PuzzleData("07", "Actual", puzzleDataStore.GetPuzzleInputAsList("07"), puzzleDataStore.GetPuzzleAnswer("07", "1"), puzzleDataStore.GetPuzzleAnswer("07", "2")),
                 new PuzzleData("08", "Actual", puzzleDataStore.GetPuzzleInputAsList("08"), puzzleDataStore.GetPuzzleAnswer("08", "1"), puzzleDataStore.GetPuzzleAnswer("08", "2")),
-                new PuzzleData("08", "Sample", new List<string>()
+                new PuzzleData("09", "Actual", puzzleDataStore.GetPuzzleInputAsList("09"), puzzleDataStore.GetPuzzleAnswer("09", "1"), puzzleDataStore.GetPuzzleAnswer("09", "2")),
+                new PuzzleData(
+                    "08",
+                    "Sample",
+                    new List<string>()
                     {
                         "nop +0",
                         "acc +1",
@@ -32,7 +36,9 @@
                         "acc +1",
                         "jmp -4",
                         "acc +6",
-                    }, "5", string.Empty),
+                    },
+                    "5",
+                    string.Empty),
             };
         }
 

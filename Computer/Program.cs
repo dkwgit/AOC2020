@@ -18,6 +18,7 @@
                 "nop" => new NoOp(amount),
                 "jmp" => new Jump(amount),
                 "acc" => new Accumulate(amount),
+                _ => throw new System.Exception("Unexpected value in switch expression")
             };
             _program.Add(instruction);
         }

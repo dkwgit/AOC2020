@@ -83,7 +83,9 @@
                 }
             }
 
+#pragma warning disable CS0162 // Unreachable code detected
             return -1;
+#pragma warning restore CS0162 // Unreachable code detected
         }
     }
 }
