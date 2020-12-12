@@ -60,7 +60,7 @@
                     },
                     "220",
                     "19208"),
-                new PuzzleData(
+                /*new PuzzleData(
                     "11",
                     "Sample",
                     new List<string>()
@@ -77,7 +77,7 @@
                         "L.LLLLL.LL",
                     },
                     "37",
-                    ""),
+                    ""),*/
             };
         }
 

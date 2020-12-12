@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AOC2020.Sledding;
+    using AOC2020.Map;
     using AOC2020.Utilities;
     using Microsoft.Extensions.Logging;
 
@@ -69,7 +69,7 @@
         public void ProcessPuzzleInput(List<string> input)
         {
             _input = input;
-            _forest = new ForestBuilder(_input).Build();
+            _forest = new MapBuilder(_input).Build();
         }
     }
 }

@@ -1,16 +1,16 @@
-﻿namespace AOC2020.Sledding
+﻿namespace AOC2020.Map
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class ForestBuilder
+    public class MapBuilder
     {
         private readonly List<List<Square>> _forestSquares = new ();
 
         private readonly List<string> _input = null;
 
-        public ForestBuilder(List<string> input)
+        public MapBuilder(List<string> input)
         {
             _input = input;
         }

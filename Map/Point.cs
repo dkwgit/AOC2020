@@ -1,4 +1,4 @@
-﻿namespace AOC2020.Sledding
+﻿namespace AOC2020.Map
 {
     public record Point
     {
