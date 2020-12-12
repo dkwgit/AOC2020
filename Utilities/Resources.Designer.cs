@@ -862,5 +862,37 @@ namespace AOC2020.Utilities {
                 return ResourceManager.GetString("Day10Part2_Answer", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LLLLLLLL.LLLL.LLLLL.LLLLLLLLLLLLLL.LLLLLLLLLLLLLL.LLLLL.LLLLLLLLLLLLLL.LLLLLLL.LLLLLL.LLLLLLLLLL.L
+        ///LLLLLLLLLLLLLLLLLLL.L.LL.LLL.LLLLL.LLLLLLLLLLL.LL.LLLLL.LLLLLLLL.LLLLLLLLL.LLL.LLLLLLLLLLLLLLLLLLL
+        ///LLLLLLLLLLLLL.LLLLLLLLLLLLLL.LL.LL.LLLLLLL.LLLLLL.LLLLLLLLL.LLLL.LLLLL.LLLLLLL.LLLLLL.LLLLLLLLLLLL
+        ///LLLLLLLL.LLLL.LLLLL..LLLLLLL.L.LLL.LLLLLLL.LLLLLL.LLLLL.LLLLLLLL.LLLLLLLLLLLLL.LLLLLL.LLLLLLLLLLLL
+        ///LLLLLL.L.LLLL.L.LLL.LLLLLLLLLLLLLL.LLL.LLL.LLLLLL.LLLLL.LLLLLLLLLLLLLL.LLLLLLL.LLLLLL.LLLLLLLLLLLL
+        ///LLLLLLLL.LLL [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day11_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day11_PuzzleInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to data1.
+        /// </summary>
+        internal static string Day11Part1_Answer {
+            get {
+                return ResourceManager.GetString("Day11Part1_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to data2.
+        /// </summary>
+        internal static string Day11Part2_Answer {
+            get {
+                return ResourceManager.GetString("Day11Part2_Answer", resourceCulture);
+            }
+        }
     }
 }
