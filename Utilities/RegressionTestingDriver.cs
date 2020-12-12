@@ -28,7 +28,9 @@
                     Type t = Type.GetType($"AOC2020.Day{puzzleData.Day}.Puzzle, Day{puzzleData.Day}");
                     var puzzle = (IPuzzle)_serviceProvider.GetService(t) as IPuzzle;
 
+                    _logger.LogInformation("Starting test of type {type} for Day {day}", puzzleData.Type, puzzleData.Day);
                     puzzle.RegressionTest(puzzleData);
+                    _logger.LogInformation("Finished");
                 }
             }
             catch (Exception e)

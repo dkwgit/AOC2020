@@ -31,7 +31,7 @@
                 var result = _adapters.Skip(1).Select((x, index) => x - _adapters[index]).ToList(); // Because of skip, index is one lower than the real current position in list, so passing index get's previous
                 int oneDiffsMultipliedWithThreeDiffs = result.Where(x => x == 1).Count() * result.Where(x => x == 3).Count();
                 answer = oneDiffsMultipliedWithThreeDiffs.ToString();
-                _logger.LogInformation("{Day}/Part1: Found {answer}", Day, answer);
+                _logger.LogInformation("{Day}/Part1: Found {answer} as the multiplied total of sum of adapters with a 1 jolt difference and the sum of those with 3 jolt difference", Day, answer);
                 return answer;
             }
         }
@@ -44,14 +44,18 @@
 
                 List<List<int>> runs = new ();
                 List<int> run = null;
+
+                // Get the sub paths (runs) through adapter list that contain variability
                 for (int index = 0; index < _adapters.Count; index++)
                 {
                     int current = _adapters[index];
 
                     if (run != null && current - run[^1] >= 3)
                     {
+                        // If we have a run going and current is 3 or more away from its last, terminate the run
                         if (run.Count > 2)
                         {
+                            // Only runs longer than 2 contain variability
                             runs.Add(run);
                         }
 
@@ -66,8 +70,8 @@
                     run.Add(current);
                 }
 
+                // Build a tree for each sub path from above
                 List<Tree> trees = new ();
-
                 for (int i = 0; i < runs.Count; i++)
                 {
                     var r = runs[i];
@@ -75,6 +79,7 @@
                     trees.Add(tree);
                 }
 
+                // Evaluate the trees for how they affect the combinations. We have to multiply total paths by the number of paths throug each tree.
                 long totalPaths = 1;
                 foreach (var tree in trees)
                 {
@@ -83,7 +88,7 @@
                 }
 
                 answer = totalPaths.ToString();
-                _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
+                _logger.LogInformation("{Day}/Part2: Found {answer} as the total number of combinations of adapters", Day, answer);
                 return answer;
             }
         }
