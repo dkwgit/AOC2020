@@ -70,7 +70,7 @@
                     run.Add(current);
                 }
 
-                // Build a tree for each sub path from above
+                // Build a tree for each sub path from above. Could actually handle this above, but for validation it was easier to break it out.
                 List<Tree> trees = new ();
                 for (int i = 0; i < runs.Count; i++)
                 {
