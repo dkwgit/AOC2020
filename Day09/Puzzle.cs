@@ -14,6 +14,10 @@
 
         private List<string> _input = null;
 
+        private int _indexOFWeakNumber = -1;
+
+        private long _weakNumber = -1;
+
         public Puzzle(ILogger<Puzzle> logger)
         {
             _logger = logger;
@@ -38,6 +42,8 @@
                     Combinations<long> combi = new Combinations<long>(_codes.Skip(start).Take(countTake).ToArray(), 2);
                     if (!combi.Any(x => x[0] + x[1] == _codes[iteration]))
                     {
+                        _weakNumber = _codes[iteration];
+                        _indexOFWeakNumber = iteration;
                         answer = _codes[iteration].ToString();
                         break;
                     }
@@ -59,15 +65,15 @@
                 int start = 0;
                 bool found = false;
 
-                for (int countTake = 2; countTake < 504; countTake++)
+                for (int take = 2; take < _indexOFWeakNumber; take++)
                 {
                     start = 0;
-                    while (start + countTake <= 504)
+                    while (start + take <= _indexOFWeakNumber)
                     {
-                        if (_codes.Skip(start).Take(countTake).Sum(x => x) == 14144619)
+                        if (_codes.Skip(start).Take(take).Sum(x => x) == _weakNumber)
                         {
-                            long min = _codes.Skip(start).Take(countTake).Min();
-                            long max = _codes.Skip(start).Take(countTake).Max();
+                            long min = _codes.Skip(start).Take(take).Min();
+                            long max = _codes.Skip(start).Take(take).Max();
                             long both = min + max;
                             answer = both.ToString();
                             found = true;

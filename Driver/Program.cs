@@ -35,16 +35,17 @@
                      .AddDebug();
              })
             .AddSingleton<Driver>()
-            .AddSingleton<AOC2020.Day01.Puzzle>()
-            .AddSingleton<AOC2020.Day02.Puzzle>()
-            .AddSingleton<AOC2020.Day03.Puzzle>()
-            .AddSingleton<AOC2020.Day04.Puzzle>()
-            .AddSingleton<AOC2020.Day05.Puzzle>()
-            .AddSingleton<AOC2020.Day06.Puzzle>()
-            .AddSingleton<AOC2020.Day07.Puzzle>()
-            .AddSingleton<AOC2020.Day08.Puzzle>()
-            .AddSingleton<AOC2020.Day09.Puzzle>()
-            .AddSingleton<AOC2020.Day10.Puzzle>();
+            .AddSingleton<AOC2020.Utilities.RegressionTestingDriver>()
+            .AddTransient<AOC2020.Day01.Puzzle>()
+            .AddTransient<AOC2020.Day02.Puzzle>()
+            .AddTransient<AOC2020.Day03.Puzzle>()
+            .AddTransient<AOC2020.Day04.Puzzle>()
+            .AddTransient<AOC2020.Day05.Puzzle>()
+            .AddTransient<AOC2020.Day06.Puzzle>()
+            .AddTransient<AOC2020.Day07.Puzzle>()
+            .AddTransient<AOC2020.Day08.Puzzle>()
+            .AddTransient<AOC2020.Day09.Puzzle>()
+            .AddTransient<AOC2020.Day10.Puzzle>();
         }
     }
 }

@@ -23,20 +23,9 @@
 
         public void RunPuzzleRegressionTests()
         {
-            RegressionTesting.RunPuzzleRegressionTests(
-                new List<IPuzzle>
-                {
-                    _serviceProvider.GetService<AOC2020.Day01.Puzzle>(),
-                    _serviceProvider.GetService<AOC2020.Day02.Puzzle>(),
-                    _serviceProvider.GetService<AOC2020.Day03.Puzzle>(),
-                    _serviceProvider.GetService<AOC2020.Day04.Puzzle>(),
-                    _serviceProvider.GetService<AOC2020.Day05.Puzzle>(),
-                    _serviceProvider.GetService<AOC2020.Day06.Puzzle>(),
-                    _serviceProvider.GetService<AOC2020.Day07.Puzzle>(),
-                    _serviceProvider.GetService<AOC2020.Day08.Puzzle>(),
-                    _serviceProvider.GetService<AOC2020.Day09.Puzzle>(),
-                    _serviceProvider.GetService<AOC2020.Day10.Puzzle>(),
-                });
+            RegressionTestingDriver testingDriver = _serviceProvider.GetService<AOC2020.Utilities.RegressionTestingDriver>();
+
+            testingDriver.RunPuzzleRegressionTests();
         }
     }
 }

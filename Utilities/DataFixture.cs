@@ -22,6 +22,7 @@
                 new PuzzleData("07", "Actual", puzzleDataStore.GetPuzzleInputAsList("07"), puzzleDataStore.GetPuzzleAnswer("07", "1"), puzzleDataStore.GetPuzzleAnswer("07", "2")),
                 new PuzzleData("08", "Actual", puzzleDataStore.GetPuzzleInputAsList("08"), puzzleDataStore.GetPuzzleAnswer("08", "1"), puzzleDataStore.GetPuzzleAnswer("08", "2")),
                 new PuzzleData("09", "Actual", puzzleDataStore.GetPuzzleInputAsList("09"), puzzleDataStore.GetPuzzleAnswer("09", "1"), puzzleDataStore.GetPuzzleAnswer("09", "2")),
+                new PuzzleData("10", "Actual", puzzleDataStore.GetPuzzleInputAsList("10"), puzzleDataStore.GetPuzzleAnswer("10", "1"), puzzleDataStore.GetPuzzleAnswer("10", "2")),
                 new PuzzleData(
                     "08",
                     "Sample",
@@ -39,12 +40,30 @@
                     },
                     "5",
                     string.Empty),
+                new PuzzleData(
+                    "10",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "1", "4", "5", "6", "7", "10", "11", "12", "15", "16", "19",
+                    },
+                    "35",
+                    "8"),
+                new PuzzleData(
+                    "10",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "28", "33", "18", "42", "31", "14", "46", "20", "48", "47", "24", "23", "49", "45", "19", "38", "39", "11", "1", "32", "25", "35", "8", "17", "7", "9", "4", "2", "34", "10", "3",
+                    },
+                    "220",
+                    "19208"),
             };
         }
 
-        public List<PuzzleData> GetPuzzleData(string day)
+        public List<PuzzleData> GetPuzzleData()
         {
-            return _puzzleData.Where(x => x.Day == day).OrderBy(x => (x.Type == "Actual") ? 2 : 1).ToList();
+            return _puzzleData.OrderBy(x => (x.Day, (x.Type == "Actual") ? 2 : 1)).ToList();
         }
     }
 }
