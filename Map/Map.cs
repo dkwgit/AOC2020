@@ -21,7 +21,7 @@
             _width = mapSquares.GetLength(1);
         }
 
-        public Point SledPoint => _currentPoint;
+        public Point CurrentPoint => _currentPoint;
 
         public List<Square> Run((int, int) slope)
         {
@@ -41,9 +41,9 @@
             return path;
         }
 
-        public void ResetForest(Point sledPoint)
+        public void ResetMap(Point point)
         {
-            _currentPoint = sledPoint;
+            _currentPoint = point;
             _columnOffset = 0;
         }
 

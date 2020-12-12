@@ -52,7 +52,7 @@
 
                 foreach (var slope in _part2Slopes)
                 {
-                    _forest.ResetForest(new Point(0, 0));
+                    _forest.ResetMap(new Point(0, 0));
                     List<Square> path = _forest.Run(slope);
                     answerNumber *= path.Where(x => x.Has(typeof(ITreeValue))).Count();
                 }
