@@ -22,7 +22,7 @@
 
         private List<string> _input = null;
 
-        private Forest _forest = null;
+        private Map _forest = null;
 
         public Puzzle(ILogger<Puzzle> logger)
         {
@@ -37,7 +37,7 @@
             {
                 (int, int) slope = (3, 1);
                 List<Square> path = _forest.Run(slope);
-                string answer = path.Where(x => x.HasTree).Count().ToString();
+                string answer = path.Where(x => x.Has(typeof(TreeValue))).Count().ToString();
                 _logger.LogInformation("{Day}/Part1: Found {answer} trees while sledding through the forest on slope {slope}", Day, answer, slope);
                 return answer;
             }
@@ -54,7 +54,7 @@
                 {
                     _forest.ResetForest(new Point(0, 0));
                     List<Square> path = _forest.Run(slope);
-                    answerNumber *= path.Where(x => x.HasTree).Count();
+                    answerNumber *= path.Where(x => x.Has(typeof(ITreeValue))).Count();
                 }
 
                 string answer = answerNumber.ToString();
@@ -69,7 +69,7 @@
         public void ProcessPuzzleInput(List<string> input)
         {
             _input = input;
-            _forest = new MapBuilder(_input).Build();
+            _forest = new MapBuilder<TreeValue>(_input).Build();
         }
     }
 }

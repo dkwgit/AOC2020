@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class Forest
+    public class Map
     {
         private readonly Square[,] _squares = null;
 
@@ -12,16 +12,16 @@
         private int _columnOffset = 0;
 #pragma warning restore IDE0052 // Remove unread private members
 
-        private Point _sledPoint = null;
+        private Point _currentPoint = null;
 
-        public Forest(Point sledPoint, Square[,] forestSquares)
+        public Map(Point startPoint, Square[,] mapSquares)
         {
-            _sledPoint = sledPoint;
-            _squares = forestSquares;
-            _width = forestSquares.GetLength(1);
+            _currentPoint = startPoint;
+            _squares = mapSquares;
+            _width = mapSquares.GetLength(1);
         }
 
-        public Point SledPoint => _sledPoint;
+        public Point SledPoint => _currentPoint;
 
         public List<Square> Run((int, int) slope)
         {
@@ -30,7 +30,7 @@
             while (run)
             {
                 MoveOnce(slope);
-                Square s = _squares[_sledPoint.Y, _sledPoint.X];
+                Square s = _squares[_currentPoint.Y, _currentPoint.X];
                 path.Add(s);
                 if (s.Down == null)
                 {
@@ -43,18 +43,18 @@
 
         public void ResetForest(Point sledPoint)
         {
-            _sledPoint = sledPoint;
+            _currentPoint = sledPoint;
             _columnOffset = 0;
         }
 
         private void MoveOnce((int, int) slope)
         {
-            _sledPoint = _sledPoint.PointFromOffset(slope);
-            if (_sledPoint.X + 1 > _width || _sledPoint.X < 0)
+            _currentPoint = _currentPoint.PointFromOffset(slope);
+            if (_currentPoint.X + 1 > _width || _currentPoint.X < 0)
             {
                 int offset = _width * ((slope.Item1 >= 0) ? 1 : -1);
                 _columnOffset += offset;
-                _sledPoint = _sledPoint.PointFromOffset(((-1) * offset, 0));
+                _currentPoint = _currentPoint.PointFromOffset(((-1) * offset, 0));
             }
         }
     }

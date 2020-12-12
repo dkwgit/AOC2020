@@ -4,9 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class MapBuilder
+    public class MapBuilder<T>
+        where T : ISquareValue, new()
     {
-        private readonly List<List<Square>> _forestSquares = new ();
+        private readonly List<List<Square>> _squares = new ();
 
         private readonly List<string> _input = null;
 
@@ -15,7 +16,7 @@
             _input = input;
         }
 
-        public Forest Build()
+        public Map Build()
         {
             int currentRowNumber = 0;
             List<Square> previousRow = null;
@@ -28,7 +29,7 @@
                 for (int columnNumber = 0; columnNumber < row.Length; columnNumber++)
                 {
                     var cell = row[columnNumber];
-                    Square square = new Square(new Point(columnNumber, currentRowNumber), cell == '#');
+                    Square square = new Square(new Point(columnNumber, currentRowNumber), cell == '.' ? new EmptySquareValue() : new T());
 
                     if (previousRow != null)
                     {
@@ -55,28 +56,28 @@
                 }
 
                 currentRowNumber++;
-                _forestSquares.Add(currentRow);
+                _squares.Add(currentRow);
                 previousRow = currentRow;
             }
 
-            int maxColumns = _forestSquares.Max(x => x.Count);
-            if (_forestSquares.Any(x => x.Count != maxColumns))
+            int maxColumns = _squares.Max(x => x.Count);
+            if (_squares.Any(x => x.Count != maxColumns))
             {
-                throw new Exception("Unexpected column count in the list of squares for forest");
+                throw new Exception("Unexpected column count in the list of squares for map");
             }
 
-            Square[,] squares = new Square[_forestSquares.Count, maxColumns];
+            Square[,] squares = new Square[_squares.Count, maxColumns];
 
-            for (int row = 0; row < _forestSquares.Count; row++)
+            for (int row = 0; row < _squares.Count; row++)
             {
                 for (int column = 0; column < maxColumns; column++)
                 {
-                    squares[row, column] = _forestSquares[row][column];
+                    squares[row, column] = _squares[row][column];
                 }
             }
 
-            Forest forest = new Forest(new Point(0, 0), squares);
-            return forest;
+            Map map = new Map(new Point(0, 0), squares);
+            return map;
         }
     }
 }

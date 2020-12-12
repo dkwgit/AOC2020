@@ -2,7 +2,7 @@
 {
     public class Square
     {
-        private readonly bool _tree = false;
+        private readonly ISquareValue _value;
 
         private readonly Point _location = null;
 
@@ -14,10 +14,10 @@
 
         private Square _left = null;
 
-        public Square(Point location, bool tree)
+        public Square(Point location, ISquareValue value)
         {
             _location = location;
-            _tree = tree;
+            _value = value;
         }
 
         public Square Up => _up;
@@ -28,9 +28,13 @@
 
         public Square Left => _left;
 
-        public bool HasTree => _tree;
-
         public Point OriginalLocation => _location;
+
+        public bool Has(System.Type squareValue)
+        {
+            bool returnValue = squareValue.IsInstanceOfType(_value);
+            return returnValue;
+        }
 
         public void SetDown(Square s)
         {
