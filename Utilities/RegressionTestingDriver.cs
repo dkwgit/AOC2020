@@ -1,7 +1,6 @@
 ﻿namespace AOC2020.Utilities
 {
     using System;
-    using System.Collections.Generic;
     using Microsoft.Extensions.Logging;
 
     public class RegressionTestingDriver

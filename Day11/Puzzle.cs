@@ -11,6 +11,8 @@
     {
         private readonly ILogger _logger;
 
+        private readonly Dictionary<Type, char> _mapSquaresToText = new ();
+
         private List<string> _input = null;
 
         private Map _waitingRoom = null;
@@ -20,6 +22,10 @@
         public Puzzle(ILogger<Puzzle> logger)
         {
             _logger = logger;
+
+            _mapSquaresToText.Add(typeof(AOC2020.Map.EmptyValue), '.');
+            _mapSquaresToText.Add(typeof(EmptySeat), 'L');
+            _mapSquaresToText.Add(typeof(FullSeat), '#');
         }
 
         public string Day => "11";
@@ -30,30 +36,27 @@
         {
             get
             {
-                string answer = string.Empty;
+                _currentRepresentation = _waitingRoom.GetTextRepresentation(_mapSquaresToText);
 
-                Dictionary<Type, char> dict = new ();
-                dict.Add(typeof(AOC2020.Map.EmptyValue), '.');
-                dict.Add(typeof(EmptySeat), 'L');
-                dict.Add(typeof(FullSeat), '#');
+                /* var initial = new Printer(_currentRepresentation);
+                initial.Print(); */
 
-                _currentRepresentation = _waitingRoom.GetTextRepresentation(dict);
-                var initial = new Printer(_currentRepresentation);
-                initial.Print();
                 bool different = true;
                 while (different)
                 {
                     RepresentationComparer r = new RepresentationComparer(_currentRepresentation);
                     _waitingRoom.ChangeSquares(MutateSquareForPart1);
-                    var representation = _waitingRoom.GetTextRepresentation(dict);
-                    var printer = new Printer(representation);
-                    printer.Print();
+                    var representation = _waitingRoom.GetTextRepresentation(_mapSquaresToText);
+
+                    /* var printer = new Printer(representation);
+                    printer.Print(); */
+
                     different = r.Different(representation);
                     _currentRepresentation = representation;
                 }
 
                 var flatten = string.Join(string.Empty, _currentRepresentation.ToArray());
-                answer = flatten.Count(x => x == '#').ToString();
+                string answer = flatten.Count(x => x == '#').ToString();
 
                 _logger.LogInformation("{Day}/Part1: Found {answer} occupied seats after waiting room stabilizes", Day, answer);
                 return answer;

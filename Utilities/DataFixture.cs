@@ -60,6 +60,17 @@
                     "220",
                     "19208"),
                 new PuzzleData(
+                    "10",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+                    },
+                    "30",
+                    "53798080",
+                    "Test case from Brian",
+                    false),
+                new PuzzleData(
                     "11",
                     "Sample",
                     new List<string>()
@@ -82,7 +93,7 @@
 
         public List<PuzzleData> GetPuzzleData()
         {
-            return _puzzleData.OrderBy(x => (x.Day, (x.Type == "Actual") ? 2 : 1)).ToList();
+            return _puzzleData.Where(x => x.Enabled).OrderBy(x => (x.Day, (x.Type == "Actual") ? 2 : 1)).ToList();
         }
     }
 }

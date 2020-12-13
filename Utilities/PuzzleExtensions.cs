@@ -30,7 +30,7 @@
             {
                 if (part2Answer != part2StoredAnswer)
                 {
-                    throw new Exception($"Day{puzzle.Day}, Part1 gave answer of {part2Answer}, but expected answer was {part2StoredAnswer}");
+                    throw new Exception($"Day{puzzle.Day}, Part2 gave answer of {part2Answer}, but expected answer was {part2StoredAnswer}");
                 }
             }
             else
