@@ -91,7 +91,7 @@
                 var flatten = string.Join(string.Empty, _currentRepresentation.ToArray());
 
                 string answer = flatten.Count(x => x == '#').ToString();
-                _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
+                _logger.LogInformation("{Day}/Part2: Found {answer} occupied seats after waiting room stabilizes", Day, answer);
                 return answer;
             }
         }

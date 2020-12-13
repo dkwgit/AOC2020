@@ -137,14 +137,12 @@
 
             foreach (var offset in directions)
             {
-                bool seek = true;
                 Square current = this;
-                while (seek)
+                while (true)
                 {
                     Point p = map.Move(offset, current.Location);
                     if (p == null)
                     {
-                        seek = false;
                         break;
                     }
 
@@ -152,7 +150,7 @@
                     if (current.IsType(t))
                     {
                         foundSquares.Add(current);
-                        seek = false;
+                        break;
                     }
                 }
             }

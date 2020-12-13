@@ -24,6 +24,7 @@
                 new PuzzleData("09", "Actual", puzzleDataStore.GetPuzzleInputAsList("09"), puzzleDataStore.GetPuzzleAnswer("09", "1"), puzzleDataStore.GetPuzzleAnswer("09", "2")),
                 new PuzzleData("10", "Actual", puzzleDataStore.GetPuzzleInputAsList("10"), puzzleDataStore.GetPuzzleAnswer("10", "1"), puzzleDataStore.GetPuzzleAnswer("10", "2")),
                 new PuzzleData("11", "Actual", puzzleDataStore.GetPuzzleInputAsList("11"), puzzleDataStore.GetPuzzleAnswer("11", "1"), puzzleDataStore.GetPuzzleAnswer("11", "2")),
+                new PuzzleData("12", "Actual", puzzleDataStore.GetPuzzleInputAsList("12"), puzzleDataStore.GetPuzzleAnswer("12", "1"), puzzleDataStore.GetPuzzleAnswer("12", "2")),
                 new PuzzleData(
                     "08",
                     "Sample",
@@ -88,6 +89,19 @@
                     },
                     "37",
                     "26"),
+                new PuzzleData(
+                    "12",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "F10",
+                        "N3",
+                        "F7",
+                        "R90",
+                        "F11",
+                    },
+                    "25",
+                    null),
             };
         }
 
