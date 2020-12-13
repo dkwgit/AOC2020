@@ -212,7 +212,7 @@
     <value>2412</value>
   </data>
   <data name="Day11Part2_Answer" xml:space="preserve">
-    <value>data2</value>
+    <value>2176</value>
   </data>
   <data name="Day11_PuzzleInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Day11_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

@@ -91,7 +91,7 @@
                 }
             }
 
-            Map map = new Map(new Point(0, 0), squares);
+            Map map = new Map(new Point(0, 0), squares, _mapWraps);
             return map;
         }
     }

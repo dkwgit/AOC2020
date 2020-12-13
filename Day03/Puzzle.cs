@@ -36,7 +36,7 @@
             {
                 (int, int) slope = (3, 1);
                 List<Square> path = _forest.Run(slope);
-                string answer = path.Where(x => x.Has(typeof(TreeValue))).Count().ToString();
+                string answer = path.Where(x => x.IsType(typeof(TreeValue))).Count().ToString();
                 _logger.LogInformation("{Day}/Part1: Found {answer} trees while sledding through the forest on slope {slope}", Day, answer, slope);
                 return answer;
             }
@@ -53,7 +53,7 @@
                 {
                     _forest.ResetMap(new Point(0, 0));
                     List<Square> path = _forest.Run(slope);
-                    answerNumber *= path.Where(x => x.Has(typeof(ITreeValue))).Count();
+                    answerNumber *= path.Where(x => x.IsType(typeof(ITreeValue))).Count();
                 }
 
                 string answer = answerNumber.ToString();

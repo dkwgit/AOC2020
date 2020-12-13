@@ -36,6 +36,7 @@
         {
             get
             {
+                _waitingRoom = new MapBuilder<EmptySeat>(_input, false).Build();
                 _currentRepresentation = _waitingRoom.GetTextRepresentation(_mapSquaresToText);
 
                 /* var initial = new Printer(_currentRepresentation);
@@ -67,7 +68,29 @@
         {
             get
             {
-                string answer = string.Empty;
+                _waitingRoom = new MapBuilder<EmptySeat>(_input, false).Build();
+                _currentRepresentation = _waitingRoom.GetTextRepresentation(_mapSquaresToText);
+
+                /*var initial = new Printer(_currentRepresentation);
+                initial.Print();*/
+
+                bool different = true;
+                while (different)
+                {
+                    RepresentationComparer r = new RepresentationComparer(_currentRepresentation);
+                    _waitingRoom.ChangeSquares(MutateSquareForPart2);
+                    var representation = _waitingRoom.GetTextRepresentation(_mapSquaresToText);
+
+                    /*var printer = new Printer(representation);
+                    printer.Print();*/
+
+                    different = r.Different(representation);
+                    _currentRepresentation = representation;
+                }
+
+                var flatten = string.Join(string.Empty, _currentRepresentation.ToArray());
+
+                string answer = flatten.Count(x => x == '#').ToString();
                 _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
                 return answer;
             }
@@ -76,23 +99,22 @@
         public void ProcessPuzzleInput(List<string> input)
         {
             _input = input;
-            _waitingRoom = new MapBuilder<EmptySeat>(_input, false).Build();
         }
 
         private ISquareValue MutateSquareForPart1(Square s)
         {
             var neighbors = s.GetNeighbors();
-            if (s.Has(typeof(EmptySeat)))
+            if (s.IsType(typeof(EmptySeat)))
             {
-                if (!neighbors.Any(x => x.Has(typeof(FullSeat))))
+                if (!neighbors.Any(x => x.IsType(typeof(FullSeat))))
                 {
                     return new FullSeat();
                 }
             }
 
-            if (s.Has(typeof(FullSeat)))
+            if (s.IsType(typeof(FullSeat)))
             {
-                if (neighbors.Where(x => x.Has(typeof(FullSeat))).Count() >= 4)
+                if (neighbors.Where(x => x.IsType(typeof(FullSeat))).Count() >= 4)
                 {
                     return new EmptySeat();
                 }
@@ -101,26 +123,27 @@
             return s.Value;
         }
 
-        /*private ISquareValue MutateSquareForPart2(Square s)
+        private ISquareValue MutateSquareForPart2(Square s)
         {
-            var neighbors = s.GetNeighbors();
-            if (s.Has(typeof(EmptySeat)))
+            var firsts = s.GetFirstValuesInMainDirection(typeof(ISeat), _waitingRoom);
+
+            if (s.IsType(typeof(EmptySeat)))
             {
-                if (!neighbors.Any(x => x.Has(typeof(FullSeat))))
+                if (!firsts.Any(x => x.IsType(typeof(FullSeat))))
                 {
                     return new FullSeat();
                 }
             }
 
-            if (s.Has(typeof(FullSeat)))
+            if (s.IsType(typeof(FullSeat)))
             {
-                if (neighbors.Where(x => x.Has(typeof(FullSeat))).Count() >= 4)
+                if (firsts.Where(x => x.IsType(typeof(FullSeat))).Count() >= 5)
                 {
                     return new EmptySeat();
                 }
             }
 
             return s.Value;
-        }*/
+        }
     }
 }

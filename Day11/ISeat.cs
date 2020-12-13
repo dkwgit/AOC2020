@@ -2,7 +2,7 @@
 {
     using AOC2020.Map;
 
-    internal interface IFullSeat : ISeat
+    internal interface ISeat : ISquareValue
     {
     }
 }

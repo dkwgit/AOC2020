@@ -1,5 +1,6 @@
 ﻿namespace AOC2020.Map
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -49,14 +50,14 @@
 
         public Square DownRight => _downRight;
 
-        public Point OriginalLocation => _location;
+        public Point Location => _location;
 
         public void SetValue(ISquareValue value)
         {
             _value = value;
         }
 
-        public bool Has(System.Type squareValue)
+        public bool IsType(System.Type squareValue)
         {
             bool returnValue = squareValue.IsInstanceOfType(_value);
             return returnValue;
@@ -116,6 +117,47 @@
                 Left,
             };
             return neighbors.Where(x => x is not null).ToList();
+        }
+
+        public List<Square> GetFirstValuesInMainDirection(Type t, Map map)
+        {
+            List<Square> foundSquares = new ();
+
+            List<(int, int)> directions = new ()
+            {
+                (-1, -1),
+                (0, -1),
+                (1, -1),
+                (1, 0),
+                (1, 1),
+                (0, 1),
+                (-1, 1),
+                (-1, 0),
+            };
+
+            foreach (var offset in directions)
+            {
+                bool seek = true;
+                Square current = this;
+                while (seek)
+                {
+                    Point p = map.Move(offset, current.Location);
+                    if (p == null)
+                    {
+                        seek = false;
+                        break;
+                    }
+
+                    current = map.GetSquareFromPoint(p);
+                    if (current.IsType(t))
+                    {
+                        foundSquares.Add(current);
+                        seek = false;
+                    }
+                }
+            }
+
+            return foundSquares;
         }
     }
 }
