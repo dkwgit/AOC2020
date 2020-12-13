@@ -4,6 +4,8 @@
     using AOC2020.Utilities;
     using Microsoft.Extensions.Logging;
 
+    using Point = AOC2020.Map.Point;
+
     public class Puzzle : IPuzzle
     {
         private readonly ILogger _logger;
@@ -23,8 +25,14 @@
         {
             get
             {
-                string answer = string.Empty;
-                _logger.LogInformation("{Day}/Part1: Found {answer}", Day, answer);
+                Ship s = new Ship((1, 0), new Point(0, 0));
+                foreach (var instruction in _input)
+                {
+                    s.ProcessInstruction(instruction);
+                }
+
+                string answer = s.ManhattanDistance.ToString();
+                _logger.LogInformation("{Day}/Part1: Found {answer} Manhattan distance after ship processed instructions", Day, answer);
                 return answer;
             }
         }
