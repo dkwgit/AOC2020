@@ -107,9 +107,7 @@
 
             for (int i = 0; i < turns; i++)
             {
-                (int, int) current = (_wayPoint.X > 0 ? 1 : -1, _wayPoint.Y > 0 ? 1 : -1);
-                (int, int) turn = _turns[current];
-                _wayPoint = new Point(_wayPoint.Y * turn.Item1, _wayPoint.X * turn.Item2);
+                _wayPoint = new Point(_wayPoint.Y, _wayPoint.X * -1);
             }
         }
     }
