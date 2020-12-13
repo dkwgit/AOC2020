@@ -1,6 +1,9 @@
 ﻿namespace AOC2020.Day11
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using AOC2020.Map;
     using AOC2020.Utilities;
     using Microsoft.Extensions.Logging;
 
@@ -9,6 +12,10 @@
         private readonly ILogger _logger;
 
         private List<string> _input = null;
+
+        private Map _waitingRoom = null;
+
+        private List<string> _currentRepresentation = null;
 
         public Puzzle(ILogger<Puzzle> logger)
         {
@@ -24,7 +31,31 @@
             get
             {
                 string answer = string.Empty;
-                _logger.LogInformation("{Day}/Part1: Found {answer}", Day, answer);
+
+                Dictionary<Type, char> dict = new ();
+                dict.Add(typeof(AOC2020.Map.EmptyValue), '.');
+                dict.Add(typeof(EmptySeat), 'L');
+                dict.Add(typeof(FullSeat), '#');
+
+                _currentRepresentation = _waitingRoom.GetTextRepresentation(dict);
+                var initial = new Printer(_currentRepresentation);
+                initial.Print();
+                bool different = true;
+                while (different)
+                {
+                    RepresentationComparer r = new RepresentationComparer(_currentRepresentation);
+                    _waitingRoom.ChangeSquares(MutateSquareForPart1);
+                    var representation = _waitingRoom.GetTextRepresentation(dict);
+                    var printer = new Printer(representation);
+                    printer.Print();
+                    different = r.Different(representation);
+                    _currentRepresentation = representation;
+                }
+
+                var flatten = string.Join(string.Empty, _currentRepresentation.ToArray());
+                answer = flatten.Count(x => x == '#').ToString();
+
+                _logger.LogInformation("{Day}/Part1: Found {answer} occupied seats after waiting room stabilizes", Day, answer);
                 return answer;
             }
         }
@@ -42,6 +73,51 @@
         public void ProcessPuzzleInput(List<string> input)
         {
             _input = input;
+            _waitingRoom = new MapBuilder<EmptySeat>(_input, false).Build();
         }
+
+        private ISquareValue MutateSquareForPart1(Square s)
+        {
+            var neighbors = s.GetNeighbors();
+            if (s.Has(typeof(EmptySeat)))
+            {
+                if (!neighbors.Any(x => x.Has(typeof(FullSeat))))
+                {
+                    return new FullSeat();
+                }
+            }
+
+            if (s.Has(typeof(FullSeat)))
+            {
+                if (neighbors.Where(x => x.Has(typeof(FullSeat))).Count() >= 4)
+                {
+                    return new EmptySeat();
+                }
+            }
+
+            return s.Value;
+        }
+
+        /*private ISquareValue MutateSquareForPart2(Square s)
+        {
+            var neighbors = s.GetNeighbors();
+            if (s.Has(typeof(EmptySeat)))
+            {
+                if (!neighbors.Any(x => x.Has(typeof(FullSeat))))
+                {
+                    return new FullSeat();
+                }
+            }
+
+            if (s.Has(typeof(FullSeat)))
+            {
+                if (neighbors.Where(x => x.Has(typeof(FullSeat))).Count() >= 4)
+                {
+                    return new EmptySeat();
+                }
+            }
+
+            return s.Value;
+        }*/
     }
 }

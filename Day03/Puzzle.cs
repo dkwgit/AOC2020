@@ -1,6 +1,5 @@
 ﻿namespace AOC2020.Day03
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using AOC2020.Map;
@@ -69,7 +68,7 @@
         public void ProcessPuzzleInput(List<string> input)
         {
             _input = input;
-            _forest = new MapBuilder<TreeValue>(_input).Build();
+            _forest = new MapBuilder<TreeValue>(_input, true).Build();
         }
     }
 }

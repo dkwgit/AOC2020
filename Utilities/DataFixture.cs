@@ -23,8 +23,7 @@
                 new PuzzleData("08", "Actual", puzzleDataStore.GetPuzzleInputAsList("08"), puzzleDataStore.GetPuzzleAnswer("08", "1"), puzzleDataStore.GetPuzzleAnswer("08", "2")),
                 new PuzzleData("09", "Actual", puzzleDataStore.GetPuzzleInputAsList("09"), puzzleDataStore.GetPuzzleAnswer("09", "1"), puzzleDataStore.GetPuzzleAnswer("09", "2")),
                 new PuzzleData("10", "Actual", puzzleDataStore.GetPuzzleInputAsList("10"), puzzleDataStore.GetPuzzleAnswer("10", "1"), puzzleDataStore.GetPuzzleAnswer("10", "2")),
-
-                // new PuzzleData("11", "Actual", puzzleDataStore.GetPuzzleInputAsList("11"), puzzleDataStore.GetPuzzleAnswer("11", "1"), puzzleDataStore.GetPuzzleAnswer("11", "2")),
+                new PuzzleData("11", "Actual", puzzleDataStore.GetPuzzleInputAsList("11"), puzzleDataStore.GetPuzzleAnswer("11", "1"), puzzleDataStore.GetPuzzleAnswer("11", "2")),
                 new PuzzleData(
                     "08",
                     "Sample",
@@ -60,7 +59,7 @@
                     },
                     "220",
                     "19208"),
-                /*new PuzzleData(
+                new PuzzleData(
                     "11",
                     "Sample",
                     new List<string>()
@@ -77,7 +76,7 @@
                         "L.LLLLL.LL",
                     },
                     "37",
-                    ""),*/
+                    null),
             };
         }
 

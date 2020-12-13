@@ -35,7 +35,7 @@
             }
             else
             {
-                throw new Exception($"Day{puzzle.Day}, could not find answer for Part1 in the data store.");
+                // throw new Exception($"Day{puzzle.Day}, could not find answer for Part1 in the data store.");
             }
         }
     }

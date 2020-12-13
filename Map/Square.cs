@@ -1,10 +1,13 @@
 ﻿namespace AOC2020.Map
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class Square
     {
-        private readonly ISquareValue _value;
-
         private readonly Point _location = null;
+
+        private ISquareValue _value;
 
         private Square _up = null;
 
@@ -14,11 +17,21 @@
 
         private Square _left = null;
 
+        private Square _upLeft = null;
+
+        private Square _upRight = null;
+
+        private Square _downLeft = null;
+
+        private Square _downRight = null;
+
         public Square(Point location, ISquareValue value)
         {
             _location = location;
             _value = value;
         }
+
+        public ISquareValue Value => _value;
 
         public Square Up => _up;
 
@@ -28,7 +41,20 @@
 
         public Square Left => _left;
 
+        public Square UpLeft => _upLeft;
+
+        public Square UpRight => _upRight;
+
+        public Square DownLeft => _downLeft;
+
+        public Square DownRight => _downRight;
+
         public Point OriginalLocation => _location;
+
+        public void SetValue(ISquareValue value)
+        {
+            _value = value;
+        }
 
         public bool Has(System.Type squareValue)
         {
@@ -54,6 +80,42 @@
         public void SetLeft(Square s)
         {
             _left = s;
+        }
+
+        public void SetUpLeft(Square s)
+        {
+            _upLeft = s;
+        }
+
+        public void SetUpRight(Square s)
+        {
+            _upRight = s;
+        }
+
+        public void SetDownRight(Square s)
+        {
+            _downRight = s;
+        }
+
+        public void SetDownLeft(Square s)
+        {
+            _downLeft = s;
+        }
+
+        public List<Square> GetNeighbors()
+        {
+            List<Square> neighbors = new ()
+            {
+                UpLeft,
+                Up,
+                UpRight,
+                Right,
+                DownRight,
+                Down,
+                DownLeft,
+                Left,
+            };
+            return neighbors.Where(x => x is not null).ToList();
         }
     }
 }

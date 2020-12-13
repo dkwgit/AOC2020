@@ -11,9 +11,12 @@
 
         private readonly List<string> _input = null;
 
-        public MapBuilder(List<string> input)
+        private readonly bool _mapWraps = false;
+
+        public MapBuilder(List<string> input, bool mapWraps)
         {
             _input = input;
+            _mapWraps = mapWraps;
         }
 
         public Map Build()
@@ -29,13 +32,25 @@
                 for (int columnNumber = 0; columnNumber < row.Length; columnNumber++)
                 {
                     var cell = row[columnNumber];
-                    Square square = new Square(new Point(columnNumber, currentRowNumber), cell == '.' ? new EmptySquareValue() : new T());
+                    Square square = new Square(new Point(columnNumber, currentRowNumber), cell == '.' ? new EmptyValue() : new T());
 
                     if (previousRow != null)
                     {
                         Square above = previousRow[columnNumber];
-                        above.SetDown(square);
                         square.SetUp(above);
+                        above.SetDown(square);
+
+                        if (above.Left != null)
+                        {
+                            square.SetUpLeft(above.Left);
+                            above.Left.SetDownRight(square);
+                        }
+
+                        if (above.Right != null)
+                        {
+                            square.SetUpRight(above.Right);
+                            above.Right.SetDownLeft(square);
+                        }
                     }
 
                     if (columnNumber > 0)
@@ -45,7 +60,7 @@
                         square.SetLeft(left);
                     }
 
-                    if (columnNumber + 1 == row.Length)
+                    if (_mapWraps && columnNumber + 1 == row.Length)
                     {
                         Square beginning = currentRow[0];
                         beginning.SetLeft(square);

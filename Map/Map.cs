@@ -1,6 +1,8 @@
 ﻿namespace AOC2020.Map
 {
+    using System;
     using System.Collections.Generic;
+    using System.Text;
 
     public class Map
     {
@@ -45,6 +47,47 @@
         {
             _currentPoint = point;
             _columnOffset = 0;
+        }
+
+        public void ChangeSquares(Func<Square, ISquareValue> squareChanger)
+        {
+            ISquareValue[,] newValues = new ISquareValue[_squares.GetLength(0), _squares.GetLength(1)];
+
+            for (int i = 0; i < _squares.GetLength(0); i++)
+            {
+                for (int j = 0; j < _squares.GetLength(1); j++)
+                {
+                    newValues[i, j] = squareChanger(_squares[i, j]);
+                }
+            }
+
+            for (int i = 0; i < _squares.GetLength(0); i++)
+            {
+                for (int j = 0; j < _squares.GetLength(1); j++)
+                {
+                    _squares[i, j].SetValue(newValues[i, j]);
+                }
+            }
+        }
+
+        public List<string> GetTextRepresentation(Dictionary<Type, char> lookupDict)
+        {
+            List<string> representation = new ();
+
+            for (int i = 0; i < _squares.GetLength(0); i++)
+            {
+                StringBuilder sb = new ();
+                for (int j = 0; j < _squares.GetLength(1); j++)
+                {
+                    Square s = _squares[i, j];
+                    char c = lookupDict[s.Value.GetType()];
+                    sb.Append(c);
+                }
+
+                representation.Add(sb.ToString());
+            }
+
+            return representation;
         }
 
         private void MoveOnce((int, int) slope)
