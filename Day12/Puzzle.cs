@@ -41,8 +41,14 @@
         {
             get
             {
-                string answer = string.Empty;
-                _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
+                WaypointShip s = new WaypointShip(new Point(0, 0), new Point(10, 1));
+                foreach (var instruction in _input)
+                {
+                    s.ProcessInstruction(instruction);
+                }
+
+                string answer = s.ManhattanDistance.ToString();
+                _logger.LogInformation("{Day}/Part2: Found {answer} Manhattan distance after waypoint ship processed instructions", Day, answer);
                 return answer;
             }
         }
