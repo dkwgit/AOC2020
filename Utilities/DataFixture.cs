@@ -26,6 +26,7 @@
                 new PuzzleData("11", "Actual", puzzleDataStore.GetPuzzleInputAsList("11"), puzzleDataStore.GetPuzzleAnswer("11", "1"), puzzleDataStore.GetPuzzleAnswer("11", "2")),
                 new PuzzleData("12", "Actual", puzzleDataStore.GetPuzzleInputAsList("12"), puzzleDataStore.GetPuzzleAnswer("12", "1"), puzzleDataStore.GetPuzzleAnswer("12", "2")),
                 new PuzzleData("13", "Actual", puzzleDataStore.GetPuzzleInputAsList("13"), puzzleDataStore.GetPuzzleAnswer("13", "1"), puzzleDataStore.GetPuzzleAnswer("13", "2")),
+                new PuzzleData("14", "Actual", puzzleDataStore.GetPuzzleInputAsList("14"), puzzleDataStore.GetPuzzleAnswer("14", "1"), puzzleDataStore.GetPuzzleAnswer("14", "2")),
                 new PuzzleData(
                     "08",
                     "Sample",
@@ -113,6 +114,18 @@
                     },
                     "295",
                     "1068781"),
+                new PuzzleData(
+                    "14",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X",
+                        "mem[8] = 11",
+                        "mem[7] = 101",
+                        "mem[8] = 0",
+                    },
+                    "165",
+                    null),
             };
         }
 
