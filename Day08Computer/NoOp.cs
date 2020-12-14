@@ -1,4 +1,4 @@
-﻿namespace AOC2020.Computer
+﻿namespace AOC2020.Day08Computer
 {
     record NoOp : IInstruction
     {

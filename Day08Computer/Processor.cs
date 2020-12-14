@@ -1,4 +1,4 @@
-﻿namespace AOC2020.Computer
+﻿namespace AOC2020.Day08Computer
 {
     using System.Linq;
     using System.Collections.Generic;

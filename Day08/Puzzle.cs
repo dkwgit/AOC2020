@@ -1,7 +1,7 @@
 ﻿namespace AOC2020.Day08
 {
     using System.Collections.Generic;
-    using AOC2020.Computer;
+    using AOC2020.Day08Computer;
     using AOC2020.Utilities;
     using Microsoft.Extensions.Logging;
 

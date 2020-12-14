@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>AOC2020.Computer</RootNamespace>
+    <RootNamespace>AOC2020.Day08Computer</RootNamespace>
   </PropertyGroup>
 
 </Project>
