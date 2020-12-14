@@ -1064,8 +1064,27 @@ namespace AOC2020.Utilities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to inputData
-        ///.
+        ///   Looks up a localized string similar to mask = 11110100010101111011001X0100XX00100X
+        ///mem[17610] = 1035852
+        ///mem[55284] = 229776690
+        ///mem[16166] = 12685380
+        ///mem[8340] = 16011
+        ///mask = 0X1X0X010101011X10X101000X0001110100
+        ///mem[968] = 15992
+        ///mem[32758] = 7076
+        ///mem[30704] = 1701
+        ///mem[33719] = 58012
+        ///mem[20818] = 25927237
+        ///mem[16718] = 46485
+        ///mask = 111001111X0X0X101X111X1X001XX0011010
+        ///mem[2115] = 14848
+        ///mem[42753] = 617
+        ///mem[56076] = 9933868
+        ///mem[19106] = 43503
+        ///mem[10073] = 32909
+        ///mem[40830] = 1959686
+        ///mask = X11X00000XX1011X10000X01110000X0001X
+        ///mem[ [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Day14_PuzzleInput {
             get {
@@ -1074,7 +1093,7 @@ namespace AOC2020.Utilities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to data1.
+        ///   Looks up a localized string similar to 10885823581193.
         /// </summary>
         internal static string Day14Part1_Answer {
             get {
