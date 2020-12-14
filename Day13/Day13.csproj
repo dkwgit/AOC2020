@@ -4,6 +4,7 @@
     <RootNamespace>AOC2020.Day13</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="ExtendedArithmetic.Polynomial" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

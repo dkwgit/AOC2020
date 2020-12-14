@@ -230,7 +230,7 @@
     <value>2092</value>
   </data>
   <data name="Day13Part2_Answer" xml:space="preserve">
-    <value>data2</value>
+    <value>702970661767766</value>
   </data>
   <data name="Day13_PuzzleInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Day13_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
