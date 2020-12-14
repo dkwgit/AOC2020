@@ -92,6 +92,7 @@
                 90 => 270,
                 180 => 180,
                 270 => 90,
+                _ => throw new NotSupportedException()
             };
             TurnRight(newNumber);
         }
@@ -102,7 +103,8 @@
             {
                 90 => 1,
                 180 => 2,
-                270 => 3
+                270 => 3,
+                _ => throw new NotSupportedException(),
             };
 
             for (int i = 0; i < turns; i++)
