@@ -15,6 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Util
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F9358771-93CD-40BF-831A-CAD4EFD6BF60}"
 	ProjectSection(SolutionItems) = preProject
+		Create-Day.ps1 = Create-Day.ps1
 		Directory.Build.props = Directory.Build.props
 		StyleCopAnalyzersDefault.ruleset = StyleCopAnalyzersDefault.ruleset
 	EndProjectSection
@@ -41,7 +42,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Map", "Map\Map.csproj", "{F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day12", "Day12\Day12.csproj", "{6574C4BB-01E9-48B4-9D59-89990EE5DA8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day13", "Day13\Day13.csproj", "{979C5B31-E5CD-4BD3-8A1A-E10F1A482B8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day13", "Day13\Day13.csproj", "{979C5B31-E5CD-4BD3-8A1A-E10F1A482B8F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day14", "Day14\Day14.csproj", "{06599BAE-0849-4340-84CD-7CF7F5C9AD45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +120,10 @@ Global
 		{979C5B31-E5CD-4BD3-8A1A-E10F1A482B8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{979C5B31-E5CD-4BD3-8A1A-E10F1A482B8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{979C5B31-E5CD-4BD3-8A1A-E10F1A482B8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06599BAE-0849-4340-84CD-7CF7F5C9AD45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06599BAE-0849-4340-84CD-7CF7F5C9AD45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06599BAE-0849-4340-84CD-7CF7F5C9AD45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06599BAE-0849-4340-84CD-7CF7F5C9AD45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
