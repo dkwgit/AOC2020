@@ -26,7 +26,8 @@
                 new PuzzleData("11", "Actual", puzzleDataStore.GetPuzzleInputAsList("11"), puzzleDataStore.GetPuzzleAnswer("11", "1"), puzzleDataStore.GetPuzzleAnswer("11", "2")),
                 new PuzzleData("12", "Actual", puzzleDataStore.GetPuzzleInputAsList("12"), puzzleDataStore.GetPuzzleAnswer("12", "1"), puzzleDataStore.GetPuzzleAnswer("12", "2")),
                 new PuzzleData("13", "Actual", puzzleDataStore.GetPuzzleInputAsList("13"), puzzleDataStore.GetPuzzleAnswer("13", "1"), puzzleDataStore.GetPuzzleAnswer("13", "2")),
-                new PuzzleData("14", "Actual", puzzleDataStore.GetPuzzleInputAsList("14"), puzzleDataStore.GetPuzzleAnswer("14", "1"), puzzleDataStore.GetPuzzleAnswer("14", "2")),
+                new PuzzleData("14", "Actual", puzzleDataStore.GetPuzzleInputAsList("14"), puzzleDataStore.GetPuzzleAnswer("14", "1"), puzzleDataStore.GetPuzzleAnswer("14", "2"), string.Empty, false),
+                new PuzzleData("15", "Actual", puzzleDataStore.GetPuzzleInputAsList("15"), puzzleDataStore.GetPuzzleAnswer("15", "1"), puzzleDataStore.GetPuzzleAnswer("15", "2")),
                 new PuzzleData(
                     "08",
                     "Sample",
@@ -138,6 +139,69 @@
                     },
                     null,
                     "208"),
+                new PuzzleData(
+                    "15",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "0,3,6",
+                    },
+                    "436",
+                    "175594"),
+                new PuzzleData(
+                    "15",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "1,3,2",
+                    },
+                    "1",
+                    "2578"),
+                new PuzzleData(
+                    "15",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "2,1,3",
+                    },
+                    "10",
+                    "3544142"),
+                new PuzzleData(
+                    "15",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "1,2,3",
+                    },
+                    "27",
+                    "261214"),
+                new PuzzleData(
+                    "15",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "2,3,1",
+                    },
+                    "78",
+                    "6895259"),
+                new PuzzleData(
+                    "15",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "3,2,1",
+                    },
+                    "438",
+                    "18"),
+                new PuzzleData(
+                    "15",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "3,1,2",
+                    },
+                    "1836",
+                    "362"),
             };
         }
 
