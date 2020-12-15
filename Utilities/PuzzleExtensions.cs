@@ -12,7 +12,7 @@
             string part2StoredAnswer = testData.AnswerPart2;
 
             string part1Answer = puzzle.Part1;
-            string part2Answer = (part2StoredAnswer != string.Empty) ? puzzle.Part2 : string.Empty;
+            string part2Answer = !string.IsNullOrEmpty(part2StoredAnswer) ? puzzle.Part2 : string.Empty;
 
             if (part1StoredAnswer != null)
             {
@@ -23,7 +23,7 @@
             }
             else
             {
-                throw new Exception($"Day{puzzle.Day}, could not find answer for Part1 in the data store.");
+                // throw new Exception($"Day{puzzle.Day}, could not find answer for Part1 in the data store.");
             }
 
             if (part2StoredAnswer != null)

@@ -31,7 +31,7 @@
                 string pattern = @"^mem\[(\d+)\]\s=\s(\d+)$";
                 Regex regex = new Regex(pattern);
 
-                Day14Computer computer = new Day14Computer(36);
+                Day14Computer<ValueMaskingStrategy> computer = new Day14Computer<ValueMaskingStrategy>(36);
                 foreach (var instruction in Input)
                 {
                     if (instruction.Contains("mask"))
@@ -55,7 +55,7 @@
                     }
                 }
 
-                var result = computer.GetValuesInMemory().Sum();
+                var result = computer.GetAllMemoryValues().Sum();
                 string answer = result.ToString();
                 _logger.LogInformation("{Day}/Part1: Found {answer} as the sum of all numbers in the computers memory", Day, answer);
                 return answer;
@@ -66,8 +66,37 @@
         {
             get
             {
-                string answer = string.Empty;
-                _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
+                string pattern = @"^mem\[(\d+)\]\s=\s(\d+)$";
+                Regex regex = new Regex(pattern);
+
+                Day14Computer<LocationMaskingStrategy> computer = new Day14Computer<LocationMaskingStrategy>(36);
+
+                foreach (var instruction in Input)
+                {
+                    if (instruction.Contains("mask"))
+                    {
+                        var mask = instruction[7..];
+                        computer.MaskString = mask;
+                    }
+                    else
+                    {
+                        Match match = regex.Match(instruction);
+                        if (match.Success)
+                        {
+                            int location = int.Parse(match.Groups[1].Value);
+                            long value = long.Parse(match.Groups[2].Value);
+                            computer.WriteValue(location, value);
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException($"instruction {instruction} not handled by Regex pattern {pattern}");
+                        }
+                    }
+                }
+
+                var result = computer.GetAllMemoryValues().Sum();
+                string answer = result.ToString();
+                _logger.LogInformation("{Day}/Part2: Found {answer} as the sum of all numbers in the computers memory", Day, answer);
                 return answer;
             }
         }

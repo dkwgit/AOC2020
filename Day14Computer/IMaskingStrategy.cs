@@ -5,7 +5,11 @@
 
     public interface IMaskingStrategy
     {
-        List<int> GetLocations(int location);
+        string MaskString { get; set; }
+
+        void SetWordWidth(int wordWidth);
+
+        List<long> GetLocations(long location);
 
         BitArray GetDataToWrite(BitArray data);
     }
