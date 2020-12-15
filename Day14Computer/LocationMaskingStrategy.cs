@@ -11,6 +11,23 @@
 
         public string MaskString { get; set; }
 
+        public static IEnumerable<string> GetCombinations(int length)
+        {
+            for (long i = 0; i < (1 << length); i++)
+            {
+                char[] arr = new char[length];
+                long mask = 1;
+                for (int j = 0; j < length; j++)
+                {
+                    arr[j] = (i & mask << j) >> j == 1 ? '1' : '0';
+                }
+
+                yield return string.Join(string.Empty, arr);
+            }
+
+            yield break;
+        }
+
         public BitArray GetDataToWrite(BitArray data)
         {
             return data;
@@ -47,23 +64,6 @@
 
             return locations;
         }
-
-        public static IEnumerable<string> GetCombinations(int length)
-        {
-            for (long i = 0; i < (1 << length); i++)
-            {
-                char[] arr = new char[length];
-                long mask = 1;
-                for (int j = 0; j < length; j++)
-                {
-                    arr[j] = (i & mask << j) >> j == 1 ? '1' : '0';
-                }
-
-                yield return string.Join(string.Empty, arr);
-            }
-
-            yield break;
-         }
 
         public void SetWordWidth(int wordWidth)
         {
