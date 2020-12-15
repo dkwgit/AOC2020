@@ -94,7 +94,8 @@
                     }
                 }
 
-                var result = computer.GetAllMemoryValues().Sum();
+                var memoryItems = computer.GetAllMemoryValues();
+                var result = memoryItems.Sum();
                 string answer = result.ToString();
                 _logger.LogInformation("{Day}/Part2: Found {answer} as the sum of all numbers in the computers memory", Day, answer);
                 return answer;
