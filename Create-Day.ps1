@@ -72,7 +72,7 @@ $xml.Save(".\$projectName\$projectName.csproj")
 $xml=New-Object XML
 $xml.Load(".\Utilities\resources.resx")
 $obj=$xml.SelectNodes("/root/data[@name='Day15_PuzzleInput']");
-$node=$obj[0].CloneNode()
+$node=$obj[0].CloneNode($true)
 $node.value = $node.value.Replace("Day15","$projectName")
 $node.name=$("$projectName" + "_PuzzleInput")
 $xml.root.InsertAfter($node, $xml.root.LastChild);
