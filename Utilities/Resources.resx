@@ -179,7 +179,7 @@
     <value>38426</value>
   </data>
   <data name="Day07_PuzzleInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\Day07_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>Resources\Day07_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="Day08Part1_Answer" xml:space="preserve">
     <value>1766</value>
@@ -242,7 +242,7 @@
     <value>3816594901962</value>
   </data>
   <data name="Day14_PuzzleInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\Day14_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>Resources\Day14_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="Day15Part1_Answer" xml:space="preserve">
     <value>1259</value>
@@ -251,6 +251,6 @@
     <value>689</value>
   </data>
   <data name="Day15_PuzzleInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\Day15_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>Resources\Day15_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>
