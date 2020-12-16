@@ -59,8 +59,8 @@ dotnet add $projectName\$projectName.csproj package StyleCop.Analyzers
 dotnet add $projectName\$projectName.csproj reference Utilities\Utilities.csproj
 
 Remove-Item -Path "$projectName\Class1.cs"
-$puzzleClass | Set-Content -Encoding UTF8 -Path "$projectName\Puzzle.cs"
-Write-Output "inputData" | Set-Content -Encoding UTF8 -Path $("Utilities\Resources\$projectName" + "_PuzzleInput.txt")
+$puzzleClass | Set-Content -Encoding utf8BOM -Path "$projectName\Puzzle.cs"
+Write-Output "inputData" | Set-Content -Encoding utf8BOM -Path $("Utilities\Resources\$projectName" + "_PuzzleInput.txt")
 
 $xml=New-Object XML
 $xml.Load(".\$projectName\$projectName.csproj")
@@ -68,3 +68,21 @@ $rootNameSpaceNode = $xml.CreateElement("RootNamespace")
 $xml.Project.PropertyGroup.AppendChild($rootNameSpaceNode)
 $xml.Project.PropertyGroup.RootNameSpace = "AOC2020.$projectName"
 $xml.Save(".\$projectName\$projectName.csproj")
+
+$xml=New-Object XML
+$xml.Load(".\Utilities\resources.resx")
+$obj=$xml.SelectNodes("/root/data[@name='Day15_PuzzleInput']");
+$node=$obj[0].CloneNode()
+$node.value = $node.value.Replace("Day15","$projectName")
+$node.name=$("$projectName" + "_PuzzleInput")
+$xml.root.InsertAfter($node, $xml.root.LastChild);
+$obj=$xml.SelectNodes("/root/data[@name='Day15Part1_Answer']");
+$node=$obj[0].CloneNode($true)
+$node.name=$("$projectName" + "Part1_Answer")
+$node.value="part1"
+$xml.root.InsertAfter($node, $xml.root.LastChild);
+$node=$obj[0].CloneNode($true)
+$node.name=$("$projectName" + "Part2_Answer")
+$node.value="part2"
+$xml.root.InsertAfter($node, $xml.root.LastChild);
+$xml.Save(".\Utilities\resources.resx")
