@@ -10,11 +10,13 @@
     {
         private readonly ILogger _logger;
 
-        private readonly List<(string name, (int, int) rangeA, (int, int) rangeB)> _rules = new ();
+        private readonly List<(string name, int ruleNumber, (int, int) rangeA, (int, int) rangeB, int fieldNumber)> _rules = new ();
 
         private readonly List<int> _yourTicket = new ();
 
         private readonly List<List<int>> _tickets = new ();
+
+        private readonly List<List<int>> _goodTickets = new ();
 
         private List<string> _input = null;
 
@@ -34,12 +36,19 @@
                 List<int> badValues = new ();
                 foreach (var ticket in _tickets)
                 {
+                    bool good = true;
                     foreach (var number in ticket)
                     {
-                        if (_rules.All(rule => !(number >= rule.rangeA.Item1 && number <= rule.rangeA.Item2) && !(number >= rule.rangeB.Item1 && number <= rule.rangeB.Item2)))
+                        if (_rules.All(rule => !(rule.rangeA.Item1 <= number && number <= rule.rangeA.Item2) && !(rule.rangeB.Item1 <= number && number <= rule.rangeB.Item2)))
                         {
                             badValues.Add(number);
+                            good = false;
                         }
+                    }
+
+                    if (good)
+                    {
+                        _goodTickets.Add(ticket);
                     }
                 }
 
@@ -53,8 +62,65 @@
         {
             get
             {
-                string answer = string.Empty;
-                _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
+                List<List<int>> fieldValues = new ();
+                for (int i = 0; i < _rules.Count; i++)
+                {
+                    List<int> values = new ();
+                    fieldValues.Add(values);
+                }
+
+                // gather the values from each field [column] of each ticket. Each fieldValue list will have all the values from that field of all the tickets. E.g. all values from 0th field.
+                foreach (var ticket in _goodTickets)
+                {
+                    int field = 0;
+
+                    foreach (var number in ticket)
+                    {
+                        fieldValues[field].Add(number);
+                        field++;
+                    }
+                }
+
+                // Each field will satisfy one of more rules. Which rules does a field satisfy?
+                List<(int field, List<int> rules)> fieldToRules = new ();
+
+                // For each field, find all the rules that are satisfied for it (at least one rule per field)
+                for (int j = 0; j < fieldValues.Count; j++)
+                {
+                    fieldToRules.Add((j, new List<int>()));
+                    var values = fieldValues[j]; // The values for the jth field
+
+                    for (int k = 0; k < _rules.Count; k++)
+                    {
+                        var rule = _rules[k];
+                        if (values.All(x => (rule.rangeA.Item1 <= x && x <= rule.rangeA.Item2) || (rule.rangeB.Item1 <= x && x <= rule.rangeB.Item2)))
+                        {
+                            fieldToRules[j].rules.Add(rule.ruleNumber);
+                        }
+                    }
+                }
+
+                // Order ascending. The very first will only be satisfied by one rule, the second by two, etc.
+                // We assign the rule for the first. That leaves only one viable rule for the second. That leaves only one viable rule for the third.
+                foreach ((int field, List<int> rules) in fieldToRules.OrderBy(x => x.rules.Count))
+                {
+                    // If we have done this right, there is only a single un-assigned rule (fieldValue == -1).
+                    var ruleNumber = rules.Where(x => _rules.Any(r => r.ruleNumber == x && r.fieldNumber == -1)).Single();
+                    var ruleToAssign = _rules[ruleNumber];
+
+                    // Change the field number of this rule to field, not -1
+                    _rules[ruleToAssign.ruleNumber] = (ruleToAssign.name, ruleToAssign.ruleNumber, ruleToAssign.rangeA, ruleToAssign.rangeB, field);
+                }
+
+                var departureFields = _rules.Where(x => x.name.Contains("departure")).Select(x => x.fieldNumber).ToList();
+                long answerValue = 1;
+                foreach (var field in departureFields)
+                {
+                    answerValue *= _yourTicket[field];
+                }
+
+                string answer = answerValue.ToString();
+                _logger.LogInformation("{Day}/Part2: Found {answer} of multipled values in the departure fields of your ticket", Day, answer);
                 return answer;
             }
         }
@@ -63,7 +129,7 @@
         {
             _input = input;
 
-            string rulePattern = @"(\w+\s?\w?):\s(\d+)-(\d+)\sor\s(\d+)-(\d+)";
+            string rulePattern = @"^([^:]+):\s(\d+)-(\d+)\sor\s(\d+)-(\d+)$";
             Regex regexRule = new Regex(rulePattern);
 
             string state = "field rules:";
@@ -97,7 +163,7 @@
                 int rangeA2 = int.Parse(match.Groups[3].Value);
                 int rangeB1 = int.Parse(match.Groups[4].Value);
                 int rangeB2 = int.Parse(match.Groups[5].Value);
-                _rules.Add((name, (rangeA1, rangeA2), (rangeB1, rangeB2)));
+                _rules.Add((name, _rules.Count, (rangeA1, rangeA2), (rangeB1, rangeB2), -1));
             }
             else
             {

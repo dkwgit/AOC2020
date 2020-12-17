@@ -237,6 +237,25 @@
                     },
                     "71",
                     null),
+                new PuzzleData(
+                    "16",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "class: 0-1 or 4-19",
+                        "row: 0-5 or 8-19",
+                        "seat: 0-13 or 16-19",
+                        string.Empty,
+                        "your ticket:",
+                        "11,12,13",
+                        string.Empty,
+                        "nearby tickets:",
+                        "3,9,18",
+                        "15,1,5",
+                        "5,14,9",
+                    },
+                    "0",
+                    "1"),
             };
         }
 

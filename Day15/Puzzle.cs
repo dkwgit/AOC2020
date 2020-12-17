@@ -31,7 +31,7 @@
                 Setup();
                 int finalTurn = 2020;
                 string answer = RunToTurn(finalTurn);
-                _logger.LogInformation("{Day}/Part1: Found {answer}", Day, answer);
+                _logger.LogInformation("{Day}/Part1: Found {answer} for turn {finalTurn}", Day, answer, finalTurn);
                 return answer;
             }
         }
@@ -43,7 +43,7 @@
                 Setup();
                 int finalTurn = 30000000;
                 string answer = RunToTurn(finalTurn);
-                _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
+                _logger.LogInformation("{Day}/Part2: Found {answer} for turn {finalTurn}", Day, answer, finalTurn);
                 return answer;
             }
         }
