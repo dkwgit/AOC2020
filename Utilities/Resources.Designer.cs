@@ -19,7 +19,7 @@ namespace AOC2020.Utilities {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -1135,6 +1135,48 @@ namespace AOC2020.Utilities {
         internal static string Day15Part2_Answer {
             get {
                 return ResourceManager.GetString("Day15Part2_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to departure location: 27-672 or 680-954
+        ///departure station: 25-430 or 439-966
+        ///departure platform: 31-293 or 299-953
+        ///departure track: 29-749 or 775-955
+        ///departure date: 43-93 or 107-953
+        ///departure time: 50-916 or 941-963
+        ///arrival location: 31-682 or 702-954
+        ///arrival station: 38-663 or 672-960
+        ///arrival platform: 31-629 or 635-969
+        ///arrival track: 42-365 or 371-967
+        ///class: 30-147 or 167-966
+        ///duration: 39-525 or 545-967
+        ///price: 30-803 or 822-950
+        ///route: 39-235 or 257-957
+        ///row: 33-206 or 231-971
+        ///seat: 29-784 or  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day16_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day16_PuzzleInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to part1.
+        /// </summary>
+        internal static string Day16Part1_Answer {
+            get {
+                return ResourceManager.GetString("Day16Part1_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to part2.
+        /// </summary>
+        internal static string Day16Part2_Answer {
+            get {
+                return ResourceManager.GetString("Day16Part2_Answer", resourceCulture);
             }
         }
     }

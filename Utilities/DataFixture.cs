@@ -28,6 +28,7 @@
                 new PuzzleData("13", "Actual", puzzleDataStore.GetPuzzleInputAsList("13"), puzzleDataStore.GetPuzzleAnswer("13", "1"), puzzleDataStore.GetPuzzleAnswer("13", "2")),
                 new PuzzleData("14", "Actual", puzzleDataStore.GetPuzzleInputAsList("14"), puzzleDataStore.GetPuzzleAnswer("14", "1"), puzzleDataStore.GetPuzzleAnswer("14", "2"), string.Empty, false),
                 new PuzzleData("15", "Actual", puzzleDataStore.GetPuzzleInputAsList("15"), puzzleDataStore.GetPuzzleAnswer("15", "1"), puzzleDataStore.GetPuzzleAnswer("15", "2")),
+                new PuzzleData("16", "Actual", puzzleDataStore.GetPuzzleInputAsList("16"), puzzleDataStore.GetPuzzleAnswer("16", "1"), puzzleDataStore.GetPuzzleAnswer("16", "2")),
                 new PuzzleData(
                     "08",
                     "Sample",
@@ -147,7 +148,9 @@
                         "0,3,6",
                     },
                     "436",
-                    "175594"),
+                    "175594",
+                    string.Empty,
+                    false),
                 new PuzzleData(
                     "15",
                     "Sample",
@@ -156,7 +159,9 @@
                         "1,3,2",
                     },
                     "1",
-                    "2578"),
+                    "2578",
+                    string.Empty,
+                    false),
                 new PuzzleData(
                     "15",
                     "Sample",
@@ -165,7 +170,9 @@
                         "2,1,3",
                     },
                     "10",
-                    "3544142"),
+                    "3544142",
+                    string.Empty,
+                    false),
                 new PuzzleData(
                     "15",
                     "Sample",
@@ -174,7 +181,9 @@
                         "1,2,3",
                     },
                     "27",
-                    "261214"),
+                    "261214",
+                    string.Empty,
+                    false),
                 new PuzzleData(
                     "15",
                     "Sample",
@@ -183,7 +192,9 @@
                         "2,3,1",
                     },
                     "78",
-                    "6895259"),
+                    "6895259",
+                    string.Empty,
+                    false),
                 new PuzzleData(
                     "15",
                     "Sample",
@@ -192,7 +203,9 @@
                         "3,2,1",
                     },
                     "438",
-                    "18"),
+                    "18",
+                    string.Empty,
+                    false),
                 new PuzzleData(
                     "15",
                     "Sample",
@@ -201,7 +214,9 @@
                         "3,1,2",
                     },
                     "1836",
-                    "362"),
+                    "362",
+                    string.Empty,
+                    false),
             };
         }
 

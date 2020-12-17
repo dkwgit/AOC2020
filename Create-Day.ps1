@@ -86,3 +86,7 @@ $node.name=$("$projectName" + "Part2_Answer")
 $node.value="part2"
 $xml.root.InsertAfter($node, $xml.root.LastChild);
 $xml.Save(".\Utilities\resources.resx")
+Push-Location Utilities
+& $("C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\" + "resgen.exe") resources.resx /str:"C#,AOC2020.Utilities,Resources,Resources.Designer.cs"
+Remove-Item resources.resources
+Pop-Location
