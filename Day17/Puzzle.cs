@@ -11,15 +11,25 @@
 
         private readonly ILogger _logger;
 
+        private readonly List<int> _neighborVariance = new () { -1, 0, 1 };
+
         private int _width;
 
         private int _length;
 
         private int _height;
 
-        private int[,,] _space = null;
+        private int _extra;
+
+        private int _estart;
+
+        private int _dimensionCount;
+
+        private int[,,,] _space = null;
 
         private List<string> _input = null;
+
+        private List<List<int>> _dimensionVarianceCombos;
 
         public Puzzle(ILogger<Puzzle> logger)
         {
@@ -34,13 +44,25 @@
         {
             get
             {
+                _dimensionCount = 3;
+                ComboGenerator<int> gen = new ComboGenerator<int>(_neighborVariance, _dimensionCount);
+                _dimensionVarianceCombos = new List<List<int>>();
+
+                foreach (var item in gen.Iterator())
+                {
+                    if (!item.All(x => x == 0))
+                    {
+                        _dimensionVarianceCombos.Add(item);
+                    }
+                }
+
                 for (int turn = 0; turn < _numberOfTurns; turn++)
                 {
                     DoTurn();
                 }
 
                 string answer = CountActive().ToString();
-                _logger.LogInformation("{Day}/Part1: Found {answer}", Day, answer);
+                _logger.LogInformation("{Day}/Part1: Found {answer} cubes active in 3 dimensional space", Day, answer);
                 return answer;
             }
         }
@@ -49,8 +71,27 @@
         {
             get
             {
-                string answer = string.Empty;
-                _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
+                ProcessPuzzleInput(_input);
+
+                _dimensionCount = 4;
+                ComboGenerator<int> gen = new ComboGenerator<int>(_neighborVariance, _dimensionCount);
+                _dimensionVarianceCombos = new List<List<int>>();
+
+                foreach (var item in gen.Iterator())
+                {
+                    if (!item.All(x => x == 0))
+                    {
+                        _dimensionVarianceCombos.Add(item);
+                    }
+                }
+
+                for (int turn = 0; turn < _numberOfTurns; turn++)
+                {
+                    DoTurn();
+                }
+
+                string answer = CountActive().ToString();
+                _logger.LogInformation("{Day}/Part2: Found {answer} cubes active in 4 dimensional space", Day, answer);
                 return answer;
             }
         }
@@ -85,39 +126,46 @@
             // enough to go vertically up by turn + 1 and vertically down by same
             _height = 1 + ((_numberOfTurns + 1) * 2);
 
-            _space = CreateSpace(_length, _width, _height);
+            _extra = _height;
+
+            _space = CreateSpace(_length, _width, _height, _extra);
 
             // Starting coordinates to write the initial layout
-            int x = tileWidth;
-            int y = tileLength;
-            int z = _numberOfTurns + 1;
+            int xstart = tileWidth;
+            int ystart = tileLength;
+            int zstart = _numberOfTurns + 1;
+            int estart = _estart = _numberOfTurns + 1;
 
             for (int i = 0; i < rowCount; i++)
             {
                 for (int j = 0; j < columnCount; j++)
                 {
-                    _space[y + i, x + j, z] = rows[i][j];
+                    _space[ystart + i, xstart + j, zstart, estart] = rows[i][j];
                 }
             }
         }
 
-        private static int[,,] CreateSpace(int length, int width, int height)
+        private static int[,,,] CreateSpace(int length, int width, int height, int extra)
         {
-            return new int[length, width, height];
+            return new int[length, width, height, extra];
         }
 
-        private int ActiveNeighborCount(int y, int x, int z)
+        private int ActiveNeighborCount(int y, int x, int z, int e)
         {
             int activeNeighbors = 0;
 
-            // layer below
-            activeNeighbors += GetLayerActiveCount(y, x, z - 1);
+            foreach (var item in _dimensionVarianceCombos)
+            {
+                int yoffset = item[0];
+                int xoffset = item[1];
+                int zoffset = item[2];
+                int eoffset = item.Count == 4 ? item[3] : 0;
 
-            // same layer
-            activeNeighbors += GetLayerActiveCount(y, x, z, true);
-
-            // layer above
-            activeNeighbors += GetLayerActiveCount(y, x, z + 1);
+                if (_space[y + yoffset, x + xoffset, z + zoffset, e + eoffset] == 1)
+                {
+                    activeNeighbors++;
+                }
+            }
 
             return activeNeighbors;
         }
@@ -125,6 +173,8 @@
         private int CountActive()
         {
             int activeCount = 0;
+            int estart = _dimensionCount == 3 ? _estart : 0;
+            int elimit = _dimensionCount == 3 ? _estart + 1 : _extra;
 
             for (int y = 0; y < _length; y++)
             {
@@ -132,35 +182,13 @@
                 {
                     for (int z = 0; z < _height; z++)
                     {
-                        if (_space[y, x, z] == 1)
+                        for (int e = estart; e < elimit; e++)
                         {
-                            activeCount++;
+                            if (_space[y, x, z, e] == 1)
+                            {
+                                activeCount++;
+                            }
                         }
-                    }
-                }
-            }
-
-            return activeCount;
-        }
-
-        private int GetLayerActiveCount(int y, int x, int zz, bool skipMiddle = false)
-        {
-            int activeCount = 0;
-            for (int yy = y - 1; yy < y + 2; yy++)
-            {
-                for (int xx = x - 1; xx < x + 2; xx++)
-                {
-                    if (skipMiddle)
-                    {
-                        if (yy == y && xx == x)
-                        {
-                            continue;
-                        }
-                    }
-
-                    if (_space[yy, xx, zz] == 1)
-                    {
-                        activeCount++;
                     }
                 }
             }
@@ -170,7 +198,9 @@
 
         private void DoTurn()
         {
-            int[,,] newSpace = new int[_length, _width, _height];
+            int[,,,] newSpace = new int[_length, _width, _height, _extra];
+            int estart = _dimensionCount == 3 ? _estart : 1;
+            int elimit = _dimensionCount == 3 ? _estart + 1 : _extra - 1;
 
             // Start one from the edge, so each thing we evaluate has all 26 cube surrounding
             for (int y = 1; y < _length - 1; y++)
@@ -179,25 +209,28 @@
                 {
                     for (int z = 1; z < _height - 1; z++)
                     {
-                        int anc = ActiveNeighborCount(y, x, z);
-                        int newValue = _space[y, x, z];
-
-                        if (newValue == 1)
+                        for (int e = estart; e < elimit; e++)
                         {
-                            if (!(anc >= 2 && anc <= 3))
-                            {
-                                newValue = 0;
-                            }
-                        }
-                        else
-                        {
-                            if (anc == 3)
-                            {
-                                newValue = 1;
-                            }
-                        }
+                            int anc = ActiveNeighborCount(y, x, z, e);
+                            int newValue = _space[y, x, z, e];
 
-                        newSpace[y, x, z] = newValue;
+                            if (newValue == 1)
+                            {
+                                if (!(anc >= 2 && anc <= 3))
+                                {
+                                    newValue = 0;
+                                }
+                            }
+                            else
+                            {
+                                if (anc == 3)
+                                {
+                                    newValue = 1;
+                                }
+                            }
+
+                            newSpace[y, x, z, e] = newValue;
+                        }
                     }
                 }
             }

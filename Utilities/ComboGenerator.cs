@@ -1,12 +1,8 @@
 ﻿namespace AOC2020.Utilities
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
-    record ComboGenerator<T>
+    public record ComboGenerator<T>
     {
         public List<T> Alphabet { get; init; }
 

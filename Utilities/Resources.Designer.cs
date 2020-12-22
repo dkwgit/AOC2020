@@ -1197,7 +1197,7 @@ namespace AOC2020.Utilities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to part1.
+        ///   Looks up a localized string similar to 353.
         /// </summary>
         internal static string Day17Part1_Answer {
             get {
@@ -1206,7 +1206,7 @@ namespace AOC2020.Utilities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to part2.
+        ///   Looks up a localized string similar to 2472.
         /// </summary>
         internal static string Day17Part2_Answer {
             get {
