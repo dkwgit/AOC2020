@@ -271,4 +271,13 @@
   <data name="Day17_PuzzleInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Day17_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="Day18_PuzzleInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Day18_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Day18Part1_Answer" xml:space="preserve">
+    <value>21993583522852</value>
+  </data>
+  <data name="Day18Part2_Answer" xml:space="preserve">
+    <value>122438593522757</value>
+  </data>
 </root>

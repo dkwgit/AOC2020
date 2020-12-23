@@ -30,6 +30,7 @@
                 new PuzzleData("15", "Actual", puzzleDataStore.GetPuzzleInputAsList("15"), puzzleDataStore.GetPuzzleAnswer("15", "1"), puzzleDataStore.GetPuzzleAnswer("15", "2")),
                 new PuzzleData("16", "Actual", puzzleDataStore.GetPuzzleInputAsList("16"), puzzleDataStore.GetPuzzleAnswer("16", "1"), puzzleDataStore.GetPuzzleAnswer("16", "2")),
                 new PuzzleData("17", "Actual", puzzleDataStore.GetPuzzleInputAsList("17"), puzzleDataStore.GetPuzzleAnswer("17", "1"), puzzleDataStore.GetPuzzleAnswer("17", "2")),
+                new PuzzleData("18", "Actual", puzzleDataStore.GetPuzzleInputAsList("18"), puzzleDataStore.GetPuzzleAnswer("18", "1"), puzzleDataStore.GetPuzzleAnswer("18", "2")),
                 new PuzzleData(
                     "08",
                     "Sample",

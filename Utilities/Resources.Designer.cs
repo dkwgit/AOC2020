@@ -1213,5 +1213,43 @@ namespace AOC2020.Utilities {
                 return ResourceManager.GetString("Day17Part2_Answer", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4 * 3 * (2 * 6 + (3 * 3 + 8 + 7 + 2) + 9 + 8) * 4 * 6
+        ///2 * 6 * 2 + 2 * 8 * (3 + 2 * (9 * 8) + 6 + 9 + 2)
+        ///8 + (4 + 7 + 3 + 3 * 9) * 4 * 9
+        ///4 * (7 + (5 * 9 * 8 * 5) + 5 + 9 * 8 + 6)
+        ///(5 * 8) + 2
+        ///((6 * 6 + 5 * 7) * 5 * 8 * 3 + 8 * 5) + 9 * 4 + 8
+        ///(3 * 9) * 3 + 4 * 6 * (4 * 4 * 2 * 9 * 7 * 4) + 3
+        ///(5 * (7 + 7) * 3 * 2) + 7 * 6
+        ///4 + (3 + 9 * 2 + 5 * 5)
+        ///(3 * 3 + 3 + 4 + (3 + 9)) * (2 + 6 * 6 + (2 + 2)) + 4 * 6 + 4 * (2 + 2)
+        ///9 + 3 * ((2 * 7) * 4 + 9 + 8 * (6 + 5) * 7) * 5 + 9
+        ///8 + 8 + 2 + (8 + 8 * 5 * (8 + 4 + [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day18_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day18_PuzzleInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 21993583522852.
+        /// </summary>
+        internal static string Day18Part1_Answer {
+            get {
+                return ResourceManager.GetString("Day18Part1_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 122438593522757.
+        /// </summary>
+        internal static string Day18Part2_Answer {
+            get {
+                return ResourceManager.GetString("Day18Part2_Answer", resourceCulture);
+            }
+        }
     }
 }

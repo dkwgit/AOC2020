@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0042:Deconstruct variable declaration", Justification = "<Pending>", Scope = "member", Target = "~P:AOC2020.Day16.Puzzle.Part2")]
+[assembly: SuppressMessage("Style", "IDE0042:Deconstruct variable declaration", Justification = "Didn't want to", Scope = "member", Target = "~P:AOC2020.Day16.Puzzle.Part2")]
