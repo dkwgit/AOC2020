@@ -98,7 +98,7 @@
             IAbstractRule rule = expression switch
             {
                 string e when e.Contains(' ') && e.Contains('|') => AlternatingRule.Create(this, parent, ruleNumber, expression),
-                string f when f.Contains(' ') && !f.Contains('|') => DoubleRule.Create(this, parent, ruleNumber, expression),
+                string f when f.Contains(' ') && !f.Contains('|') => MultiRule.Create(this, parent, ruleNumber, expression),
                 string g when g.Contains('"') => TerminalRule.Create(this, parent, ruleNumber, expression),
                 string h when !h.Contains('"') && !h.Contains(' ') => SimpleRule.Create(this, parent, ruleNumber, expression),
                 _ => throw new InvalidOperationException($"Unexpected expression {expression}"),

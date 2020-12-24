@@ -45,7 +45,7 @@
 
             if (expression.Contains(' '))
             {
-                rule = DoubleRule.Create(p, parent, id, expression);
+                rule = MultiRule.Create(p, parent, id, expression);
             }
             else
             {
