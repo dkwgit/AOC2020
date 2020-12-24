@@ -19,7 +19,7 @@ namespace AOC2020.Utilities {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -1253,8 +1253,32 @@ namespace AOC2020.Utilities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to inputData
-        ///.
+        ///   Looks up a localized string similar to 126: 116 104 | 107 95
+        ///28: 104 | 95
+        ///25: 116 95 | 33 104
+        ///17: 98 104 | 14 95
+        ///69: 120 104 | 86 95
+        ///78: 49 95 | 57 104
+        ///124: 95 36 | 104 74
+        ///61: 104 39 | 95 30
+        ///27: 99 95 | 41 104
+        ///114: 50 104 | 102 95
+        ///76: 83 95 | 116 104
+        ///22: 95 133 | 104 53
+        ///9: 104 71 | 95 63
+        ///72: 65 104 | 90 95
+        ///125: 77 95 | 60 104
+        ///130: 104 44 | 95 69
+        ///106: 33 95
+        ///77: 104 20 | 95 101
+        ///118: 95 104
+        ///99: 95 32 | 104 54
+        ///15: 95 116 | 104 116
+        ///92: 104 132 | 95 23
+        ///120: 66 95 | 37 104
+        ///94: 53 104 | 16 95
+        ///3: 104 107 | 95 10
+        ///40: 95 36 | 104 3 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Day19_PuzzleInput {
             get {
@@ -1263,7 +1287,7 @@ namespace AOC2020.Utilities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to part1.
+        ///   Looks up a localized string similar to 216.
         /// </summary>
         internal static string Day19Part1_Answer {
             get {
