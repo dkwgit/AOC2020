@@ -20,16 +20,50 @@
 
         public bool Valid(string expression)
         {
-            var ruleExpressionStringPairs = Value.Select((x, index) => (Rule: x, ExpressionString: expression.Substring(index == 0 ? index : Value[index - 1].MatchLength, Value[index].MatchLength))).ToList();
-            foreach (var (rule, expressionString) in ruleExpressionStringPairs)
+            List<IAbstractRule> valuesToUse = new ();
+            valuesToUse.AddRange(Value);
+
+            bool run = true;
+            bool valid = false;
+
+            while (run)
             {
-                if (!rule.Valid(expressionString))
+                var ruleExpressionStringPairs = valuesToUse.Select((x, index) => (Rule: x, ExpressionString: expression.Substring(index == 0 ? index : valuesToUse[index - 1].MatchLength, valuesToUse[index].MatchLength))).ToList();
+                int ruleLength = ruleExpressionStringPairs.Sum(x => x.ExpressionString.Length);
+                if (ruleLength > expression.Length)
                 {
-                    return false;
+                    run = false;
+                    break;
+                }
+
+                List<bool> valids = new ();
+                foreach (var (rule, expressionString) in ruleExpressionStringPairs)
+                {
+                    valids.Add(rule.Valid(expressionString));
+                }
+
+                if (valids.All(x => x))
+                {
+                    run = false;
+                    valid = true;
+                    break;
+                }
+
+                if (run)
+                {
+                    int selfRuleIndex = valuesToUse.FindIndex(x => x.GetType() == typeof(SelfRule));
+                    if (selfRuleIndex == -1)
+                    {
+                        run = false;
+                    }
+                    else
+                    {
+                        valuesToUse.InsertRange(selfRuleIndex, Value);
+                    }
                 }
             }
 
-            return true;
+            return valid;
         }
 
         public static MultiRule Create(Puzzle p, IAbstractRule parent, int id, string expression)
