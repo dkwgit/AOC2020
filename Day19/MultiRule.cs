@@ -46,6 +46,7 @@
             rulesToUse.AddRange(Value);
             int baseLength = rulesToUse.Sum(x => x.MatchLength);
 
+            // if we can expand 
             while (IsVariableLength && baseLength < expression.Length)
             {
                 int index = rulesToUse.FindIndex(x => x.GetType() == typeof(SelfRule));
@@ -54,53 +55,9 @@
                 baseLength = rulesToUse.Sum(x => x.MatchLength);
             }
 
-            List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions = new ();
-            foreach (var item in rulesToUse)
-            {
-                if (item.GetType() == typeof(SelfRule))
-                {
-                    continue;
-                }
+            List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions = GetRulesWithExpansions(rulesToUse, baseLength, expression);
 
-                rulesWithExpansions.Add((item, new List<int>() { 0 }));
-            }
-
-            foreach (var (rule, expansions) in rulesWithExpansions)
-            {
-                if (rule.IsVariableLength && baseLength < expression.Length)
-                {
-                    GenerateExpansions(expansions, rule.ExpansionIncrement, baseLength, expression.Length);
-                }
-            }
-
-            List<List<int>> alphabet = new ();
-            foreach (var (_, expansions) in rulesWithExpansions)
-            {
-                alphabet.Add(expansions);
-            }
-
-            var comboGenerator = new ComboGeneratorWithPositionalAlphabet<int>(alphabet, rulesWithExpansions.Count, true);
-            var allCombos = comboGenerator.Iterator().Distinct().Where(x => x.Sum() + baseLength == expression.Length).ToList();
-
-            List<List<int>> combos = new ();
-            foreach (var combo in allCombos)
-            {
-                bool include = true;
-                Debug.Assert(combo.Count == rulesWithExpansions.Count, "Expect the combinations to have the same number of elements as the total rules involved");
-                for (int ruleIndex = 0; ruleIndex < rulesWithExpansions.Count; ruleIndex++)
-                {
-                    if (!rulesWithExpansions[ruleIndex].expansions.Any(x => x == combo[ruleIndex]))
-                    {
-                        include = false;
-                        break;
-                    }
-                }
-
-                if (include)
-                {
-                    combos.Add(combo);
-                }
-            }
+            List<List<int>> combos = GetCombos(rulesWithExpansions, baseLength, expression);
 
             if (combos.Count == 0)
             {
@@ -111,6 +68,7 @@
             foreach (var combo in combos)
             {
                 List<bool> comboResult = new ();
+
                 int startingStringIndex = 0;
                 for (int i = 0; i < combo.Count; i++)
                 {
@@ -157,6 +115,30 @@
             return rule;
         }
 
+        private static List<(IAbstractRule rule, List<int> expansions)> GetRulesWithExpansions(List<IAbstractRule> rulesToUse, int baseLength, string expression)
+        {
+            List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions = new ();
+            foreach (var item in rulesToUse)
+            {
+                if (item.GetType() == typeof(SelfRule))
+                {
+                    continue;
+                }
+
+                rulesWithExpansions.Add((item, new List<int>() { 0 }));
+            }
+
+            foreach (var (rule, expansions) in rulesWithExpansions)
+            {
+                if (rule.IsVariableLength && baseLength < expression.Length)
+                {
+                    GenerateExpansions(expansions, rule.ExpansionIncrement, baseLength, expression.Length);
+                }
+            }
+
+            return rulesWithExpansions;
+        }
+
         private static void GenerateExpansions(List<int> expansions, int expansionIncrement, int baseLength, int expressionLength)
         {
             int incrementBase = 0;
@@ -165,6 +147,20 @@
                 expansions.Add(incrementBase + expansionIncrement);
                 incrementBase += expansionIncrement;
             }
+        }
+
+        private static List<List<int>> GetCombos(List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions, int baseLength, string expression)
+        {
+            List<List<int>> alphabet = new();
+            foreach (var (_, expansions) in rulesWithExpansions)
+            {
+                alphabet.Add(expansions);
+            }
+
+            var comboGenerator = new ComboGeneratorWithPositionalAlphabet<int>(alphabet, rulesWithExpansions.Count, true);
+            var combos = comboGenerator.Iterator().Distinct().Where(x => x.Sum() + baseLength == expression.Length).ToList();
+
+            return combos;
         }
     }
 }
