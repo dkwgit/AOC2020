@@ -6,7 +6,7 @@
     {
         IAbstractRule Parent { get; init; }
 
-        List<int> MatchLengths { get; set; }
+        int MatchLength { get; set; }
 
         int Id { get; init; }
 

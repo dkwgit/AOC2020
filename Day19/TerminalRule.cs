@@ -13,9 +13,9 @@
 
         public string Value { get; init; }
 
-        public List<int> MatchLengths { get; set; }
+        public int MatchLength { get; set; }
 
-        public TerminalRule(IAbstractRule parent, int id, string generatingExpression, string value) => (Parent, Id, GeneratingExpression, Value, MatchLengths) = (parent, id, generatingExpression, value, new List<int>() { 1 });
+        public TerminalRule(IAbstractRule parent, int id, string generatingExpression, string value) => (Parent, Id, GeneratingExpression, Value, MatchLength) = (parent, id, generatingExpression, value, 1);
 
         public bool Valid(string expression)
         {

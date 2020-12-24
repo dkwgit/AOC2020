@@ -12,7 +12,7 @@
 
         public IAbstractRule Value { get; init; }
 
-        public List<int> MatchLengths { get; set; }
+        public int MatchLength { get; set; }
 
         public SimpleRule(IAbstractRule parent, int id, string generatingExpression, IAbstractRule value) => (Parent, Id, GeneratingExpression, Value) = (parent, id, generatingExpression, value);
 
@@ -29,7 +29,7 @@
 
             SimpleRule newRule = new SimpleRule(parent, id, expression, rule)
             {
-                MatchLengths = rule.MatchLengths,
+                MatchLength = rule.MatchLength,
             };
 
             return newRule;

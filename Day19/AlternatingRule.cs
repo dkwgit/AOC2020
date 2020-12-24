@@ -1,7 +1,6 @@
 ﻿namespace AOC2020.Day19
 {
-    using System.Collections.Generic;
-    using System.Linq;
+    using System.Diagnostics;
 
     record AlternatingRule : IAbstractRule
     {
@@ -13,7 +12,7 @@
 
         public (IAbstractRule Either, IAbstractRule Or) Value { get; init; }
 
-        public List<int> MatchLengths { get; set; }
+        public int MatchLength { get; set; }
 
         public AlternatingRule(IAbstractRule parent, int id, string generatingExpression, (IAbstractRule, IAbstractRule) value) => (Parent, Id, GeneratingExpression, Value) = (parent, id, generatingExpression, value);
 
@@ -30,14 +29,11 @@
             IAbstractRule first = ResolveSubexpression(p, parent, id, expressionOne);
             IAbstractRule second = ResolveSubexpression(p, parent, id, expressionTwo);
 
-            List<int> combinedLengths = new ();
-            combinedLengths.AddRange(first.MatchLengths);
-            combinedLengths.AddRange(second.MatchLengths);
-            combinedLengths = combinedLengths.Distinct().ToList();
+            Debug.Assert(first.MatchLength == second.MatchLength, "Expecting both alternating rule items to have the same MatchLength");
 
             AlternatingRule rule = new AlternatingRule(parent, id, expression, (first, second))
             {
-                MatchLengths = combinedLengths,
+                MatchLength = first.MatchLength,
             };
 
             return rule;
