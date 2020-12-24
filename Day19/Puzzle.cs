@@ -51,8 +51,24 @@
         {
             get
             {
-                string answer = string.Empty;
-                _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
+                _rules[8] = "42 | 42 8";
+                _rules[11] = "42 31 | 42 11 31";
+
+                List<string> validExpressions = new ();
+
+                IAbstractRule rule = LoadRule(null, 0);
+
+                foreach (var expression in _expressions)
+                {
+                    bool valid = rule.Valid(expression);
+                    if (valid)
+                    {
+                        validExpressions.Add(expression);
+                    }
+                }
+
+                string answer = validExpressions.Count.ToString();
+                _logger.LogInformation("{Day}/Part2: Found {answer} as number of expressions that are valid using recursive rules", Day, answer);
                 return answer;
             }
         }

@@ -3,19 +3,19 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public record ComboGenerator<T>
+    public record ComboGeneratorWithPositionalAlphabet<T>
     {
         public bool Dedupe { get; set; }
 
-        public List<T> Alphabet { get; init; }
+        public List<List<T>> Alphabet { get; init; }
 
         public int LetterCount { get; init; }
 
-        public ComboGenerator(List<T> alphabet, int letterCount, bool dedupe) => (Alphabet, LetterCount, Dedupe) = (alphabet, letterCount, dedupe);
+        public ComboGeneratorWithPositionalAlphabet(List<List<T>> alphabet, int letterCount, bool dedupe) => (Alphabet, LetterCount, Dedupe) = (alphabet, letterCount, dedupe);
 
         public IEnumerable<List<T>> Iterator()
         {
-            List<List<T>> lists = GetCombo(Alphabet, LetterCount);
+            List<List<T>> lists = GetCombo(Alphabet, LetterCount, 0);
             if (Dedupe)
             {
                 lists = DedupeLists(lists);
@@ -61,19 +61,19 @@
             return copy;
         }
 
-        private static List<List<T>> GetCombo(List<T> alphabet, int n)
+        private static List<List<T>> GetCombo(List<List<T>> alphabet, int n, int alphabetSlot)
         {
             List<List<T>> lists = new ();
 
-            for (int a = 0; a < alphabet.Count; a++)
+            for (int a = 0; a < alphabet[alphabetSlot].Count; a++)
             {
                 if (n > 1)
                 {
-                    var sublists = GetCombo(alphabet, n - 1);
+                    var sublists = GetCombo(alphabet, n - 1, alphabetSlot + 1);
                     foreach (var sub in sublists)
                     {
                         // head
-                        List<T> list = new () { alphabet[a] };
+                        List<T> list = new () { alphabet[alphabetSlot][a] };
 
                         // add tail
                         list.AddRange(sub);
@@ -83,7 +83,7 @@
                 else
                 {
                     // head
-                    List<T> list = new () { alphabet[a] };
+                    List<T> list = new () { alphabet[alphabetSlot][a] };
                     lists.Add(list);
                 }
             }

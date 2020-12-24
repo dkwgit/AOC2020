@@ -5,6 +5,10 @@
 
     internal record TerminalRule : IAbstractRule
     {
+        public bool IsVariableLength { get; } = false;
+
+        public int ExpansionIncrement { get; } = 0;
+
         public IAbstractRule Parent { get; init; }
 
         public int Id { get; init; }

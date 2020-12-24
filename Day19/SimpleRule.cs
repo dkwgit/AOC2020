@@ -4,6 +4,22 @@
 
     internal record SimpleRule : IAbstractRule
     {
+        public bool IsVariableLength
+        {
+            get
+            {
+                return Value.IsVariableLength;
+            }
+        }
+
+        public int ExpansionIncrement
+        {
+            get
+            {
+                return Value.ExpansionIncrement;
+            }
+        }
+
         public IAbstractRule Parent { get; init; }
 
         public int Id { get; init; }

@@ -4,6 +4,10 @@
 
     internal interface IAbstractRule
     {
+        bool IsVariableLength { get; }
+
+        int ExpansionIncrement { get; }
+
         IAbstractRule Parent { get; init; }
 
         int MatchLength { get; set; }

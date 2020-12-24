@@ -29,9 +29,9 @@
                 new PuzzleData("14", "Actual", puzzleDataStore.GetPuzzleInputAsList("14"), puzzleDataStore.GetPuzzleAnswer("14", "1"), puzzleDataStore.GetPuzzleAnswer("14", "2"), string.Empty, false),
                 new PuzzleData("15", "Actual", puzzleDataStore.GetPuzzleInputAsList("15"), puzzleDataStore.GetPuzzleAnswer("15", "1"), puzzleDataStore.GetPuzzleAnswer("15", "2"), string.Empty, false),
                 new PuzzleData("16", "Actual", puzzleDataStore.GetPuzzleInputAsList("16"), puzzleDataStore.GetPuzzleAnswer("16", "1"), puzzleDataStore.GetPuzzleAnswer("16", "2"), string.Empty, false),
-                new PuzzleData("17", "Actual", puzzleDataStore.GetPuzzleInputAsList("17"), puzzleDataStore.GetPuzzleAnswer("17", "1"), puzzleDataStore.GetPuzzleAnswer("17", "2"), string.Empty, false),
+                new PuzzleData("17", "Actual", puzzleDataStore.GetPuzzleInputAsList("17"), puzzleDataStore.GetPuzzleAnswer("17", "1"), puzzleDataStore.GetPuzzleAnswer("17", "2"), string.Empty, true),
                 new PuzzleData("18", "Actual", puzzleDataStore.GetPuzzleInputAsList("18"), puzzleDataStore.GetPuzzleAnswer("18", "1"), puzzleDataStore.GetPuzzleAnswer("18", "2"), string.Empty, false),
-                new PuzzleData("19", "Actual", puzzleDataStore.GetPuzzleInputAsList("19"), puzzleDataStore.GetPuzzleAnswer("19", "1"), puzzleDataStore.GetPuzzleAnswer("19", "2")),
+                new PuzzleData("19", "Actual", puzzleDataStore.GetPuzzleInputAsList("19"), puzzleDataStore.GetPuzzleAnswer("19", "1"), puzzleDataStore.GetPuzzleAnswer("19", "2"), string.Empty, true),
                 new PuzzleData(
                     "08",
                     "Sample",
@@ -346,7 +346,7 @@
                         "aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba",
                     },
                     "3",
-                    null,
+                    "12",
                     string.Empty,
                     true),
             };

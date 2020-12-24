@@ -45,7 +45,7 @@
             get
             {
                 _dimensionCount = 3;
-                ComboGenerator<int> gen = new ComboGenerator<int>(_neighborVariance, _dimensionCount);
+                ComboGenerator<int> gen = new ComboGenerator<int>(_neighborVariance, _dimensionCount, false);
                 _dimensionVarianceCombos = new List<List<int>>();
 
                 foreach (var item in gen.Iterator())
@@ -74,7 +74,7 @@
                 ProcessPuzzleInput(_input);
 
                 _dimensionCount = 4;
-                ComboGenerator<int> gen = new ComboGenerator<int>(_neighborVariance, _dimensionCount);
+                ComboGenerator<int> gen = new ComboGenerator<int>(_neighborVariance, _dimensionCount, false);
                 _dimensionVarianceCombos = new List<List<int>>();
 
                 foreach (var item in gen.Iterator())

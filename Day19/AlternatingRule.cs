@@ -1,9 +1,31 @@
 ﻿namespace AOC2020.Day19
 {
     using System.Diagnostics;
+    using System.Linq;
 
     record AlternatingRule : IAbstractRule
     {
+        public bool IsVariableLength
+        {
+            get
+            {
+                return Value.Or.GetType() == typeof(MultiRule) && (Value.Or as MultiRule).Value.Any(x => x.GetType() == typeof(SelfRule));
+            }
+        }
+
+        public int ExpansionIncrement
+        {
+            get
+            {
+                if (!IsVariableLength)
+                {
+                    return 0;
+                }
+
+                return Value.Or.ExpansionIncrement;
+            }
+        }
+
         public IAbstractRule Parent { get; init; }
 
         public int Id { get; init; }
