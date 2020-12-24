@@ -46,7 +46,7 @@
             rulesToUse.AddRange(Value);
             int baseLength = rulesToUse.Sum(x => x.MatchLength);
 
-            // if we can expand 
+            // if we can expand this rule and need to, to handle an expression, do so
             while (IsVariableLength && baseLength < expression.Length)
             {
                 int index = rulesToUse.FindIndex(x => x.GetType() == typeof(SelfRule));
@@ -57,14 +57,18 @@
 
             List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions = GetRulesWithExpansions(rulesToUse, baseLength, expression);
 
+            // combos contains all the possible rule lengths that together add up to the expression length, including the effects of expansions
             List<List<int>> combos = GetCombos(rulesWithExpansions, baseLength, expression);
 
+            // if there are no combos, no combination will handle the length of the expression
             if (combos.Count == 0)
             {
                 return false;
             }
 
             List<List<bool>> comboResults = new ();
+
+            // Now step through each combo, split the expression into substrings for each rule per the combo and store whether the combo was valid
             foreach (var combo in combos)
             {
                 List<bool> comboResult = new ();
@@ -82,6 +86,7 @@
                 comboResults.Add(comboResult);
             }
 
+            // fine any combos for which each rule returned valid == true.  If any, the MuliRule is valid for that expression.
             if (comboResults.Any(x => x.All(y => y)))
             {
                 return true;
@@ -115,6 +120,7 @@
             return rule;
         }
 
+        // For each rule, get a list of expansion sizes.  Rules that do not expand will have one expansion of 0
         private static List<(IAbstractRule rule, List<int> expansions)> GetRulesWithExpansions(List<IAbstractRule> rulesToUse, int baseLength, string expression)
         {
             List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions = new ();
@@ -139,6 +145,7 @@
             return rulesWithExpansions;
         }
 
+        // For rules that expand, find out how many times it can expand and handle the expression. These expansions (growth in lenngth) are added to the expanion list for that rule
         private static void GenerateExpansions(List<int> expansions, int expansionIncrement, int baseLength, int expressionLength)
         {
             int incrementBase = 0;
@@ -149,9 +156,10 @@
             }
         }
 
+        // Get combos between various rules, by combining the possible lengths of the rules (including expansiosn) to sum up to the length of the expression
         private static List<List<int>> GetCombos(List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions, int baseLength, string expression)
         {
-            List<List<int>> alphabet = new();
+            List<List<int>> alphabet = new ();
             foreach (var (_, expansions) in rulesWithExpansions)
             {
                 alphabet.Add(expansions);
