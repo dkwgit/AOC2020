@@ -289,4 +289,13 @@
   <data name="Day19Part2_Answer" xml:space="preserve">
     <value>400</value>
   </data>
+  <data name="Day20_PuzzleInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Day20_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Day20Part1_Answer" xml:space="preserve">
+    <value>part1</value>
+  </data>
+  <data name="Day20Part2_Answer" xml:space="preserve">
+    <value>part2</value>
+  </data>
 </root>
