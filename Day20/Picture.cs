@@ -6,6 +6,7 @@
     using System.Drawing;
     using System.Linq;
     using System.Text;
+    using Pastel;
 
     internal class Picture : IPicture
     {
@@ -191,6 +192,48 @@
             }
 
             Tile.PrintTile(pictureRows);
+        }
+
+        public void PrintInColor()
+        {
+            List<string> rows = new ();
+            for (int row = 0; row < _pictureHeight; row++)
+            {
+                string rowString = string.Empty;
+                for (int column = 0; column < _pictureWidth; column++)
+                {
+                    char ch = _finalPictureData[row, column];
+                    string s = string.Empty;
+                    if (ch == '.')
+                    {
+                        s = new string(new char[] { ' ' });
+                        s = s.Pastel(Color.DarkSlateBlue).PastelBg(Color.DarkSlateBlue);
+                    }
+                    else if (ch == '#')
+                    {
+                        Point p = new Point() { Y = row, X = column };
+                        if (_serpentPoints.ContainsKey(p))
+                        {
+                            s = new string(new char[] { '@' });
+                            s = s.Pastel(Color.LimeGreen).PastelBg(Color.DarkSlateBlue);
+                        }
+                        else
+                        {
+                            s = new string(new char[] { '.' });
+                            s = s.Pastel(Color.White).PastelBg(Color.DarkBlue);
+                        }
+                    }
+
+                    rowString = $"{rowString}{s}";
+                }
+
+                rows.Add(rowString.ToString());
+            }
+
+            foreach (var rowString in rows)
+            {
+                Console.WriteLine(rowString);
+            }
         }
 
         public int GetOccupiedPointCount()
