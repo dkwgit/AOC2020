@@ -10,6 +10,8 @@
 
         public Dictionary<int, List<(int tileId, string edge)>> TileToNeighborTilesWithEdge { get; } = new ();
 
+        public Dictionary<int, Tile> Tiles { get; } = new ();
+
         public void RegisterEdge(string edge, int tileId, int matchingIndex)
         {
             if (EdgeToTiles.ContainsKey(edge))

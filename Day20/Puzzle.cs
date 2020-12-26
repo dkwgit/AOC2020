@@ -1,5 +1,6 @@
 ﻿namespace AOC2020.Day20
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
@@ -48,15 +49,59 @@
         {
             get
             {
-                string answer = string.Empty;
-                _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
+                Picture picture = new ();
+                picture.SetRegistry(_registry).
+                SetLengths(_tiles[0].Length, _tiles[0].Length - 2, (int)Math.Sqrt(_tiles.Count)).
+                Assemble().// picture.PrintPictureFromTiles();
+                StripBorders();
+
+                Pattern p = new ();
+
+                int found = picture.FindPatterns(p, 1);
+                if (found == 0)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        // rotate
+                        picture.RotateRight();
+                        found = picture.FindPatterns(p, 1);
+                        if (found == 1)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (found == 0)
+                {
+                    picture.FlipOnXAxis();
+
+                    found = picture.FindPatterns(p, 1);
+                    if (found == 0)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            // rotate
+                            picture.RotateRight();
+                            found = picture.FindPatterns(p, 1);
+                            if (found == 1)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                int totalFound = picture.FindPatterns(p);
+
+                string answer = (picture.GetOccupiedPointCount() - picture.GetSerpentPointCount()).ToString();
+                _logger.LogInformation("{Day}/Part2: Found {answer} as roughness of water after subtracting {totalFound} sea serpents", Day, answer, totalFound);
                 return answer;
             }
         }
 
         public void ProcessPuzzleInput(List<string> input)
         {
-
             int length = -1;
             int tileId = -1;
             int row = 0;
@@ -97,7 +142,9 @@
 
                     if (tileData != null)
                     {
-                        _tiles.Add(new Tile(_registry, tileId, length, tileData));
+                        Tile t = new Tile(_registry, tileId, length, tileData);
+                        _tiles.Add(t);
+                        _registry.Tiles.Add(t.Id, t);
                     }
 
                     tileId = -1;

@@ -1,5 +1,6 @@
 ﻿namespace AOC2020.Day20
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
@@ -9,7 +10,20 @@
     {
         private int _matchingIndex = -1;
 
+        private char[,] _finalOrientation;
+
         public Tile(Registry registry, int id, int length, char[,] initialData) => (Registry, Id, Length, Data, Edges) = (registry, id, length, Tile.SetupData(length, initialData, out List<List<string>> edges), Tile.RegisterEdges(registry, id, edges));
+
+        public enum EdgeEnum
+        {
+#pragma warning disable SA1602 // Enumeration items should be documented
+            Top = 0,
+            Right = 1,
+            Bottom = 2,
+            Left = 3,
+            Invalid = -1,
+#pragma warning restore SA1602 // Enumeration items should be documented
+        }
 
         public Registry Registry { get; init; }
 
@@ -20,6 +34,19 @@
         public List<char[,]> Data { get; init; }
 
         public List<List<string>> Edges { get; init; }
+
+        public char[,] FinalOrientation
+        {
+            get
+            {
+                return _finalOrientation;
+            }
+
+            set
+            {
+                _finalOrientation = value;
+            }
+        }
 
         public int MatchingDataIndex
         {
@@ -37,7 +64,7 @@
 
         public static List<char[,]> SetupData(int length, char[,] initialData, out List<List<string>> edges)
         {
-            List<char[,]> data = new () { initialData, Tile.FlipTileDataAlongX(length, initialData) };
+            List<char[,]> data = new () { initialData, Tile.FlipAlongX(length, initialData) };
 
             edges = new ();
 
@@ -82,7 +109,7 @@
             return edges;
         }
 
-        public static char[,] FlipTileDataAlongX(int length, char[,] initialData)
+        public static char[,] FlipAlongX(int length, char[,] initialData)
         {
             char[,] flipped = new char[length, length];
 
@@ -95,6 +122,198 @@
             }
 
             return flipped;
+        }
+
+        public static char[,] RotateRight(char[,] data, int numberOfRotations, int length)
+        {
+            for (int rotations = 0; rotations < numberOfRotations; rotations++)
+            {
+                data = Tile.RotateRightOnce(data, length);
+            }
+
+            return data;
+        }
+
+        public static char[,] RotateRightOnce(char[,] data, int length)
+        {
+            // PrintTile(GetTileText(data, length));
+            char[,] newData = new char[length, length];
+
+            for (int row = 0; row < length; row++)
+            {
+                for (int column = 0; column < length; column++)
+                {
+                    newData[column, length - 1 - row] = data[row, column];
+                }
+            }
+
+            // PrintTile(GetTileText(newData, length));
+            return newData;
+        }
+
+        public static List<string> GetTileText(char[,] data, int length)
+        {
+            List<string> tileText = new ();
+
+            for (int row = 0; row < length; row++)
+            {
+                StringBuilder sb = new ();
+                for (int column = 0; column < length; column++)
+                {
+                    sb.Append(data[row, column]);
+                }
+
+                tileText.Add(sb.ToString());
+            }
+
+            return tileText;
+        }
+
+        public static void PrintTile(List<string> tileRows)
+        {
+            foreach (var row in tileRows)
+            {
+                Console.WriteLine(row);
+            }
+
+            Console.WriteLine(string.Empty);
+        }
+
+        public EdgeEnum MatchEdge(string edge, int matchingIndex)
+        {
+            char[,] data = Data[matchingIndex];
+
+            if (MatchTopEdge(edge, data))
+            {
+                return EdgeEnum.Top;
+            }
+
+            if (MatchRightEdge(edge, data))
+            {
+                return EdgeEnum.Right;
+            }
+
+            if (MatchBottomEdge(edge, data))
+            {
+                return EdgeEnum.Bottom;
+            }
+
+            if (MatchLeftEdge(edge, data))
+            {
+                return EdgeEnum.Left;
+            }
+
+            return EdgeEnum.Invalid;
+        }
+
+        public string GetEdge(Tile.EdgeEnum edgeToGet)
+        {
+            string edge = edgeToGet switch
+            {
+                Tile.EdgeEnum.Top => GetTopEdge(),
+                Tile.EdgeEnum.Right => GetRightEdge(),
+                Tile.EdgeEnum.Bottom => GetBottomEdge(),
+                Tile.EdgeEnum.Left => GetLeftEdge(),
+                _ => throw new InvalidOperationException("Unexpected value for EdgeEnum in GetEdge()"),
+            };
+
+            return edge;
+        }
+
+        private string GetTopEdge()
+        {
+            StringBuilder sb = new ();
+            for (int column = 0; column < Length; column++)
+            {
+                sb.Append(FinalOrientation[0, column]);
+            }
+
+            return sb.ToString();
+        }
+
+        private string GetRightEdge()
+        {
+            StringBuilder sb = new ();
+            for (int row = 0; row < Length; row++)
+            {
+                sb.Append(FinalOrientation[row, Length - 1]);
+            }
+
+            return sb.ToString();
+        }
+
+        private string GetBottomEdge()
+        {
+            StringBuilder sb = new ();
+            for (int column = Length - 1; column >= 0; column--)
+            {
+                sb.Append(FinalOrientation[Length - 1, column]);
+            }
+
+            return sb.ToString();
+        }
+
+        private string GetLeftEdge()
+        {
+            StringBuilder sb = new ();
+            for (int row = Length - 1; row >= 0; row--)
+            {
+                sb.Append(FinalOrientation[row, 0]);
+            }
+
+            return sb.ToString();
+        }
+
+        private bool MatchTopEdge(string edge, char[,] data)
+        {
+            for (int column = 0; column < Length; column++)
+            {
+                if (data[0, column] != edge[column])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool MatchRightEdge(string edge, char[,] data)
+        {
+            for (int row = 0; row < Length; row++)
+            {
+                if (data[row, Length - 1] != edge[row])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool MatchBottomEdge(string edge, char[,] data)
+        {
+            for (int column = 0; column < Length; column++)
+            {
+                if (data[Length - 1, Length - 1 - column] != edge[column])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool MatchLeftEdge(string edge, char[,] data)
+        {
+            for (int row = 0; row < Length; row++)
+            {
+                if (data[Length - 1 - row, 0] != edge[row])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
