@@ -56,7 +56,8 @@
             .AddTransient<AOC2020.Day18.Puzzle>()
             .AddTransient<AOC2020.Day19.Puzzle>()
             .AddTransient<AOC2020.Day20.Puzzle>()
-            .AddTransient<AOC2020.Day21.Puzzle>();
+            .AddTransient<AOC2020.Day21.Puzzle>()
+            .AddTransient<AOC2020.Day22.Puzzle>();
         }
     }
 }
