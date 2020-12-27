@@ -19,7 +19,7 @@ namespace AOC2020.Utilities {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -1377,8 +1377,7 @@ namespace AOC2020.Utilities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to inputData
-        ///.
+        ///   Looks up a localized string similar to nncl snvzl jsrrk grbmvx qzczl zh kbbmsc bltrrnl jkpmsf hfxss shjvxj lnrjbft bgbvr kdvrrmmx kdqls sgslkt jlzhsl zdl pnhd vsv zgbh dlhx thbdr nmzz bmmb hkrnqnlt qfbh zrzh ghrnz nbdcsj gffbft shpglbr bgfdt jfjr pltnp dbxkrn kxjt hzc rhzgdm hdvkmd ggdbl dsvz ldpr scms rrqtp glc ddkk pgvqd qgqlv dcfj drrzq xncmd nnbn mgczn plhpz gcp zsfzq pbtq kbxcj pmzcrrd sgkmrlt frpvd nvhnjb cmqs zvd frtdmqzb scg xknmp gdnhx sxpv qzmnp ddtkx hbgsgt zppsxq gjmvxg tjlgcb zfcqk lfspxch qhrd qjvf kktsjbh gjjglc gbbs lcggks lsrxkj [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Day21_PuzzleInput {
             get {
@@ -1387,7 +1386,7 @@ namespace AOC2020.Utilities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to part1.
+        ///   Looks up a localized string similar to 2075.
         /// </summary>
         internal static string Day21Part1_Answer {
             get {
@@ -1396,7 +1395,7 @@ namespace AOC2020.Utilities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to part2.
+        ///   Looks up a localized string similar to zfcqk,mdtvbb,ggdbl,frpvd,mgczn,zsfzq,kdqls,kktsjbh.
         /// </summary>
         internal static string Day21Part2_Answer {
             get {

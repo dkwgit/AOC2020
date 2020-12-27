@@ -32,7 +32,7 @@
                 new PuzzleData("17", "Actual", puzzleDataStore.GetPuzzleInputAsList("17"), puzzleDataStore.GetPuzzleAnswer("17", "1"), puzzleDataStore.GetPuzzleAnswer("17", "2"), string.Empty, false),
                 new PuzzleData("18", "Actual", puzzleDataStore.GetPuzzleInputAsList("18"), puzzleDataStore.GetPuzzleAnswer("18", "1"), puzzleDataStore.GetPuzzleAnswer("18", "2"), string.Empty, false),
                 new PuzzleData("19", "Actual", puzzleDataStore.GetPuzzleInputAsList("19"), puzzleDataStore.GetPuzzleAnswer("19", "1"), puzzleDataStore.GetPuzzleAnswer("19", "2"), string.Empty, false),
-                new PuzzleData("20", "Actual", puzzleDataStore.GetPuzzleInputAsList("20"), puzzleDataStore.GetPuzzleAnswer("20", "1"), puzzleDataStore.GetPuzzleAnswer("20", "2"), string.Empty, true),
+                new PuzzleData("20", "Actual", puzzleDataStore.GetPuzzleInputAsList("20"), puzzleDataStore.GetPuzzleAnswer("20", "1"), puzzleDataStore.GetPuzzleAnswer("20", "2"), string.Empty, false),
                 new PuzzleData("21", "Actual", puzzleDataStore.GetPuzzleInputAsList("21"), puzzleDataStore.GetPuzzleAnswer("21", "1"), puzzleDataStore.GetPuzzleAnswer("21", "2"), string.Empty, true),
                 new PuzzleData(
                     "08",
@@ -467,6 +467,20 @@
                     },
                     "20899048083289",
                     "273",
+                    string.Empty,
+                    false),
+                new PuzzleData(
+                    "21",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "mxmxvkd kfcds sqjhc nhms (contains dairy, fish)",
+                        "trh fvjkl sbzzf mxmxvkd (contains dairy)",
+                        "sqjhc fvjkl (contains soy)",
+                        "sqjhc mxmxvkd sbzzf (contains fish)",
+                    },
+                    "5",
+                    "mxmxvkd,sqjhc,fvjkl",
                     string.Empty,
                     true),
             };
