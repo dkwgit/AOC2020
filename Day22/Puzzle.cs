@@ -8,11 +8,9 @@
     {
         private readonly ILogger _logger;
 
-        private readonly List<int> _playerOneDeck = new ();
-
-        private readonly List<int> _playerTwoDeck = new ();
-
         private List<string> _input = null;
+
+        private Game _game;
 
         public Puzzle(ILogger<Puzzle> logger)
         {
@@ -27,33 +25,8 @@
         {
             get
             {
-                while (_playerOneDeck.Count >= 1 && _playerTwoDeck.Count >= 1)
-                {
-                    int playerOneCard = _playerOneDeck[0];
-                    _playerOneDeck.RemoveAt(0);
-                    int playerTwoCard = _playerTwoDeck[0];
-                    _playerTwoDeck.RemoveAt(0);
-
-                    if (playerOneCard > playerTwoCard)
-                    {
-                        _playerOneDeck.Add(playerOneCard);
-                        _playerOneDeck.Add(playerTwoCard);
-                    }
-                    else
-                    {
-                        _playerTwoDeck.Add(playerTwoCard);
-                        _playerTwoDeck.Add(playerOneCard);
-                    }
-                }
-
-                List<int> winningDeck = (_playerOneDeck.Count > 0) ? _playerOneDeck : _playerTwoDeck;
-                int score = 0;
-                for (int i = 1; i <= winningDeck.Count; i++)
-                {
-                    score += winningDeck[^i] * i;
-                }
-
-                string answer = score.ToString();
+                _game.Play();
+                string answer = _game.Score.ToString();
                 _logger.LogInformation("{Day}/Part1: Found {answer} as the score of the winning Deck", Day, answer);
                 return answer;
             }
@@ -74,6 +47,9 @@
             _input = input;
             string state = string.Empty;
 
+            List<int> playerOneDeck = new ();
+            List<int> playerTwoDeck = new ();
+
             foreach (var line in _input)
             {
                 if (line.Contains("Player 1"))
@@ -89,14 +65,16 @@
                 {
                     if (state == "Player 1")
                     {
-                        _playerOneDeck.Add(card);
+                        playerOneDeck.Add(card);
                     }
                     else
                     {
-                        _playerTwoDeck.Add(card);
+                        playerTwoDeck.Add(card);
                     }
                 }
             }
+
+            _game = new Game(playerOneDeck, playerTwoDeck);
         }
     }
 }

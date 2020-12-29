@@ -1,0 +1,66 @@
+﻿namespace AOC2020.Day22
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    internal class Game
+    {
+        public Game(List<int> deckOne, List<int> deckTwo)
+        {
+            (DeckOne, DeckTwo) = (deckOne, deckTwo);
+        }
+
+        public List<int> DeckOne { get; init; }
+
+        public List<int> DeckTwo { get; init; }
+
+        public int PlayedOne { get; set; } = -1;
+
+        public int PlayedTwo { get; set; } = -1;
+
+        public long Score
+        {
+            get
+            {
+                List<int> winningDeck = (DeckOne.Count > 0) ? DeckOne : DeckTwo;
+                long score = 0;
+                for (int i = 1; i <= winningDeck.Count; i++)
+                {
+                    score += winningDeck[^i] * i;
+                }
+
+                return score;
+            }
+        }
+
+        public void Play()
+        {
+            while (DeckOne.Count >= 1 && DeckTwo.Count >= 1)
+            {
+                PlayRound();
+            }
+        }
+
+        public void PlayRound()
+        {
+            PlayedOne = DeckOne[0];
+            DeckOne.RemoveAt(0);
+            PlayedTwo = DeckTwo[0];
+            DeckTwo.RemoveAt(0);
+
+            if (PlayedOne > PlayedTwo)
+            {
+                DeckOne.Add(PlayedOne);
+                DeckOne.Add(PlayedTwo);
+            }
+            else
+            {
+                DeckTwo.Add(PlayedTwo);
+                DeckTwo.Add(PlayedOne);
+            }
+        }
+    }
+}
