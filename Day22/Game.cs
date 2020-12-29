@@ -31,7 +31,20 @@
         {
             get
             {
-                List<int> winningDeck = (DeckOne.Count > 0) ? DeckOne : DeckTwo;
+                List<int> winningDeck;
+                if (WinState == GameWinInfo.PlayerOneWinsGame)
+                {
+                    winningDeck = DeckOne;
+                }
+                else if (WinState == GameWinInfo.PlayerTwoWinsGame)
+                {
+                    winningDeck = DeckTwo;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Unexpected GameWinInfo value");
+                }
+
                 long score = 0;
                 for (int i = 1; i <= winningDeck.Count; i++)
                 {
@@ -72,6 +85,19 @@
             {
                 DeckTwo.Add(PlayedTwo);
                 DeckTwo.Add(PlayedOne);
+            }
+
+            if (DeckOne.Count == 0)
+            {
+                WinState = GameWinInfo.PlayerTwoWinsGame;
+            }
+            else if (DeckTwo.Count == 0)
+            {
+                WinState = GameWinInfo.PlayerOneWinsGame;
+            }
+            else
+            {
+                WinState = GameWinInfo.NoWinYet;
             }
         }
     }

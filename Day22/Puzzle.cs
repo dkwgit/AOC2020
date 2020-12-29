@@ -39,8 +39,10 @@
         {
             get
             {
-                string answer = string.Empty;
-                _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
+                //Game game = new (_startingDeckOne, _startingDeckTwo, new PartTwoRuleVariants());
+                //game.Play();
+                string answer = string.Empty;//game.Score.ToString();
+                _logger.LogInformation("{Day}/Part2: Found {answer} as the score of the winning Deck", Day, answer);
                 return answer;
             }
         }
