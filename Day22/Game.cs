@@ -57,7 +57,7 @@
 
         public void Play()
         {
-            while (DeckOne.Count >= 1 && DeckTwo.Count >= 1)
+            while (WinState == GameWinInfo.NoWinYet)
             {
                 WinState = RuleVariants.CheckHistoryForWinner(DeckOne, DeckTwo);
                 if (WinState != GameWinInfo.NoWinYet)
