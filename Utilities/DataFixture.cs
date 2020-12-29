@@ -34,7 +34,8 @@
                 new PuzzleData("19", "Actual", puzzleDataStore.GetPuzzleInputAsList("19"), puzzleDataStore.GetPuzzleAnswer("19", "1"), puzzleDataStore.GetPuzzleAnswer("19", "2"), string.Empty, false),
                 new PuzzleData("20", "Actual", puzzleDataStore.GetPuzzleInputAsList("20"), puzzleDataStore.GetPuzzleAnswer("20", "1"), puzzleDataStore.GetPuzzleAnswer("20", "2"), string.Empty, false),
                 new PuzzleData("21", "Actual", puzzleDataStore.GetPuzzleInputAsList("21"), puzzleDataStore.GetPuzzleAnswer("21", "1"), puzzleDataStore.GetPuzzleAnswer("21", "2"), string.Empty, false),
-                new PuzzleData("22", "Actual", puzzleDataStore.GetPuzzleInputAsList("22"), puzzleDataStore.GetPuzzleAnswer("22", "1"), puzzleDataStore.GetPuzzleAnswer("22", "2"), string.Empty, true),
+                new PuzzleData("22", "Actual", puzzleDataStore.GetPuzzleInputAsList("22"), puzzleDataStore.GetPuzzleAnswer("22", "1"), puzzleDataStore.GetPuzzleAnswer("22", "2"), string.Empty, false),
+                new PuzzleData("23", "Actual", puzzleDataStore.GetPuzzleInputAsList("23"), puzzleDataStore.GetPuzzleAnswer("23", "1"), puzzleDataStore.GetPuzzleAnswer("23", "2"), string.Empty, true),
                 new PuzzleData(
                     "08",
                     "Sample",
@@ -505,6 +506,17 @@
                     },
                     "306",
                     "291",
+                    string.Empty,
+                    false),
+                new PuzzleData(
+                    "23",
+                    "Sample",
+                    new List<string>()
+                    {
+                        "389125467",
+                    },
+                    "67384529",
+                    null,
                     string.Empty,
                     true),
             };
