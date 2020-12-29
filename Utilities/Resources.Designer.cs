@@ -19,7 +19,7 @@ namespace AOC2020.Utilities {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -1404,8 +1404,59 @@ namespace AOC2020.Utilities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to inputData
-        ///.
+        ///   Looks up a localized string similar to Player 1:
+        ///10
+        ///21
+        ///37
+        ///2
+        ///47
+        ///13
+        ///6
+        ///29
+        ///9
+        ///3
+        ///4
+        ///48
+        ///46
+        ///25
+        ///44
+        ///41
+        ///23
+        ///20
+        ///24
+        ///12
+        ///45
+        ///43
+        ///5
+        ///27
+        ///50
+        ///
+        ///Player 2:
+        ///39
+        ///42
+        ///31
+        ///36
+        ///7
+        ///1
+        ///49
+        ///19
+        ///40
+        ///35
+        ///8
+        ///11
+        ///18
+        ///30
+        ///14
+        ///17
+        ///15
+        ///34
+        ///26
+        ///33
+        ///32
+        ///38
+        ///28
+        ///16
+        ///22.
         /// </summary>
         internal static string Day22_PuzzleInput {
             get {
@@ -1414,7 +1465,7 @@ namespace AOC2020.Utilities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to part1.
+        ///   Looks up a localized string similar to 33631.
         /// </summary>
         internal static string Day22Part1_Answer {
             get {

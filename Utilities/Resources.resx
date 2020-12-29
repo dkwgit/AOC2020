@@ -311,7 +311,7 @@
     <value>Resources\Day22_PuzzleInput.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="Day22Part1_Answer" xml:space="preserve">
-    <value>part1</value>
+    <value>33631</value>
   </data>
   <data name="Day22Part2_Answer" xml:space="preserve">
     <value>part2</value>
