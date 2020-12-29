@@ -10,7 +10,9 @@
 
         private List<string> _input = null;
 
-        private Game _game;
+        private List<int> _startingDeckOne;
+
+        private List<int> _startingDeckTwo;
 
         public Puzzle(ILogger<Puzzle> logger)
         {
@@ -25,8 +27,9 @@
         {
             get
             {
-                _game.Play();
-                string answer = _game.Score.ToString();
+                Game game = new (_startingDeckOne, _startingDeckTwo, new PartOneRuleVariants());
+                game.Play();
+                string answer = game.Score.ToString();
                 _logger.LogInformation("{Day}/Part1: Found {answer} as the score of the winning Deck", Day, answer);
                 return answer;
             }
@@ -47,8 +50,8 @@
             _input = input;
             string state = string.Empty;
 
-            List<int> playerOneDeck = new ();
-            List<int> playerTwoDeck = new ();
+            _startingDeckOne = new ();
+            _startingDeckTwo = new ();
 
             foreach (var line in _input)
             {
@@ -65,16 +68,14 @@
                 {
                     if (state == "Player 1")
                     {
-                        playerOneDeck.Add(card);
+                        _startingDeckOne.Add(card);
                     }
                     else
                     {
-                        playerTwoDeck.Add(card);
+                        _startingDeckTwo.Add(card);
                     }
                 }
             }
-
-            _game = new Game(playerOneDeck, playerTwoDeck);
         }
     }
 }
