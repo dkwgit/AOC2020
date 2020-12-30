@@ -19,7 +19,7 @@ namespace AOC2020.Utilities {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -1507,6 +1507,34 @@ namespace AOC2020.Utilities {
         internal static string Day23Part2_Answer {
             get {
                 return ResourceManager.GetString("Day23Part2_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to inputData
+        ///.
+        /// </summary>
+        internal static string Day24_PuzzleInput {
+            get {
+                return ResourceManager.GetString("Day24_PuzzleInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to part1.
+        /// </summary>
+        internal static string Day24Part1_Answer {
+            get {
+                return ResourceManager.GetString("Day24Part1_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to part2.
+        /// </summary>
+        internal static string Day24Part2_Answer {
+            get {
+                return ResourceManager.GetString("Day24Part2_Answer", resourceCulture);
             }
         }
     }
