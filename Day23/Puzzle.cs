@@ -27,17 +27,18 @@
         {
             get
             {
-                List<int> finalList = RunGame(_cups, 100);
+                List<int> part1List = new List<int>(_cups);
+                part1List = RunGame(part1List, 100, 1, _logger);
 
-                int oneIndex = finalList.FindIndex(x => x == 1);
+                int oneIndex = part1List.FindIndex(x => x == 1);
                 for (int i = 0; i < oneIndex; i++)
                 {
-                    finalList.Add(finalList[0]);
-                    finalList.RemoveAt(0);
+                    part1List.Add(part1List[0]);
+                    part1List.RemoveAt(0);
                 }
 
-                Debug.Assert(finalList[0] == 1, "Expecting label 1 cup to be leftmost");
-                string answer = string.Join(string.Empty, finalList.Skip(1).Select(x => x.ToString()).ToList());
+                Debug.Assert(part1List[0] == 1, "Expecting label 1 cup to be leftmost");
+                string answer = string.Join(string.Empty, part1List.Skip(1).Select(x => x.ToString()).ToList());
 
                 _logger.LogInformation("{Day}/Part1: Found {answer}", Day, answer);
                 return answer;
@@ -48,26 +49,44 @@
         {
             get
             {
-                string answer = string.Empty;
+                int maxNumber = 1000000;
+
+                List<int> part2List = new List<int>(_cups);
+
+                int max = _cups.Max();
+
+                for (int j = part2List.Count; j < maxNumber; j++)
+                {
+                    part2List.Add(max + 1);
+                    max++;
+                }
+
+                part2List = RunGame(part2List, maxNumber, 10, _logger);
+
+                int indexOf1Value = part2List.FindIndex(x => x == 1);
+
+                string answer = (part2List[indexOf1Value + 1] * 1L * part2List[indexOf1Value + 2]).ToString();
                 _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
                 return answer;
             }
         }
 
-        public static List<int> RunGame(List<int> cupList, int rounds)
+        public static List<int> RunGame(List<int> cupList, int rounds, int superRounds, ILogger logger)
         {
-            List<int> localList = new List<int>(cupList);
-
             int currentCupIndex = 0;
             List<int> removeCups = new ();
 
-            for (int i = 0; i < rounds; i++)
+            int maxOfList = cupList.Max();
+            List<int> maxList = new () { maxOfList - 3, maxOfList - 2, maxOfList - 1, maxOfList };
+            List<int> minList = new () { 1, 2, 3, 4 };
+
+            for (int i = 0; i < rounds * superRounds; i++)
             {
-                removeCups.AddRange(localList.GetRange(currentCupIndex + 1, 3));
-                localList.RemoveRange(currentCupIndex + 1, 3);
-                int min = localList.Min();
-                int max = localList.Max();
-                int value = localList[currentCupIndex] - 1;
+                removeCups.AddRange(cupList.GetRange(currentCupIndex + 1, 3));
+                cupList.RemoveRange(currentCupIndex + 1, 3);
+                int max = maxList.Where(x => !removeCups.Contains(x)).Max();
+                int min = minList.Where(y => !removeCups.Contains(y)).Min();
+                int value = cupList[currentCupIndex] - 1;
 
                 bool looking = true;
                 int index = -1;
@@ -79,7 +98,7 @@
                         value = max;
                     }
 
-                    index = localList.FindIndex(c => c == value);
+                    index = cupList.FindIndex(c => c == value);
                     if (index == -1)
                     {
                         value -= 1;
@@ -91,13 +110,18 @@
                     }
                 }
 
-                localList.InsertRange(index + 1, removeCups);
+                cupList.InsertRange(index + 1, removeCups);
                 removeCups.Clear();
-                localList.Add(localList[0]);
-                localList.RemoveAt(0);
+                cupList.Add(cupList[0]);
+                cupList.RemoveAt(0);
+
+                if (i > 0 && (i + 1) % rounds == 0)
+                {
+                    logger.LogInformation("at index {i}, element 1 is {element1} and element 2 is {element2}", i, cupList[1], cupList[2]);
+                }
             }
 
-            return localList;
+            return cupList;
         }
 
         public void ProcessPuzzleInput(List<string> input)
