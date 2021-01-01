@@ -207,7 +207,7 @@
                     if (ch == '.')
                     {
                         s = new string(new char[] { ' ' });
-                        s = s.Pastel(Color.DarkSlateBlue).PastelBg(Color.DarkSlateBlue);
+                        s = s.Pastel(Color.DarkSlateBlue).PastelBg(Color.Black);
                     }
                     else if (ch == '#')
                     {
@@ -215,12 +215,12 @@
                         if (_serpentPoints.ContainsKey(p))
                         {
                             s = new string(new char[] { '@' });
-                            s = s.Pastel(Color.LimeGreen).PastelBg(Color.DarkSlateBlue);
+                            s = s.Pastel(Color.LimeGreen).PastelBg(Color.Black);
                         }
                         else
                         {
                             s = new string(new char[] { '.' });
-                            s = s.Pastel(Color.White).PastelBg(Color.DarkBlue);
+                            s = s.Pastel(Color.DarkGray).PastelBg(Color.Black);
                         }
                     }
 
