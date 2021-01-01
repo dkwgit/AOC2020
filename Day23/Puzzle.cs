@@ -1,8 +1,8 @@
 ﻿namespace AOC2020.Day23
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
+    using System.Text;
     using AOC2020.Utilities;
     using Microsoft.Extensions.Logging;
 
@@ -11,8 +11,6 @@
         private readonly ILogger _logger;
 
         private List<string> _input = null;
-
-        private List<int> _cups;
 
         public Puzzle(ILogger<Puzzle> logger)
         {
@@ -27,19 +25,44 @@
         {
             get
             {
-                List<int> part1List = new List<int>(_cups);
-                part1List = RunGame(part1List, 100, 1, _logger);
-
-                int oneIndex = part1List.FindIndex(x => x == 1);
-                for (int i = 0; i < oneIndex; i++)
+                Node firstNode = null;
+                Node priorNode = null;
+                Node[] allNodes = new Node[_input[0].Length];
+                for (int i = 0; i < _input[0].Length; i++)
                 {
-                    part1List.Add(part1List[0]);
-                    part1List.RemoveAt(0);
+                    Node n = new Node(int.Parse(_input[0][i].ToString()));
+                    if (firstNode == null)
+                    {
+                        firstNode = n;
+                    }
+
+                    if (priorNode != null)
+                    {
+                        priorNode.Next = n;
+                        n.Prev = priorNode;
+                    }
+
+                    if (i + 1 == _input[0].Length)
+                    {
+                        n.Next = firstNode;
+                        firstNode.Prev = n;
+                    }
+
+                    allNodes[n.Label - 1] = n;
+                    priorNode = n;
                 }
 
-                Debug.Assert(part1List[0] == 1, "Expecting label 1 cup to be leftmost");
-                string answer = string.Join(string.Empty, part1List.Skip(1).Select(x => x.ToString()).ToList());
+                RunGame(allNodes, firstNode.Label, 100);
 
+                Node current = allNodes[0].Next; // one node clockwise after node labeled with one.
+                StringBuilder sb = new ();
+                for (int i = 0; i < allNodes.Length - 1; i++)
+                {
+                    sb.Append(current.Label);
+                    current = current.Next;
+                }
+
+                string answer = sb.ToString();
                 _logger.LogInformation("{Day}/Part1: Found {answer}", Day, answer);
                 return answer;
             }
@@ -49,86 +72,104 @@
         {
             get
             {
-                int maxNumber = 1000000;
-
-                List<int> part2List = new List<int>(_cups);
-
-                int max = _cups.Max();
-
-                for (int j = part2List.Count; j < maxNumber; j++)
+                int turns = 10000000;
+                Node firstNode = null;
+                Node priorNode = null;
+                Node[] allNodes = new Node[turns / 10];
+                for (int i = 0; i < turns / 10; i++)
                 {
-                    part2List.Add(max + 1);
-                    max++;
+                    Node n;
+                    if (i < _input[0].Length)
+                    {
+                        n = new Node(int.Parse(_input[0][i].ToString()));
+                    }
+                    else
+                    {
+                        n = new Node(i + 1);
+                    }
+
+                    if (firstNode == null)
+                    {
+                        firstNode = n;
+                    }
+
+                    if (priorNode != null)
+                    {
+                        priorNode.Next = n;
+                        n.Prev = priorNode;
+                    }
+
+                    if (i + 1 == turns / 10)
+                    {
+                        n.Next = firstNode;
+                        firstNode.Prev = n;
+                    }
+
+                    allNodes[n.Label - 1] = n;
+                    priorNode = n;
                 }
 
-                part2List = RunGame(part2List, maxNumber, 10, _logger);
+                RunGame(allNodes, firstNode.Label, turns);
 
-                int indexOf1Value = part2List.FindIndex(x => x == 1);
-
-                string answer = (part2List[indexOf1Value + 1] * 1L * part2List[indexOf1Value + 2]).ToString();
+                string answer = (1L * allNodes[0].Next.Label * allNodes[0].Next.Next.Label).ToString();
                 _logger.LogInformation("{Day}/Part2: Found {answer}", Day, answer);
                 return answer;
             }
         }
 
-        public static List<int> RunGame(List<int> cupList, int rounds, int superRounds, ILogger logger)
-        {
-            int currentCupIndex = 0;
-            List<int> removeCups = new ();
-
-            int maxOfList = cupList.Max();
-            List<int> maxList = new () { maxOfList - 3, maxOfList - 2, maxOfList - 1, maxOfList };
-            List<int> minList = new () { 1, 2, 3, 4 };
-
-            for (int i = 0; i < rounds * superRounds; i++)
-            {
-                removeCups.AddRange(cupList.GetRange(currentCupIndex + 1, 3));
-                cupList.RemoveRange(currentCupIndex + 1, 3);
-                int max = maxList.Where(x => !removeCups.Contains(x)).Max();
-                int min = minList.Where(y => !removeCups.Contains(y)).Min();
-                int value = cupList[currentCupIndex] - 1;
-
-                bool looking = true;
-                int index = -1;
-
-                while (looking)
-                {
-                    if (value < min)
-                    {
-                        value = max;
-                    }
-
-                    index = cupList.FindIndex(c => c == value);
-                    if (index == -1)
-                    {
-                        value -= 1;
-                    }
-                    else
-                    {
-                        looking = false;
-                        break;
-                    }
-                }
-
-                cupList.InsertRange(index + 1, removeCups);
-                removeCups.Clear();
-                cupList.Add(cupList[0]);
-                cupList.RemoveAt(0);
-
-                if (i > 0 && (i + 1) % rounds == 0)
-                {
-                    logger.LogInformation("at index {i}, element 1 is {element1} and element 2 is {element2}", i, cupList[1], cupList[2]);
-                }
-            }
-
-            return cupList;
-        }
-
         public void ProcessPuzzleInput(List<string> input)
         {
             _input = input;
+        }
 
-            _cups = _input[0].ToArray().Select(x => int.Parse(x.ToString())).ToList();
+        private static void RunGame(Node[] allNodes, int startLabel, int iterations)
+        {
+            Node current = allNodes[startLabel - 1];
+
+            int max = allNodes[^1].Label;
+
+            List<Node> chosenCups = new ();
+            chosenCups.Add(null);
+            chosenCups.Add(null);
+            chosenCups.Add(null);
+
+            for (int i = 0; i < iterations; i++)
+            {
+                chosenCups[0] = current.Next;
+                chosenCups[1] = current.Next.Next;
+                chosenCups[2] = current.Next.Next.Next;
+
+                current.Next = chosenCups[2].Next;
+                current.Next.Prev = current;
+
+                int destinationLabel = current.Label - 1;
+
+                while (true)
+                {
+                    if (destinationLabel < 1)
+                    {
+                        destinationLabel = max;
+                    }
+
+                    if (chosenCups.Select(x => x.Label).Any(x => x == destinationLabel))
+                    {
+                        destinationLabel -= 1;
+                        continue;
+                    }
+
+                    break;
+                }
+
+                Node destination = allNodes[destinationLabel - 1];
+
+                Node afterDestination = destination.Next;
+                destination.Next = chosenCups[0];
+                chosenCups[0].Prev = destination;
+                chosenCups[2].Next = afterDestination;
+                afterDestination.Prev = chosenCups[2];
+
+                current = current.Next;
+            }
         }
     }
 }

@@ -35,7 +35,7 @@
                 new PuzzleData("20", "Actual", puzzleDataStore.GetPuzzleInputAsList("20"), puzzleDataStore.GetPuzzleAnswer("20", "1"), puzzleDataStore.GetPuzzleAnswer("20", "2"), string.Empty, true),
                 new PuzzleData("21", "Actual", puzzleDataStore.GetPuzzleInputAsList("21"), puzzleDataStore.GetPuzzleAnswer("21", "1"), puzzleDataStore.GetPuzzleAnswer("21", "2"), string.Empty, true),
                 new PuzzleData("22", "Actual", puzzleDataStore.GetPuzzleInputAsList("22"), puzzleDataStore.GetPuzzleAnswer("22", "1"), puzzleDataStore.GetPuzzleAnswer("22", "2"), string.Empty, true),
-                new PuzzleData("23", "Actual", puzzleDataStore.GetPuzzleInputAsList("23"), puzzleDataStore.GetPuzzleAnswer("23", "1"), puzzleDataStore.GetPuzzleAnswer("23", "2"), string.Empty, false),
+                new PuzzleData("23", "Actual", puzzleDataStore.GetPuzzleInputAsList("23"), puzzleDataStore.GetPuzzleAnswer("23", "1"), puzzleDataStore.GetPuzzleAnswer("23", "2"), string.Empty, true),
                 new PuzzleData("24", "Actual", puzzleDataStore.GetPuzzleInputAsList("24"), puzzleDataStore.GetPuzzleAnswer("24", "1"), puzzleDataStore.GetPuzzleAnswer("24", "2"), string.Empty, true),
                 new PuzzleData("25", "Actual", puzzleDataStore.GetPuzzleInputAsList("25"), puzzleDataStore.GetPuzzleAnswer("25", "1"), puzzleDataStore.GetPuzzleAnswer("25", "2"), string.Empty, true),
                 new PuzzleData(
@@ -518,7 +518,7 @@
                         "389125467",
                     },
                     "67384529",
-                    "149245887792", // "62466204",
+                    "149245887792",
                     string.Empty,
                     false),
                 new PuzzleData(
