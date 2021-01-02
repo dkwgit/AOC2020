@@ -1,5 +1,6 @@
 ﻿namespace AOC2020.Day15
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using AOC2020.Utilities;
@@ -9,9 +10,11 @@
     {
         private readonly ILogger _logger;
 
-        private readonly Dictionary<int, (int Penultimate, int Ultimate)> _numberTurnInfo = new ();
-
         private readonly List<int> _numbers = new ();
+
+        private int[] _penultimates;
+
+        private int[] _ultimates;
 
         private List<string> _input = null;
 
@@ -28,8 +31,8 @@
         {
             get
             {
-                Setup();
                 int finalTurn = 2020;
+                Setup(finalTurn);
                 string answer = RunToTurn(finalTurn);
                 _logger.LogInformation("{Day}/Part1: Found {answer} for turn {finalTurn}", Day, answer, finalTurn);
                 return answer;
@@ -40,8 +43,8 @@
         {
             get
             {
-                Setup();
                 int finalTurn = 30000000;
+                Setup(finalTurn);
                 string answer = RunToTurn(finalTurn);
                 _logger.LogInformation("{Day}/Part2: Found {answer} for turn {finalTurn}", Day, answer, finalTurn);
                 return answer;
@@ -53,45 +56,47 @@
             _input = input;
         }
 
-        private void Setup()
+        private void Setup(int finalTurn)
         {
             _numbers.Clear();
-            _numberTurnInfo.Clear();
+            _ultimates = new int[finalTurn];
+            _penultimates = new int[finalTurn];
+            _ultimates.AsSpan().Fill(-1);
 
             var result = _input[0].Split(",").Select(x => int.Parse(x)).ToList();
 
             for (int turn = 0; turn < result.Count; turn++)
             {
                 _numbers.Add(result[turn]);
-                _numberTurnInfo.Add(result[turn], (Penultimate: turn, Ultimate: turn));
+                _penultimates[result[turn]] = turn;
+                _ultimates[result[turn]] = turn;
             }
         }
 
         private string RunToTurn(int finalTurn)
         {
+            int priorNumber = _numbers[^1];
             for (int turn = _numbers.Count; turn < finalTurn; turn++)
             {
-                var priorNumber = _numbers[turn - 1];
-                (int penultimate, int ultimate) = _numberTurnInfo[priorNumber];
-
-                int turnDiffOfPrior = ultimate - penultimate;
+                int turnDiffOfPrior = _ultimates[priorNumber] - _penultimates[priorNumber];
 
                 int newNumber = turnDiffOfPrior;
 
-                if (_numberTurnInfo.ContainsKey(newNumber))
+                if (_ultimates[newNumber] != -1)
                 {
-                    (_, int oldUltimate) = _numberTurnInfo[newNumber];
-                    _numberTurnInfo[newNumber] = (Penultimate: oldUltimate, Ultimate: turn);
+                    _penultimates[newNumber] = _ultimates[newNumber];
+                    _ultimates[newNumber] = turn;
                 }
                 else
                 {
-                    _numberTurnInfo.Add(newNumber, (Penultimate: turn, Ultimate: turn));
+                    _penultimates[newNumber] = turn;
+                    _ultimates[newNumber] = turn;
                 }
 
-                _numbers.Add(newNumber);
+                priorNumber = newNumber;
             }
 
-            return _numbers[finalTurn - 1].ToString();
+            return priorNumber.ToString();
         }
     }
 }

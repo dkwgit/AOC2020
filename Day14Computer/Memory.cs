@@ -6,7 +6,7 @@
 
     public class Memory : IMemory
     {
-        private readonly SortedList<long, MemoryWord> _locations = new ();
+        private readonly SortedDictionary<long, MemoryWord> _locations = new ();
 
         private int _wordWidth = -1;
 
