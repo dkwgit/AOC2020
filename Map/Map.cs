@@ -52,9 +52,9 @@
             _columnOffset = 0;
         }
 
-        public void ChangeSquares(Func<Square, ISquareValue> squareChanger)
+        public void ChangeSquares(Func<Square, char> squareChanger)
         {
-            ISquareValue[,] newValues = new ISquareValue[_squares.GetLength(0), _squares.GetLength(1)];
+            char[,] newValues = new char[_squares.GetLength(0), _squares.GetLength(1)];
 
             for (int i = 0; i < _squares.GetLength(0); i++)
             {
@@ -73,7 +73,7 @@
             }
         }
 
-        public List<string> GetTextRepresentation(Dictionary<Type, char> lookupDict)
+        public List<string> GetTextRepresentation()
         {
             List<string> representation = new ();
 
@@ -83,8 +83,7 @@
                 for (int j = 0; j < _squares.GetLength(1); j++)
                 {
                     Square s = _squares[i, j];
-                    char c = lookupDict[s.Value.GetType()];
-                    sb.Append(c);
+                    sb.Append(s.Value);
                 }
 
                 representation.Add(sb.ToString());

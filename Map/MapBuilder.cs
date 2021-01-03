@@ -4,8 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class MapBuilder<T>
-        where T : ISquareValue, new()
+    public class MapBuilder
     {
         private readonly List<List<Square>> _squares = new ();
 
@@ -32,7 +31,7 @@
                 for (int columnNumber = 0; columnNumber < row.Length; columnNumber++)
                 {
                     var cell = row[columnNumber];
-                    Square square = new Square(new Point(columnNumber, currentRowNumber), cell == '.' ? new EmptyValue() : new T());
+                    Square square = new Square(new Point(columnNumber, currentRowNumber), cell);
 
                     if (previousRow != null)
                     {

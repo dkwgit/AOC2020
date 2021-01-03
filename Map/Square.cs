@@ -6,9 +6,21 @@
 
     public class Square
     {
+        private static List<(int x, int y)> _directions = new ()
+        {
+            (-1, -1),
+            (0, -1),
+            (1, -1),
+            (1, 0),
+            (1, 1),
+            (0, 1),
+            (-1, 1),
+            (-1, 0),
+        };
+
         private readonly Point _location = null;
 
-        private ISquareValue _value;
+        private char _value;
 
         private Square _up = null;
 
@@ -26,13 +38,15 @@
 
         private Square _downRight = null;
 
-        public Square(Point location, ISquareValue value)
+        public Square(Point location, char value)
         {
             _location = location;
             _value = value;
         }
 
-        public ISquareValue Value => _value;
+        public static List<(int x, int y)> Directions => _directions;
+
+        public char Value => _value;
 
         public Square Up => _up;
 
@@ -52,15 +66,9 @@
 
         public Point Location => _location;
 
-        public void SetValue(ISquareValue value)
+        public void SetValue(char value)
         {
             _value = value;
-        }
-
-        public bool IsType(System.Type squareValue)
-        {
-            bool returnValue = squareValue.IsInstanceOfType(_value);
-            return returnValue;
         }
 
         public void SetDown(Square s)
@@ -119,23 +127,11 @@
             return neighbors.Where(x => x is not null).ToList();
         }
 
-        public List<Square> GetFirstValuesInMainDirection(Type t, Map map)
+        public List<Square> GetFirstValuesInMainDirection(char[] valuesToLookFor, Map map)
         {
             List<Square> foundSquares = new ();
 
-            List<(int, int)> directions = new ()
-            {
-                (-1, -1),
-                (0, -1),
-                (1, -1),
-                (1, 0),
-                (1, 1),
-                (0, 1),
-                (-1, 1),
-                (-1, 0),
-            };
-
-            foreach (var offset in directions)
+            foreach (var offset in Directions)
             {
                 Square current = this;
                 while (true)
@@ -147,7 +143,7 @@
                     }
 
                     current = map.GetSquareFromPoint(p);
-                    if (current.IsType(t))
+                    if (valuesToLookFor.Any(x => x == current.Value))
                     {
                         foundSquares.Add(current);
                         break;
