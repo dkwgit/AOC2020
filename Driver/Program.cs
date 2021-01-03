@@ -1,19 +1,35 @@
 ﻿namespace AOC2020.Driver
 {
-    using System;
+    using CommandLine;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
     public class Program
     {
-        public static void Main()
+        public class Options
         {
+            [Option('r', "runs", Required = false, HelpText = "Number of runs")]
+            public int? Runs { get; set; } = 1;
+        }
+
+        public static void Main(string[] args)
+        {
+            int numberOfRuns = 1;
+
+            Parser.Default.ParseArguments<Options>(args)
+                   .WithParsed<Options>(o =>
+                   {
+                       if (o.Runs.HasValue)
+                       {
+                           numberOfRuns = o.Runs.Value;
+                       }
+                   });
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             using var serviceProvider = serviceCollection.BuildServiceProvider();
             Driver driver = serviceProvider.GetService<AOC2020.Driver.Driver>();
 
-            driver.Run();
+            driver.Run(numberOfRuns);
         }
 
         public static void ConfigureServices(IServiceCollection collection)

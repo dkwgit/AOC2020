@@ -18,14 +18,14 @@
             _logger = logger;
         }
 
-        public bool RunPuzzleRegressionTests()
+        public bool RunPuzzleRegressionTests(out List<(string day, string label, long timing)> timings)
         {
             bool testsPass = true;
             DataFixture fixture = new ();
+            timings = new ();
 
             try
             {
-                List<(string day, string label, long timing)> timings = new ();
                 foreach (var puzzleData in fixture.GetPuzzleData())
                 {
                     Type t = Type.GetType($"AOC2020.Day{puzzleData.Day}.Puzzle, Day{puzzleData.Day}");
@@ -40,15 +40,6 @@
 
                     _logger.LogInformation("Finished");
                 }
-
-                _logger.LogInformation("All tests cumulative time in milliseconds {cumulative}", timings.Sum(x => x.timing));
-                _logger.LogInformation("Logging timing information for individual tests");
-                foreach (var item in timings.OrderByDescending(x => x.timing))
-                {
-                    _logger.LogInformation("Test {day}, with label {label} took {time} milliseconds", item.day, item.label, item.timing);
-                }
-
-                _logger.LogInformation("Finished logging timing");
             }
             catch (Exception e)
             {
