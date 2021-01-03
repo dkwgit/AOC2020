@@ -45,6 +45,8 @@
                 timingCount++;
             }
 
+            long totalForAllRuns = timingsForEachRun.SelectMany(x => x.Select(x => x.timing)).Sum(x => x);
+            _logger.LogInformation("Cumulative time in milliseconds for {numberOfRuns}: {cumulative}, with an average of {Avg}", numberOfRuns, totalForAllRuns, totalForAllRuns / numberOfRuns);
             _logger.LogInformation("Finished logging timing");
         }
 
