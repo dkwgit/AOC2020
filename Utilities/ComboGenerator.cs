@@ -13,9 +13,9 @@
 
         public ComboGenerator(T[] alphabet, int letterCount, bool dedupe) => (Alphabet, LetterCount, Dedupe) = (alphabet, letterCount, dedupe);
 
-        public IEnumerable<List<T>> Iterator()
+        public IEnumerable<T[]> Iterator()
         {
-            List<List<T>> lists = GetCombo(Alphabet, LetterCount);
+            List<T[]> lists = GetCombo(Alphabet, LetterCount);
             if (Dedupe)
             {
                 lists = DedupeLists(lists);
@@ -29,9 +29,9 @@
             yield break;
         }
 
-        private static List<List<T>> DedupeLists(List<List<T>> lists)
+        private static List<T[]> DedupeLists(List<T[]> lists)
         {
-            List<List<T>> copy = new (lists);
+            List<T[]> copy = new (lists);
 
             for (int i = 0; i < copy.Count; i++)
             {
@@ -61,9 +61,9 @@
             return copy;
         }
 
-        private static List<List<T>> GetCombo(T[] alphabet, int n)
+        private static List<T[]> GetCombo(T[] alphabet, int n)
         {
-            List<List<T>> lists = new ();
+            List<T[]> lists = new ();
 
             for (int a = 0; a < alphabet.Length; a++)
             {
@@ -72,19 +72,21 @@
                     var sublists = GetCombo(alphabet, n - 1);
                     foreach (var sub in sublists)
                     {
-                        // head
-                        List<T> list = new () { alphabet[a] };
+                        T[] arr = new T[n];
+                        arr[0] = alphabet[a];
+                        for (int s = 1; s < n; s++)
+                        {
+                            arr[s] = sub[s - 1];
+                        }
 
-                        // add tail
-                        list.AddRange(sub);
-                        lists.Add(list);
+                        lists.Add(arr);
                     }
                 }
                 else
                 {
-                    // head
-                    List<T> list = new () { alphabet[a] };
-                    lists.Add(list);
+                    T[] arr = new T[n];
+                    arr[0] = alphabet[a];
+                    lists.Add(arr);
                 }
             }
 

@@ -29,7 +29,7 @@
 
         private List<string> _input = null;
 
-        private List<List<int>> _dimensionVarianceCombos;
+        private List<int[]> _dimensionVarianceCombos;
 
         public Puzzle(ILogger<Puzzle> logger)
         {
@@ -46,7 +46,7 @@
             {
                 _dimensionCount = 3;
                 ComboGenerator<int> gen = new ComboGenerator<int>(_neighborVariance, _dimensionCount, false);
-                _dimensionVarianceCombos = new List<List<int>>();
+                _dimensionVarianceCombos = new List<int[]>();
 
                 foreach (var item in gen.Iterator())
                 {
@@ -75,7 +75,7 @@
 
                 _dimensionCount = 4;
                 ComboGenerator<int> gen = new ComboGenerator<int>(_neighborVariance, _dimensionCount, false);
-                _dimensionVarianceCombos = new List<List<int>>();
+                _dimensionVarianceCombos = new List<int[]>();
 
                 foreach (var item in gen.Iterator())
                 {
@@ -159,7 +159,7 @@
                 int yoffset = item[0];
                 int xoffset = item[1];
                 int zoffset = item[2];
-                int eoffset = item.Count == 4 ? item[3] : 0;
+                int eoffset = item.Length == 4 ? item[3] : 0;
 
                 if (_space[y + yoffset, x + xoffset, z + zoffset, e + eoffset] == 1)
                 {

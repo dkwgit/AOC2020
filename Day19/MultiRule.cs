@@ -58,7 +58,7 @@
             List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions = GetRulesWithExpansions(rulesToUse, baseLength, expression);
 
             // combos contains all the possible rule lengths that together add up to the expression length, including the effects of expansions
-            List<List<int>> combos = GetCombos(rulesWithExpansions, baseLength, expression);
+            List<int[]> combos = GetCombos(rulesWithExpansions, baseLength, expression);
 
             // if there are no combos, no combination will handle the length of the expression
             if (combos.Count == 0)
@@ -74,7 +74,7 @@
                 List<bool> comboResult = new ();
 
                 int startingStringIndex = 0;
-                for (int i = 0; i < combo.Count; i++)
+                for (int i = 0; i < combo.Length; i++)
                 {
                     (IAbstractRule rule, _) = rulesWithExpansions[i];
 
@@ -157,7 +157,7 @@
         }
 
         // Get combos between various rules, by combining the possible lengths of the rules (including expansiosn) to sum up to the length of the expression
-        private static List<List<int>> GetCombos(List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions, int baseLength, string expression)
+        private static List<int[]> GetCombos(List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions, int baseLength, string expression)
         {
             int[][] alphabet = new int[rulesWithExpansions.Count][];
             int alphabetSlot = 0;
