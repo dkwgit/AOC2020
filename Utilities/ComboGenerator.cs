@@ -7,11 +7,11 @@
     {
         public bool Dedupe { get; set; }
 
-        public List<T> Alphabet { get; init; }
+        public T[] Alphabet { get; init; }
 
         public int LetterCount { get; init; }
 
-        public ComboGenerator(List<T> alphabet, int letterCount, bool dedupe) => (Alphabet, LetterCount, Dedupe) = (alphabet, letterCount, dedupe);
+        public ComboGenerator(T[] alphabet, int letterCount, bool dedupe) => (Alphabet, LetterCount, Dedupe) = (alphabet, letterCount, dedupe);
 
         public IEnumerable<List<T>> Iterator()
         {
@@ -61,11 +61,11 @@
             return copy;
         }
 
-        private static List<List<T>> GetCombo(List<T> alphabet, int n)
+        private static List<List<T>> GetCombo(T[] alphabet, int n)
         {
             List<List<T>> lists = new ();
 
-            for (int a = 0; a < alphabet.Count; a++)
+            for (int a = 0; a < alphabet.Length; a++)
             {
                 if (n > 1)
                 {

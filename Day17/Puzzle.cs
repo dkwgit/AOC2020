@@ -11,7 +11,7 @@
 
         private readonly ILogger _logger;
 
-        private readonly List<int> _neighborVariance = new () { -1, 0, 1 };
+        private readonly int[] _neighborVariance = new int[3] { -1, 0, 1 };
 
         private int _width;
 
