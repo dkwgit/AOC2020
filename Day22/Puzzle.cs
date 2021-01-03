@@ -27,6 +27,7 @@
         {
             get
             {
+                Setup();
                 Game game = new (_startingDeckOne, _startingDeckTwo, new PartOneRuleVariants());
                 game.Play();
                 string answer = game.Score.ToString();
@@ -39,6 +40,7 @@
         {
             get
             {
+                Setup();
                 Game game = new (_startingDeckOne, _startingDeckTwo, new PartTwoRuleVariants());
                 game.Play();
                 string answer = game.Score.ToString();
@@ -50,10 +52,14 @@
         public void ProcessPuzzleInput(List<string> input)
         {
             _input = input;
+        }
+
+        private void Setup()
+        {
             string state = string.Empty;
 
-            _startingDeckOne = new ();
-            _startingDeckTwo = new ();
+            _startingDeckOne = new (50);
+            _startingDeckTwo = new (50);
 
             foreach (var line in _input)
             {

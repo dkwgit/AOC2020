@@ -2,24 +2,21 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     internal class Game
     {
         public Game(List<int> deckOne, List<int> deckTwo, IRuleVariants ruleVariants)
         {
-            DeckOne.AddRange(deckOne);
-            DeckTwo.AddRange(deckTwo);
+            DeckOne = deckOne;
+            DeckTwo = deckTwo;
             RuleVariants = ruleVariants;
         }
 
         public IRuleVariants RuleVariants { get; init; }
 
-        public List<int> DeckOne { get; init; } = new ();
+        public List<int> DeckOne { get; init; }
 
-        public List<int> DeckTwo { get; init; } = new ();
+        public List<int> DeckTwo { get; init; }
 
         public int PlayedOne { get; set; } = -1;
 

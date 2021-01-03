@@ -128,10 +128,7 @@
 
             int max = allNodes[^1].Label;
 
-            List<Node> chosenCups = new ();
-            chosenCups.Add(null);
-            chosenCups.Add(null);
-            chosenCups.Add(null);
+            Node[] chosenCups = new Node[3];
 
             for (int i = 0; i < iterations; i++)
             {
@@ -151,7 +148,7 @@
                         destinationLabel = max;
                     }
 
-                    if (chosenCups.Select(x => x.Label).Any(x => x == destinationLabel))
+                    if (chosenCups[0].Label == destinationLabel || chosenCups[1].Label == destinationLabel || chosenCups[2].Label == destinationLabel)
                     {
                         destinationLabel -= 1;
                         continue;
