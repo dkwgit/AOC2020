@@ -159,10 +159,17 @@
         // Get combos between various rules, by combining the possible lengths of the rules (including expansiosn) to sum up to the length of the expression
         private static List<List<int>> GetCombos(List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions, int baseLength, string expression)
         {
-            List<List<int>> alphabet = new ();
+            int[][] alphabet = new int[rulesWithExpansions.Count][];
+            int alphabetSlot = 0;
             foreach (var (_, expansions) in rulesWithExpansions)
             {
-                alphabet.Add(expansions);
+                alphabet[alphabetSlot] = new int[expansions.Count];
+                for (int i = 0; i < expansions.Count; i++)
+                {
+                    alphabet[alphabetSlot][i] = expansions[i];
+                }
+
+                alphabetSlot++;
             }
 
             var comboGenerator = new ComboGeneratorWithPositionalAlphabet<int>(alphabet, rulesWithExpansions.Count, true);
