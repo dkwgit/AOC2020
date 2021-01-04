@@ -53,29 +53,11 @@
             _columnOffset = 0;
         }
 
-        class Change
-        {
-            public int I { get; init; }
-
-            public int J { get; init; }
-
-            public char NewValue { get; init; }
-        }
-
         public void ChangeSquares(Func<Square, char> squareChanger)
         {
-            //int[] indexArray1 = new int[_squares.GetLength(0) * _squares.GetLength(1)];
-            //int[] indexArray2 = new int[_squares.GetLength(0) * _squares.GetLength(1)];
-            //char[] newValues = new char[_squares.GetLength(0) * _squares.GetLength(1)];
+            Change[] changes = new Change[_squares.GetLength(0) * _squares.GetLength(1)];
 
-            
-
-        
-
-             Change[] changes = new Change[_squares.GetLength(0) * _squares.GetLength(1)];
-
-
-        int changeArrayIndex = 0;
+            int changeArrayIndex = 0;
             for (int i = 0; i < _squares.GetLength(0); i++)
             {
                 for (int j = 0; j < _squares.GetLength(1); j++)
@@ -86,7 +68,7 @@
                         var newValue = squareChanger(s);
                         if (s.Value != newValue)
                         {
-                            changes[changeArrayIndex] = new Change(){ I = i, J = j, NewValue = newValue };
+                            changes[changeArrayIndex] = new Change() { I = i, J = j, NewValue = newValue };
                             changeArrayIndex++;
                         }
                     }
@@ -151,6 +133,15 @@
             }
 
             return newPoint;
+        }
+
+        internal record Change
+        {
+            public int I { get; init; }
+
+            public int J { get; init; }
+
+            public char NewValue { get; init; }
         }
     }
 }
