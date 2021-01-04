@@ -11,7 +11,7 @@
         {
             get
             {
-                return Value.Where(x => x.GetType() == typeof(SelfRule)).ToList().Count > 0;
+                return Value.Where(x => x.GetType() == typeof(SelfRule)).Count() > 0;
             }
         }
 
@@ -97,7 +97,7 @@
 
         public static MultiRule Create(Puzzle p, IAbstractRule parent, int id, string expression)
         {
-            var ruleIdList = expression.Split(' ').Select(x => int.Parse(x)).ToList();
+            var ruleIdList = expression.Split(' ').Select(x => int.Parse(x));
 
             List<IAbstractRule> rules = new ();
             foreach (var ruleId in ruleIdList)

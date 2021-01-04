@@ -112,7 +112,7 @@
             // This can "overmatch" ingredients, so that we can now have one or more candidate ingredients for an allergen
             foreach (var allergen in _allergenToFoods.Keys)
             {
-                var allFoodsForAllergen = _allergenToFoods[allergen].Keys.ToList();
+                var allFoodsForAllergen = _allergenToFoods[allergen].Keys;
 
                 foreach (string ingredient in ingredients)
                 {
@@ -134,7 +134,7 @@
             while (allergenToIngredients.Any(x => allergenToIngredients[x.Key].Count > 1))
             {
                 var uniqueIngredients = allergenToIngredients.Where(x => allergenToIngredients[x.Key].Count == 1).SelectMany(x => x.Value).ToList();
-                foreach (var allergen in allergenToIngredients.Where(x => allergenToIngredients[x.Key].Count > 1).Select(x => x.Key).ToList())
+                foreach (var allergen in allergenToIngredients.Where(x => allergenToIngredients[x.Key].Count > 1).Select(x => x.Key))
                 {
                     var ingredientList = allergenToIngredients[allergen];
                     foreach (var ingredient in uniqueIngredients)

@@ -26,7 +26,7 @@
         {
             get
             {
-                var result = _input.Select(x => ParseLinePart1(x)).ToList();
+                var result = _input.Select(x => ParseLinePart1(x));
                 string answer = result.Sum().ToString();
                 _logger.LogInformation("{Day}/Part1: Found {answer} as the sum of all expressions using no precedence", Day, answer);
                 return answer;
@@ -37,7 +37,7 @@
         {
             get
             {
-                var result = _input.Select(x => ParseLinePart2(x)).ToList();
+                var result = _input.Select(x => ParseLinePart2(x));
                 string answer = result.Sum().ToString();
                 _logger.LogInformation("{Day}/Part2: Found {answer} as the sume of all expressions with addition having higher precedence than multiplication", Day, answer);
                 return answer;

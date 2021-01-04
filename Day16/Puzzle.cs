@@ -112,7 +112,7 @@
                     _rules[ruleToAssign.ruleNumber] = (ruleToAssign.name, ruleToAssign.ruleNumber, ruleToAssign.rangeA, ruleToAssign.rangeB, field);
                 }
 
-                var departureFields = _rules.Where(x => x.name.Contains("departure")).Select(x => x.fieldNumber).ToList();
+                var departureFields = _rules.Where(x => x.name.Contains("departure")).Select(x => x.fieldNumber);
                 long answerValue = 1;
                 foreach (var field in departureFields)
                 {
