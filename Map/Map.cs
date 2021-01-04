@@ -53,7 +53,7 @@
             _columnOffset = 0;
         }
 
-        public void ChangeSquares(Func<Square, char> squareChanger)
+        public int ChangeSquares(Func<Square, char> squareChanger)
         {
             Change[] changes = new Change[_squares.GetLength(0) * _squares.GetLength(1)];
 
@@ -80,6 +80,8 @@
                 var o = changes[change];
                 _squares[o.I, o.J].SetValue(o.NewValue);
             }
+
+            return changeArrayIndex; // Number of squares that have changed
         }
 
         public List<string> GetTextRepresentation()

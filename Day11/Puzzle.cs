@@ -15,8 +15,6 @@
 
         private Map _waitingRoom = null;
 
-        private List<string> _currentRepresentation = null;
-
         public Puzzle(ILogger<Puzzle> logger)
         {
             _logger = logger;
@@ -31,26 +29,14 @@
             get
             {
                 _waitingRoom = new MapBuilder(_input, false).Build();
-                _currentRepresentation = _waitingRoom.GetTextRepresentation();
 
-                /* var initial = new Printer(_currentRepresentation);
-                initial.Print(); */
-
-                bool different = true;
-                while (different)
+                int changed = -1;
+                while (changed != 0)
                 {
-                    RepresentationComparer r = new RepresentationComparer(_currentRepresentation);
-                    _waitingRoom.ChangeSquares(MutateSquareForPart1);
-                    var representation = _waitingRoom.GetTextRepresentation();
-
-                    /* var printer = new Printer(representation);
-                    printer.Print(); */
-
-                    different = r.Different(representation);
-                    _currentRepresentation = representation;
+                    changed = _waitingRoom.ChangeSquares(MutateSquareForPart1);
                 }
 
-                var flatten = string.Join(string.Empty, _currentRepresentation.ToArray());
+                var flatten = string.Join(string.Empty, _waitingRoom.GetTextRepresentation().ToArray());
                 string answer = flatten.Count(x => x == '#').ToString();
 
                 _logger.LogInformation("{Day}/Part1: Found {answer} occupied seats after waiting room stabilizes", Day, answer);
@@ -63,26 +49,14 @@
             get
             {
                 _waitingRoom = new MapBuilder(_input, false).Build();
-                _currentRepresentation = _waitingRoom.GetTextRepresentation();
 
-                /*var initial = new Printer(_currentRepresentation);
-                initial.Print();*/
-
-                bool different = true;
-                while (different)
+                int changed = -1;
+                while (changed != 0)
                 {
-                    RepresentationComparer r = new RepresentationComparer(_currentRepresentation);
-                    _waitingRoom.ChangeSquares(MutateSquareForPart2);
-                    var representation = _waitingRoom.GetTextRepresentation();
-
-                    /*var printer = new Printer(representation);
-                    printer.Print();*/
-
-                    different = r.Different(representation);
-                    _currentRepresentation = representation;
+                    changed = _waitingRoom.ChangeSquares(MutateSquareForPart2);
                 }
 
-                var flatten = string.Join(string.Empty, _currentRepresentation.ToArray());
+                var flatten = string.Join(string.Empty, _waitingRoom.GetTextRepresentation().ToArray());
 
                 string answer = flatten.Count(x => x == '#').ToString();
                 _logger.LogInformation("{Day}/Part2: Found {answer} occupied seats after waiting room stabilizes", Day, answer);
