@@ -39,13 +39,11 @@
                     if (priorNode != null)
                     {
                         priorNode.Next = n;
-                        n.Prev = priorNode;
                     }
 
                     if (i + 1 == _input[0].Length)
                     {
                         n.Next = firstNode;
-                        firstNode.Prev = n;
                     }
 
                     allNodes[n.Label - 1] = n;
@@ -96,13 +94,11 @@
                     if (priorNode != null)
                     {
                         priorNode.Next = n;
-                        n.Prev = priorNode;
                     }
 
                     if (i + 1 == turns / 10)
                     {
                         n.Next = firstNode;
-                        firstNode.Prev = n;
                     }
 
                     allNodes[n.Label - 1] = n;
@@ -137,7 +133,6 @@
                 chosenCups[2] = current.Next.Next.Next;
 
                 current.Next = chosenCups[2].Next;
-                current.Next.Prev = current;
 
                 int destinationLabel = current.Label - 1;
 
@@ -161,9 +156,7 @@
 
                 Node afterDestination = destination.Next;
                 destination.Next = chosenCups[0];
-                chosenCups[0].Prev = destination;
                 chosenCups[2].Next = afterDestination;
-                afterDestination.Prev = chosenCups[2];
 
                 current = current.Next;
             }

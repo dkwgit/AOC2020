@@ -4,8 +4,6 @@
     {
         public Node(int label) => Label = label;
 
-        public Node Prev { get; set; }
-
         public Node Next { get; set; }
 
         public int Label { get; init; }
