@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
 
     public class Map
@@ -52,24 +53,50 @@
             _columnOffset = 0;
         }
 
+        class Change
+        {
+            public int I { get; init; }
+
+            public int J { get; init; }
+
+            public char NewValue { get; init; }
+        }
+
         public void ChangeSquares(Func<Square, char> squareChanger)
         {
-            char[,] newValues = new char[_squares.GetLength(0), _squares.GetLength(1)];
+            //int[] indexArray1 = new int[_squares.GetLength(0) * _squares.GetLength(1)];
+            //int[] indexArray2 = new int[_squares.GetLength(0) * _squares.GetLength(1)];
+            //char[] newValues = new char[_squares.GetLength(0) * _squares.GetLength(1)];
 
+            
+
+        
+
+             Change[] changes = new Change[_squares.GetLength(0) * _squares.GetLength(1)];
+
+
+        int changeArrayIndex = 0;
             for (int i = 0; i < _squares.GetLength(0); i++)
             {
                 for (int j = 0; j < _squares.GetLength(1); j++)
                 {
-                    newValues[i, j] = squareChanger(_squares[i, j]);
+                    var s = _squares[i, j];
+                    if (s.Value != '.')
+                    {
+                        var newValue = squareChanger(s);
+                        if (s.Value != newValue)
+                        {
+                            changes[changeArrayIndex] = new Change(){ I = i, J = j, NewValue = newValue };
+                            changeArrayIndex++;
+                        }
+                    }
                 }
             }
 
-            for (int i = 0; i < _squares.GetLength(0); i++)
+            for (int change = 0; change < changeArrayIndex; change++)
             {
-                for (int j = 0; j < _squares.GetLength(1); j++)
-                {
-                    _squares[i, j].SetValue(newValues[i, j]);
-                }
+                var o = changes[change];
+                _squares[o.I, o.J].SetValue(o.NewValue);
             }
         }
 
