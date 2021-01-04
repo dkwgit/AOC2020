@@ -123,15 +123,15 @@
 
             int max = allNodes[^1].Label;
 
-            Node[] chosenCups = new Node[3];
+            Node chosenCupFirst;
+            Node chosenCupLast;
 
             for (int i = 0; i < iterations; i++)
             {
-                chosenCups[0] = current.Next;
-                chosenCups[1] = current.Next.Next;
-                chosenCups[2] = current.Next.Next.Next;
+                chosenCupFirst = current.Next;
+                chosenCupLast = current.Next.Next.Next;
 
-                current.Next = chosenCups[2].Next;
+                current.Next = chosenCupLast.Next;
 
                 int destinationLabel = current.Label - 1;
 
@@ -142,7 +142,7 @@
                         destinationLabel = max;
                     }
 
-                    if (chosenCups[0].Label == destinationLabel || chosenCups[1].Label == destinationLabel || chosenCups[2].Label == destinationLabel)
+                    if (chosenCupFirst.Label == destinationLabel || chosenCupFirst.Next.Label == destinationLabel || chosenCupLast.Label == destinationLabel)
                     {
                         destinationLabel -= 1;
                         continue;
@@ -154,8 +154,8 @@
                 Node destination = allNodes[destinationLabel - 1];
 
                 Node afterDestination = destination.Next;
-                destination.Next = chosenCups[0];
-                chosenCups[2].Next = afterDestination;
+                destination.Next = chosenCupFirst;
+                chosenCupLast.Next = afterDestination;
 
                 current = current.Next;
             }
