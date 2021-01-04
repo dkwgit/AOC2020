@@ -3,37 +3,24 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Numerics;
     using System.Text;
 
     internal class PartTwoRuleVariants : IRuleVariants
     {
-        private readonly Dictionary<string, bool> _history = new ();
+        private readonly Dictionary<BigInteger, bool> _history = new ();
 
-        public GameWinInfo CheckHistoryForWinner(List<int> deckOne, List<int> deckTwo)
+        public GameWinInfo CheckHistoryForWinner(Hand deckOne, Hand deckTwo)
         {
-            StringBuilder one = new (deckOne.Count + 1 + deckTwo.Count);
+            BigInteger composite = (deckOne.Cards << (6 * deckOne.CardCount)) + deckTwo.Cards;
 
-            foreach (var itemOne in deckOne)
-            {
-                one.Append(itemOne);
-            }
-
-            one.Append('-');
-
-            foreach (var itemTwo in deckTwo)
-            {
-                one.Append(itemTwo);
-            }
-
-            string key = one.ToString();
-
-            if (_history.ContainsKey(key))
+            if (_history.ContainsKey(composite))
             {
                 return GameWinInfo.PlayerOneWinsGame;
             }
             else
             {
-                _history.Add(key, true);
+                _history.Add(composite, true);
             }
 
             return GameWinInfo.NoWinYet;
@@ -41,7 +28,7 @@
 
         public RoundWinInfo DecideRound(Game game)
         {
-            if (game.PlayedOne > game.DeckOne.Count || game.PlayedTwo > game.DeckTwo.Count)
+            if (game.PlayedOne > game.DeckOne.CardCount || game.PlayedTwo > game.DeckTwo.CardCount)
             {
                 if (game.PlayedOne > game.PlayedTwo)
                 {
@@ -55,11 +42,8 @@
 
             int totalCards = game.PlayedOne + game.PlayedTwo;
 
-            List<int> newDeckOne = new (totalCards);
-            newDeckOne.AddRange(game.DeckOne.GetRange(0, game.PlayedOne));
-
-            List<int> newDeckTwo = new (totalCards);
-            newDeckTwo.AddRange(game.DeckTwo.GetRange(0, game.PlayedTwo));
+            Hand newDeckOne = Hand.DealHand(Hand.GetCards(game.DeckOne.Cards, game.PlayedOne));
+            Hand newDeckTwo = Hand.DealHand(Hand.GetCards(game.DeckTwo.Cards, game.PlayedTwo));
 
             Game newGame = new Game(newDeckOne, newDeckTwo, new PartTwoRuleVariants());
             newGame.Play();

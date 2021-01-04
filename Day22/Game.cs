@@ -1,11 +1,10 @@
 ﻿namespace AOC2020.Day22
 {
     using System;
-    using System.Collections.Generic;
 
     internal class Game
     {
-        public Game(List<int> deckOne, List<int> deckTwo, IRuleVariants ruleVariants)
+        public Game(Hand deckOne, Hand deckTwo, IRuleVariants ruleVariants)
         {
             DeckOne = deckOne;
             DeckTwo = deckTwo;
@@ -14,9 +13,9 @@
 
         public IRuleVariants RuleVariants { get; init; }
 
-        public List<int> DeckOne { get; init; }
+        public Hand DeckOne { get; init; }
 
-        public List<int> DeckTwo { get; init; }
+        public Hand DeckTwo { get; init; }
 
         public int PlayedOne { get; set; } = -1;
 
@@ -28,7 +27,7 @@
         {
             get
             {
-                List<int> winningDeck;
+                Hand winningDeck;
                 if (WinState == GameWinInfo.PlayerOneWinsGame)
                 {
                     winningDeck = DeckOne;
@@ -42,13 +41,7 @@
                     throw new InvalidOperationException("Unexpected GameWinInfo value");
                 }
 
-                long score = 0;
-                for (int i = 1; i <= winningDeck.Count; i++)
-                {
-                    score += winningDeck[^i] * i;
-                }
-
-                return score;
+                return winningDeck.Score();
             }
         }
 
@@ -68,27 +61,24 @@
 
         public void PlayRound()
         {
-            PlayedOne = DeckOne[0];
-            DeckOne.RemoveAt(0);
-            PlayedTwo = DeckTwo[0];
-            DeckTwo.RemoveAt(0);
-
+            PlayedOne = DeckOne.PlayCard();
+            PlayedTwo = DeckTwo.PlayCard();
             if (RuleVariants.DecideRound(this) == RoundWinInfo.PlayerOneWinsRound)
             {
-                DeckOne.Add(PlayedOne);
-                DeckOne.Add(PlayedTwo);
+                DeckOne.AddAtBack(PlayedOne);
+                DeckOne.AddAtBack(PlayedTwo);
             }
             else
             {
-                DeckTwo.Add(PlayedTwo);
-                DeckTwo.Add(PlayedOne);
+                DeckTwo.AddAtBack(PlayedTwo);
+                DeckTwo.AddAtBack(PlayedOne);
             }
 
-            if (DeckOne.Count == 0)
+            if (DeckOne.CardCount == 0)
             {
                 WinState = GameWinInfo.PlayerTwoWinsGame;
             }
-            else if (DeckTwo.Count == 0)
+            else if (DeckTwo.CardCount == 0)
             {
                 WinState = GameWinInfo.PlayerOneWinsGame;
             }

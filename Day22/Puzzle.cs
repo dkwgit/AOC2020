@@ -10,9 +10,9 @@
 
         private List<string> _input = null;
 
-        private List<int> _startingDeckOne;
+        private Hand _startingDeckOne;
 
-        private List<int> _startingDeckTwo;
+        private Hand _startingDeckTwo;
 
         public Puzzle(ILogger<Puzzle> logger)
         {
@@ -58,8 +58,10 @@
         {
             string state = string.Empty;
 
-            _startingDeckOne = new (50);
-            _startingDeckTwo = new (50);
+            int[] handOne = new int[25];
+            int handOneCount = 0;
+            int[] handTwo = new int[25];
+            int handTwoCount = 0;
 
             foreach (var line in _input)
             {
@@ -76,14 +78,17 @@
                 {
                     if (state == "Player 1")
                     {
-                        _startingDeckOne.Add(card);
+                        handOne[handOneCount++] = card;
                     }
                     else
                     {
-                        _startingDeckTwo.Add(card);
+                        handTwo[handTwoCount++] = card;
                     }
                 }
             }
+
+            _startingDeckOne = Hand.DealHand(handOne);
+            _startingDeckTwo = Hand.DealHand(handTwo);
         }
     }
 }

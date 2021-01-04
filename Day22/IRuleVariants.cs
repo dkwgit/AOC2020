@@ -4,7 +4,7 @@
 
     internal interface IRuleVariants
     {
-        GameWinInfo CheckHistoryForWinner(List<int> deckOne, List<int> deckTwo);
+        GameWinInfo CheckHistoryForWinner(Hand deckOne, Hand deckTwo);
 
         RoundWinInfo DecideRound(Game game);
     }

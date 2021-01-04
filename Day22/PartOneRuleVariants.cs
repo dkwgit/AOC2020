@@ -4,7 +4,7 @@
 
     internal class PartOneRuleVariants : IRuleVariants
     {
-        public GameWinInfo CheckHistoryForWinner(List<int> deckOne, List<int> deckTwo)
+        public GameWinInfo CheckHistoryForWinner(Hand deckOne, Hand deckTwo)
         {
             return GameWinInfo.NoWinYet;
         }
