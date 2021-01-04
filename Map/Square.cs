@@ -1,21 +1,20 @@
 ﻿namespace AOC2020.Map
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     public class Square
     {
-        private static List<(int x, int y)> _directions = new ()
+        private static Point[] _directions = new Point[8]
         {
-            (-1, -1),
-            (0, -1),
-            (1, -1),
-            (1, 0),
-            (1, 1),
-            (0, 1),
-            (-1, 1),
-            (-1, 0),
+            new Point(-1, -1),
+            new Point(0, -1),
+            new Point(1, -1),
+            new Point(1, 0),
+            new Point(1, 1),
+            new Point(0, 1),
+            new Point(-1, 1),
+            new Point(-1, 0),
         };
 
         private readonly Point _location = null;
@@ -44,7 +43,7 @@
             _value = value;
         }
 
-        public static List<(int x, int y)> Directions => _directions;
+        public static Point[] Directions => _directions;
 
         public char Value => _value;
 
@@ -127,23 +126,24 @@
             return neighbors.Where(x => x is not null).ToList();
         }
 
-        public List<Square> GetFirstValuesInMainDirection(char[] valuesToLookFor, Map map)
+        public List<Square> GetFirstValuesInMainDirection(char valueToIgnore, Map map)
         {
-            List<Square> foundSquares = new ();
+            List<Square> foundSquares = new (8);
 
-            foreach (var offset in Directions)
+            for (int i = 0; i < Directions.Length; i++)
             {
+                Point point = Directions[i];
                 Square current = this;
                 while (true)
                 {
-                    Point p = map.Move(offset, current.Location);
+                    Point p = map.Move(point, current.Location);
                     if (p == null)
                     {
                         break;
                     }
 
                     current = map.GetSquareFromPoint(p);
-                    if (valuesToLookFor.Any(x => x == current.Value))
+                    if (valueToIgnore != current.Value)
                     {
                         foundSquares.Add(current);
                         break;

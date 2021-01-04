@@ -10,13 +10,13 @@
     {
         private readonly ILogger _logger;
 
-        private readonly List<(int, int)> _part2Slopes = new ()
+        private readonly List<Point> _part2Slopes = new ()
         {
-            (1, 1),
-            (3, 1),
-            (5, 1),
-            (7, 1),
-            (1, 2),
+            new Point(1, 1),
+            new Point(3, 1),
+            new Point(5, 1),
+            new Point(7, 1),
+            new Point(1, 2),
         };
 
         private List<string> _input = null;
@@ -34,7 +34,7 @@
         {
             get
             {
-                (int, int) slope = (3, 1);
+                Point slope = new Point(3, 1);
                 List<Square> path = _forest.Run(slope);
                 string answer = path.Where(x => x.Value == '#').Count().ToString();
                 _logger.LogInformation("{Day}/Part1: Found {answer} trees while sledding through the forest on slope {slope}", Day, answer, slope);

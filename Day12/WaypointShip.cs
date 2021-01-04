@@ -76,12 +76,12 @@
 
         private void MoveShip(int number)
         {
-            _current = _current.PointFromOffset((_wayPoint.X * number, _wayPoint.Y * number));
+            _current = _current.PointFromOffset(new Point(_wayPoint.X * number, _wayPoint.Y * number));
         }
 
         private void Move((int, int) offset, int number)
         {
-            (int, int) total = (offset.Item1 * number, offset.Item2 * number);
+            Point total = new Point(offset.Item1 * number, offset.Item2 * number);
             _wayPoint = _wayPoint.PointFromOffset(total);
         }
 

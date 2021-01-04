@@ -29,7 +29,7 @@
 
         public Point CurrentPoint => _currentPoint;
 
-        public List<Square> Run((int, int) slope)
+        public List<Square> Run(Point slope)
         {
             bool run = true;
             List<Square> path = new ();
@@ -113,7 +113,7 @@
             return _squares[p.Y, p.X];
         }
 
-        public Point Move((int, int) slope, Point inPoint)
+        public Point Move(Point slope, Point inPoint)
         {
             Point newPoint = inPoint.PointFromOffset(slope);
 
@@ -129,9 +129,9 @@
 
             if (_wrap && (newPoint.X + 1 > _width || newPoint.X < 0))
             {
-                int offset = _width * ((slope.Item1 >= 0) ? 1 : -1);
+                int offset = _width * ((slope.X >= 0) ? 1 : -1);
                 _columnOffset += offset;
-                newPoint = newPoint.PointFromOffset(((-1) * offset, 0));
+                newPoint = newPoint.PointFromOffset(new Point((-1) * offset, 0));
             }
 
             return newPoint;

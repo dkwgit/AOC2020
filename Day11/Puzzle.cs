@@ -93,7 +93,7 @@
 
         private char MutateSquareForPart2(Square s)
         {
-            var firsts = s.GetFirstValuesInMainDirection(new char[2] { 'L', '#', }, _waitingRoom);
+            var firsts = s.GetFirstValuesInMainDirection('.', _waitingRoom);
 
             if (s.Value == 'L')
             {

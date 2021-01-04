@@ -78,7 +78,7 @@
 
         private void Move((int, int) offset, int number)
         {
-            (int, int) total = (offset.Item1 * number, offset.Item2 * number);
+            Point total = new Point(offset.Item1 * number, offset.Item2 * number);
             _current = _current.PointFromOffset(total);
         }
 

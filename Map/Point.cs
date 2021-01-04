@@ -6,11 +6,15 @@
 
         public int Y { get; init; }
 
-        public Point(int x, int y) => (X, Y) = (x, y);
-
-        public Point PointFromOffset((int, int) offset)
+        public Point(int x, int y)
         {
-            return new Point(X + offset.Item1, Y + offset.Item2);
+            X = x;
+            Y = y;
+        }
+
+        public Point PointFromOffset(Point offsetPoint)
+        {
+            return new Point(X + offsetPoint.X, Y + offsetPoint.Y);
         }
     }
 }
