@@ -1,7 +1,6 @@
 ﻿namespace AOC2020.Day23
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
     using AOC2020.Utilities;
     using Microsoft.Extensions.Logging;

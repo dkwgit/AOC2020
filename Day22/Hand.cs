@@ -11,7 +11,8 @@
             CardCount = count;
         }
 
-        public static BigInteger TopCardMask { get; } = new BigInteger(63); // a bitmask of 6 ones.
+        // a bitmask of 6 ones. 6 is the lowest number of bits that works for storing int values up to a value of 50, which is what is present in our puzzle
+        public static BigInteger TopCardMask { get; } = new BigInteger(63);
 
         public BigInteger Cards { get; set; }
 
@@ -31,9 +32,8 @@
             return new Hand(value, count);
         }
 
-        public static int[] GetCards(BigInteger current, int count)
+        public static int[] GetCards(BigInteger value, int count)
         {
-            BigInteger value = current + BigInteger.Zero;
             int[] cards = new int[count];
             for (int i = 0; i < count; i++)
             {
@@ -55,7 +55,7 @@
 
         public long Score()
         {
-            BigInteger copy = Cards + BigInteger.Zero;
+            BigInteger copy = Cards;
             long score = 0;
             for (int i = CardCount; i >= 1; i--)
             {
