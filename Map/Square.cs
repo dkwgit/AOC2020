@@ -123,7 +123,8 @@
                 DownLeft,
                 Left,
             };
-            return neighbors.Where(x => x is not null).ToList();
+
+            return neighbors;
         }
 
         public List<Square> GetFirstValuesInMainDirection(char valueToIgnore, Map map)

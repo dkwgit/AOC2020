@@ -72,46 +72,55 @@
         private char MutateSquareForPart1(Square s)
         {
             var neighbors = s.GetNeighbors();
-            if (s.Value == 'L')
+            int countOfOccupied = 0;
+
+            for (int i = 0; i < neighbors.Count; i++)
             {
-                if (!neighbors.Any(x => x.Value == '#'))
+                if (neighbors[i] is not null && neighbors[i].Value == '#')
                 {
-                    return '#';
+                    countOfOccupied++;
                 }
             }
 
-            if (s.Value == '#')
+            if (s.Value == 'L' && countOfOccupied == 0)
             {
-                if (neighbors.Where(x => x.Value == '#').Count() >= 4)
-                {
-                    return 'L';
-                }
+                return '#';
             }
-
-            return s.Value;
+            else if (s.Value == '#' && countOfOccupied >= 4)
+            {
+                return 'L';
+            }
+            else
+            {
+                return s.Value;
+            }
         }
 
         private char MutateSquareForPart2(Square s)
         {
             var firsts = s.GetFirstValuesInMainDirection('.', _waitingRoom);
+            int countOfOccupied = 0;
 
-            if (s.Value == 'L')
+            for (int i = 0; i < firsts.Count; i++)
             {
-                if (!firsts.Any(x => x.Value == '#'))
+                if (firsts[i].Value == '#')
                 {
-                    return '#';
+                    countOfOccupied++;
                 }
             }
 
-            if (s.Value == '#')
+            if (s.Value == 'L' && countOfOccupied == 0)
             {
-                if (firsts.Where(x => x.Value == '#').Count() >= 5)
-                {
-                    return 'L';
-                }
+                return '#';
             }
-
-            return s.Value;
+            else if (s.Value == '#' && countOfOccupied >= 5)
+            {
+                return 'L';
+            }
+            else
+            {
+                return s.Value;
+            }
         }
     }
 }

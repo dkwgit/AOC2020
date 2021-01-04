@@ -23,9 +23,7 @@
             int highIndexOfSeats = SeatsPerRow - 1;
             int lowIndexOfSeats = 0;
 
-            List<char> codes = seatCode.ToList();
-
-            foreach (var code in codes)
+            foreach (var code in seatCode)
             {
                 switch (code)
                 {
