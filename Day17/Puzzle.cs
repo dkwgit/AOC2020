@@ -198,11 +198,13 @@
 
         private void DoTurn()
         {
-            int[,,,] newSpace = new int[_length, _width, _height, _extra];
+            List<Change> changes = new (100);
+
             int estart = _dimensionCount == 3 ? _estart : 1;
             int elimit = _dimensionCount == 3 ? _estart + 1 : _extra - 1;
 
             // Start one from the edge, so each thing we evaluate has all 26 cube surrounding
+            int changeIndex = 0;
             for (int y = 1; y < _length - 1; y++)
             {
                 for (int x = 1; x < _width - 1; x++)
@@ -218,24 +220,41 @@
                             {
                                 if (!(anc >= 2 && anc <= 3))
                                 {
-                                    newValue = 0;
+                                    changes.Add(new Change() { Y = y, X = x, Z = z, E = e, NewValue = 0 });
+                                    changeIndex++;
                                 }
                             }
                             else
                             {
                                 if (anc == 3)
                                 {
-                                    newValue = 1;
+                                    changes.Add(new Change() { Y = y, X = x, Z = z, E = e, NewValue = 1 });
+                                    changeIndex++;
                                 }
                             }
-
-                            newSpace[y, x, z, e] = newValue;
                         }
                     }
                 }
             }
 
-            _space = newSpace;
+            for (int i = 0; i < changeIndex; i++)
+            {
+                Change change = changes[i];
+                _space[change.Y, change.X, change.Z, change.E] = change.NewValue;
+            }
+        }
+
+        internal record Change
+        {
+            public int Y { get; init; }
+
+            public int X { get; init; }
+
+            public int Z { get; init; }
+
+            public int E { get; init; }
+
+            public int NewValue { get; init; }
         }
     }
 }
