@@ -6,33 +6,24 @@
 
     internal class Tile
     {
-        public Tile((int x, int y, int z) location, Dictionary<(int x, int y, int z), Tile> allTiles)
+        public Tile(TileManager manager, int tilenumber)
         {
-            (X, Y, Z) = location;
-            AllTiles = allTiles;
-            if (!AllTiles.ContainsKey(location))
-            {
-                AllTiles.Add(location, this);
-            }
+            Manager = manager;
+            Tilenumber = tilenumber;
+            X = 0;
+            Y = 0;
+            Z = 0;
         }
 
-        public static List<(int xOffset, int yOffset, int zOffset)> DirectionOffsets { get; } = new ()
-        {
-            (1, -1, 0),
-            (0, -1, 1),
-            (-1, 0, 1),
-            (-1, 1, 0),
-            (0, 1, -1),
-            (1, 0, -1),
-        };
+        public TileManager Manager { get; init; }
 
-        public Dictionary<(int x, int y, int z), Tile> AllTiles { get; } = new ();
+        public int X { get; set; }
 
-        public int X { get; init; }
+        public int Y { get; set; }
 
-        public int Y { get; init; }
+        public int Z { get; set; }
 
-        public int Z { get; init; }
+        public int Tilenumber { get; init; }
 
         public char Color { get; set; } = 'w';
 
@@ -40,14 +31,17 @@
         {
             get
             {
-                List<int> allDimensions = new ()
-                {
-                    Math.Abs(X),
-                    Math.Abs(Y),
-                    Math.Abs(Z),
-                };
-                return allDimensions.Max();
+                return GetRing(X, Y, Z);
             }
+        }
+
+        public static int GetRing(int x, int y, int z)
+        {
+            int max = -1;
+            max = (Math.Abs(x) > max) ? Math.Abs(x) : max;
+            max = (Math.Abs(y) > max) ? Math.Abs(y) : max;
+            max = (Math.Abs(z) > max) ? Math.Abs(z) : max;
+            return max;
         }
 
         public static void ProcessMoves(Tile currentTile, string moves)
@@ -108,9 +102,9 @@
             return t;
         }
 
-        public Tile CopyLocationAndColor(Dictionary<(int x, int y, int z), Tile> otherTileCollection)
+        public Tile CopyLocationAndColor(TileManager otherTileManager)
         {
-            Tile t = new Tile((X, Y, Z), otherTileCollection)
+            Tile t = new Tile(otherTileManager, Tilenumber)
             {
                 Color = Color,
             };
@@ -120,6 +114,11 @@
 
         public void Flip()
         {
+            if (Ring > Manager.MaxBlackRing)
+            {
+                Manager.MaxBlackRing = Ring;
+            }
+
             Color = Color == 'w' ? 'b' : 'w';
         }
 
@@ -165,8 +164,7 @@
             int newX = X + 1;
             int newY = Y;
             int newZ = Z - 1;
-            var newLocation = (newX, newY, newZ);
-            Tile t = AllTiles.ContainsKey(newLocation) ? AllTiles[newLocation] : new Tile(newLocation, AllTiles);
+            Tile t = Manager.GetTile(newX, newY, newZ);
 
             return t;
         }
@@ -176,8 +174,7 @@
             int newX = X + 1;
             int newY = Y - 1;
             int newZ = Z;
-            var newLocation = (newX, newY, newZ);
-            Tile t = AllTiles.ContainsKey(newLocation) ? AllTiles[newLocation] : new Tile(newLocation, AllTiles);
+            Tile t = Manager.GetTile(newX, newY, newZ);
 
             return t;
         }
@@ -187,8 +184,7 @@
             int newX = X;
             int newY = Y - 1;
             int newZ = Z + 1;
-            var newLocation = (newX, newY, newZ);
-            Tile t = AllTiles.ContainsKey(newLocation) ? AllTiles[newLocation] : new Tile(newLocation, AllTiles);
+            Tile t = Manager.GetTile(newX, newY, newZ);
 
             return t;
         }
@@ -198,8 +194,7 @@
             int newX = X - 1;
             int newY = Y;
             int newZ = Z + 1;
-            var newLocation = (newX, newY, newZ);
-            Tile t = AllTiles.ContainsKey(newLocation) ? AllTiles[newLocation] : new Tile(newLocation, AllTiles);
+            Tile t = Manager.GetTile(newX, newY, newZ);
 
             return t;
         }
@@ -209,8 +204,7 @@
             int newX = X - 1;
             int newY = Y + 1;
             int newZ = Z;
-            var newLocation = (newX, newY, newZ);
-            Tile t = AllTiles.ContainsKey(newLocation) ? AllTiles[newLocation] : new Tile(newLocation, AllTiles);
+            Tile t = Manager.GetTile(newX, newY, newZ);
 
             return t;
         }
@@ -220,8 +214,7 @@
             int newX = X;
             int newY = Y + 1;
             int newZ = Z - 1;
-            var newLocation = (newX, newY, newZ);
-            Tile t = AllTiles.ContainsKey(newLocation) ? AllTiles[newLocation] : new Tile(newLocation, AllTiles);
+            Tile t = Manager.GetTile(newX, newY, newZ);
 
             return t;
         }
