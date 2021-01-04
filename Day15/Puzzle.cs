@@ -78,20 +78,10 @@
             int priorNumber = _numbers[^1];
             for (int turn = _numbers.Count; turn < finalTurn; turn++)
             {
-                int turnDiffOfPrior = _ultimates[priorNumber] - _penultimates[priorNumber];
+                int newNumber = _ultimates[priorNumber] - _penultimates[priorNumber];
 
-                int newNumber = turnDiffOfPrior;
-
-                if (_ultimates[newNumber] != -1)
-                {
-                    _penultimates[newNumber] = _ultimates[newNumber];
-                    _ultimates[newNumber] = turn;
-                }
-                else
-                {
-                    _penultimates[newNumber] = turn;
-                    _ultimates[newNumber] = turn;
-                }
+                _penultimates[newNumber] = _ultimates[newNumber] != -1 ? _ultimates[newNumber] : turn;
+                _ultimates[newNumber] = turn;
 
                 priorNumber = newNumber;
             }
