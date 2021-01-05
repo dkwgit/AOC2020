@@ -172,7 +172,7 @@
                 alphabetSlot++;
             }
 
-            var comboGenerator = new ComboGeneratorWithPositionalAlphabet<int>(alphabet, rulesWithExpansions.Count, true);
+            var comboGenerator = new ComboGeneratorWithPositionalAlphabet<int>(alphabet, rulesWithExpansions.Count);
             var combos = comboGenerator.Iterator().Distinct().Where(x => x.Sum() + baseLength == expression.Length).ToList();
 
             return combos;
