@@ -39,31 +39,31 @@
                 }
 
                 #region loggingTimingForRuns
-                _logger.LogInformation("Logging timing information for each run");
+                _logger.LogInformation("Timing: Logging timing information for each run");
                 int timingCount = 0;
                 foreach (var timing in timingsForEachRun)
                 {
                     long total = timing.Sum(x => x.timing);
-                    _logger.LogInformation("Run {run} Cumulative time for in milliseconds {cumulative} for running all days, with an average of {Avg} per day", timingCount + 1, total, total / timing.Count);
-                    _logger.LogInformation("Logging timing information for individual tests  day");
+                    _logger.LogInformation("Timing: Run {run} cumulative time for in milliseconds {cumulative} for running all days, with an average of {Avg} per day", timingCount + 1, total, total / timing.Count);
+                    _logger.LogInformation("Timing: Run {run} Logging timing information for individual tests  day", timingCount + 1);
 
                     foreach (var item in timing.OrderByDescending(x => x.timing))
                     {
-                        _logger.LogInformation("Test {day}, with label {label} took {time} milliseconds", item.day, item.label, item.timing);
+                        _logger.LogInformation("Timing Run {run} Test {day}, with label {label} took {time} milliseconds", timingCount + 1, item.day, item.label, item.timing);
                     }
 
                     timingCount++;
                 }
                 #endregion
 
-                #region AverageTimingPerRunBlock
+                #region CumulativeTimingPerRunBlock
                 long totalForAllRuns = timingsForEachRun.SelectMany(x => x.Select(x => x.timing)).Sum(x => x);
-                _logger.LogInformation("Logging timing information averaging across runs");
-                _logger.LogInformation("Cumulative time in milliseconds for total count of runs {numberOfRuns}: {cumulative}, with an average of {Avg}", numberOfRuns, totalForAllRuns, totalForAllRuns / numberOfRuns);
-                _logger.LogInformation("Logging average timing information for each day across the runs");
+                _logger.LogInformation("Timing: Cumulative: Logging timing information averaging across runs");
+                _logger.LogInformation("Timing: Cumulative: time in milliseconds for total count of runs {numberOfRuns}: {cumulative}, with an average of {Avg}", numberOfRuns, totalForAllRuns, totalForAllRuns / numberOfRuns);
                 #endregion
 
                 #region AverageTimingPerDayBlock
+                _logger.LogInformation("Timing: Average by Day :Logging average timing information for each day across the runs");
                 long[] dayTimings = new long[timingsForEachRun[0].Count];
                 for (int i = 0; i < numberOfRuns; i++)
                 {
@@ -88,7 +88,7 @@
                         dayString = "0" + dayString;
                     }
 
-                    _logger.LogInformation("Average timing for day {daystring} across the runs: {avgTiming}", dayString, dayTimings[d] / numberOfRuns);
+                    _logger.LogInformation("Timing: Average by Day: for day {daystring} across the runs: {avgTiming}", dayString, dayTimings[d] / numberOfRuns);
                 }
                 #endregion
             }
