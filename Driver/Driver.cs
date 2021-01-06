@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using AOC2020.Utilities;
     using Microsoft.Extensions.DependencyInjection;
@@ -17,37 +18,89 @@
 
         public void Run(int numberOfRuns)
         {
-            List<List<(string day, string label, long timing)>> timingsForEachRun = new ();
+            _logger.LogInformation("Starting Driver.Run()");
 
-            for (int i = 0; i < numberOfRuns; i++)
+            try
             {
-                _logger.LogInformation("Starting regression tests, run #{run}", i + 1);
-                RunPuzzleRegressionTests(out List<(string day, string label, long timing)> timings);
-                timingsForEachRun.Add(timings);
-                long total = timings.Sum(x => x.timing);
-                _logger.LogInformation("Done with regression tests, run #{run}", i + 1);
-            }
+                List<List<(string day, string label, long timing)>> timingsForEachRun = new ();
 
-            _logger.LogInformation("Logging timing information");
-            int timingCount = 0;
-            foreach (var timing in timingsForEachRun)
-            {
-                long total = timing.Sum(x => x.timing);
-                _logger.LogInformation("Timings for run #{run}", timingCount + 1);
-                _logger.LogInformation("Cumulative time in milliseconds {cumulative}, with an average of {Avg}", total, total / timing.Count);
-                _logger.LogInformation("Logging timing information for individual tests");
-
-                foreach (var item in timing.OrderByDescending(x => x.timing))
+                for (int i = 0; i < numberOfRuns; i++)
                 {
-                    _logger.LogInformation("Test {day}, with label {label} took {time} milliseconds", item.day, item.label, item.timing);
+                    #region loggingRun
+                    _logger.LogInformation("Run {run}: starting regression tests.", i + 1);
+                    #endregion
+
+                    RunPuzzleRegressionTests(out List<(string day, string label, long timing)> timings);
+                    timingsForEachRun.Add(timings);
+
+                    #region loggingRun
+                    _logger.LogInformation("Run {run}: done with regression tests.", i + 1);
+                    #endregion
                 }
 
-                timingCount++;
+                #region loggingTimingForRuns
+                _logger.LogInformation("Logging timing information for each run");
+                int timingCount = 0;
+                foreach (var timing in timingsForEachRun)
+                {
+                    long total = timing.Sum(x => x.timing);
+                    _logger.LogInformation("Run {run} Cumulative time for in milliseconds {cumulative} for running all days, with an average of {Avg} per day", timingCount + 1, total, total / timing.Count);
+                    _logger.LogInformation("Logging timing information for individual tests  day");
+
+                    foreach (var item in timing.OrderByDescending(x => x.timing))
+                    {
+                        _logger.LogInformation("Test {day}, with label {label} took {time} milliseconds", item.day, item.label, item.timing);
+                    }
+
+                    timingCount++;
+                }
+                #endregion
+
+                #region AverageTimingPerRunBlock
+                long totalForAllRuns = timingsForEachRun.SelectMany(x => x.Select(x => x.timing)).Sum(x => x);
+                _logger.LogInformation("Logging timing information averaging across runs");
+                _logger.LogInformation("Cumulative time in milliseconds for total count of runs {numberOfRuns}: {cumulative}, with an average of {Avg}", numberOfRuns, totalForAllRuns, totalForAllRuns / numberOfRuns);
+                _logger.LogInformation("Logging average timing information for each day across the runs");
+                #endregion
+
+                #region AverageTimingPerDayBlock
+                long[] dayTimings = new long[timingsForEachRun[0].Count];
+                for (int i = 0; i < numberOfRuns; i++)
+                {
+                    for (int day = 0; day < timingsForEachRun[i].Count; day++)
+                    {
+                        dayTimings[day] += timingsForEachRun[i][day].timing;
+                        string dayString = (day + 1).ToString();
+                        if (dayString.Length == 1)
+                        {
+                            dayString = "0" + dayString;
+                        }
+
+                        Debug.Assert(timingsForEachRun[i][day].day == dayString, "Expecting the list to be in order of rising days");
+                    }
+                }
+
+                for (int d = 0; d < dayTimings.Length; d++)
+                {
+                    string dayString = (d + 1).ToString();
+                    if (dayString.Length == 1)
+                    {
+                        dayString = "0" + dayString;
+                    }
+
+                    _logger.LogInformation("Average timing for day {daystring} across the runs: {avgTiming}", dayString, dayTimings[d] / numberOfRuns);
+                }
+                #endregion
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Exception during Driver.Run()");
             }
 
-            long totalForAllRuns = timingsForEachRun.SelectMany(x => x.Select(x => x.timing)).Sum(x => x);
-            _logger.LogInformation("Cumulative time in milliseconds for total count of runs {numberOfRuns}: {cumulative}, with an average of {Avg}", numberOfRuns, totalForAllRuns, totalForAllRuns / numberOfRuns);
+             #region finishLogging
             _logger.LogInformation("Finished logging timing");
+            _logger.LogInformation("Finished Driver.Run()");
+            #endregion
         }
 
         public void RunPuzzleRegressionTests(out List<(string day, string label, long timing)> timingInfo)
