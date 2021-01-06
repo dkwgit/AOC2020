@@ -1,7 +1,9 @@
 ﻿namespace AOC2020.Utilities
 {
+    using System;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Diagnostics;
+    using System.Text;
 
     public record ComboGeneratorWithPositionalAlphabet<T>
     {
@@ -13,47 +15,84 @@
 
         public IEnumerable<T[]> Iterator()
         {
-            List<T[]> lists = GetCombo(Alphabet, LetterCount, 0);
-            for (int j = 0; j < lists.Count; j++)
+            int comboCount = 1;
+            for (int a = 0; a < Alphabet.Length; a++)
             {
-                yield return lists[j];
+                comboCount *= Alphabet[a].Length;
+            }
+
+            T[][] combos = new T[comboCount][];
+
+            if (comboCount == 1)
+            {
+                combos[0] = new T[LetterCount];
+                for (int i = 0; i < LetterCount; i++)
+                {
+                    combos[0][i] = Alphabet[i][0];
+                }
+
+                yield return combos[0];
+                yield break;
+            }
+
+            for (int i = 0; i < comboCount; i++)
+            {
+                combos[i] = new T[LetterCount];
+                /*if (typeof(T) == typeof(int))
+                {
+                    Array.Fill<int>((combos as int[][])[i], -1);
+                }*/
+            }
+
+            int currentCombo = 0;
+            GetCombo(ref currentCombo, Alphabet, LetterCount, 0, combos, LetterCount);
+            Debug.Assert(currentCombo == comboCount, "Expecting the final currentCombo index to match");
+
+            for (int j = 0; j < comboCount; j++)
+            {
+                yield return combos[j];
             }
 
             yield break;
         }
 
-        private static List<T[]> GetCombo(T[][] alphabet, int n, int alphabetSlot)
+        private void GetCombo(ref int currentCombo, T[][] alphabet, int n, int alphabetSlot, T[][] combos, int totalLetterCount)
         {
-            List<T[]> lists = new ();
-
+            int startingCombo = currentCombo;
             for (int a = 0; a < alphabet[alphabetSlot].Length; a++)
             {
                 if (n > 1)
                 {
-                    var sublists = GetCombo(alphabet, n - 1, alphabetSlot + 1);
-                    foreach (var sub in sublists)
+                    GetCombo(ref currentCombo, alphabet, n - 1, alphabetSlot + 1, combos, totalLetterCount);
+                    for (; startingCombo < currentCombo; startingCombo++)
                     {
-                        // head
-                        T[] arr = new T[n];
-                        arr[0] = alphabet[alphabetSlot][a];
-                        for (int s = 1; s < n; s++)
-                        {
-                            arr[s] = sub[s - 1];
-                        }
+                        combos[startingCombo][totalLetterCount - n] = alphabet[alphabetSlot][a];
 
-                        lists.Add(arr);
+                        // PrintCombos(combos);
                     }
                 }
                 else
                 {
-                    // head
-                    T[] arr = new T[n];
-                    arr[0] = alphabet[alphabetSlot][a];
-                    lists.Add(arr);
+                    combos[currentCombo++][totalLetterCount - n] = alphabet[alphabetSlot][a];
+
+                    // PrintCombos(combos);
                 }
             }
+        }
 
-            return lists;
+        private void PrintCombos(T[][] combos)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < combos.GetLength(0); i++)
+            {
+                for (int j = 0; j < combos[i].Length; j++)
+                {
+                    sb.AppendJoin(',', combos[i][j]);
+                }
+
+                Console.WriteLine(sb);
+                sb.Clear();
+            }
         }
     }
 }
