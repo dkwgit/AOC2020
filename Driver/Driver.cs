@@ -97,6 +97,7 @@
             catch (Exception e)
             {
                 _logger.LogError(e, "Exception during Driver.Run()");
+                throw;
             }
 
              #region finishLogging
