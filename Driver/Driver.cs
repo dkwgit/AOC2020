@@ -63,32 +63,34 @@
                 #endregion
 
                 #region AverageTimingPerDayBlock
-                _logger.LogInformation("Timing: Average by Day :Logging average timing information for each day across the runs");
-                long[] dayTimings = new long[timingsForEachRun[0].Count];
+                _logger.LogInformation("Timing: Average by Day: Logging average timing information for each day across the runs, in descending order");
+                (int day, long timing)[] dayTimings = new (int day, long timing)[timingsForEachRun[0].Count];
                 for (int i = 0; i < numberOfRuns; i++)
                 {
-                    for (int day = 0; day < timingsForEachRun[i].Count; day++)
+                    for (int d = 0; d < timingsForEachRun[i].Count; d++)
                     {
-                        dayTimings[day] += timingsForEachRun[i][day].timing;
-                        string dayString = (day + 1).ToString();
+                        (int _, long timing) = dayTimings[d];
+                        timing += timingsForEachRun[i][d].timing;
+                        dayTimings[d] = (d + 1, timing);
+                        string dayString = (d + 1).ToString();
                         if (dayString.Length == 1)
                         {
                             dayString = "0" + dayString;
                         }
 
-                        Debug.Assert(timingsForEachRun[i][day].day == dayString, "Expecting the list to be in order of rising days");
+                        Debug.Assert(timingsForEachRun[i][d].day == dayString, "Expecting the list to be in order of rising days");
                     }
                 }
 
-                for (int d = 0; d < dayTimings.Length; d++)
+                foreach (var dayTiming in dayTimings.OrderByDescending(x => x.timing))
                 {
-                    string dayString = (d + 1).ToString();
+                    string dayString = dayTiming.day.ToString();
                     if (dayString.Length == 1)
                     {
                         dayString = "0" + dayString;
                     }
 
-                    _logger.LogInformation("Timing: Average by Day: for day {daystring} across the runs: {avgTiming}", dayString, dayTimings[d] / numberOfRuns);
+                    _logger.LogInformation("Timing: Average by Day: for day {daystring} across the runs: {avgTiming}", dayString, dayTiming.timing / numberOfRuns);
                 }
                 #endregion
             }
