@@ -62,8 +62,8 @@
 
             if (WordCount == 1)
             {
-                // A special (deformed case) in which some loop is asking for combos, but there is only 1
-                // caller should not do that, but calling code may not recognize
+                // A special (deformed) case in which some loop is asking for combos, but there is only 1.
+                // Caller should not do that, but calling code may not recognize
                 words[0] = new T[WordLength];
                 for (int i = 0; i < WordLength; i++)
                 {
