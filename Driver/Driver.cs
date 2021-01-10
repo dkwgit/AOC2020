@@ -77,8 +77,6 @@
                         {
                             dayString = "0" + dayString;
                         }
-
-                        Debug.Assert(timingsForEachRun[i][d].day == dayString, "Expecting the list to be in order of rising days");
                     }
                 }
 

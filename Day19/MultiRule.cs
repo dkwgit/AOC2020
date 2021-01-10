@@ -172,8 +172,8 @@
                 alphabetSlot++;
             }
 
-            var comboGenerator = new ComboGeneratorWithPositionalAlphabet<int>(alphabet, rulesWithExpansions.Count);
-            var combos = comboGenerator.Iterator().Distinct().Where(x => x.Sum() + baseLength == expression.Length).ToList();
+            var comboGenerator = new WordComboGenerator<int>(alphabet, rulesWithExpansions.Count);
+            var combos = comboGenerator.GetWords().Distinct().Where(x => x.Sum() + baseLength == expression.Length).ToList();
 
             return combos;
         }

@@ -11,7 +11,7 @@
 
         private readonly ILogger _logger;
 
-        private readonly int[] _neighborVariance = new int[3] { -1, 0, 1 };
+        private int[][] _neighborVariance;
 
         private int _width;
 
@@ -45,10 +45,12 @@
             get
             {
                 _dimensionCount = 3;
-                ComboGenerator<int> gen = new ComboGenerator<int>(_neighborVariance, _dimensionCount);
+                _neighborVariance = WordComboGenerator<int>.GetFixedAlphabet(new int[3] { -1, 0, 1 }, _dimensionCount);
+
+                WordComboGenerator<int> gen = new WordComboGenerator<int>(_neighborVariance, _dimensionCount);
                 _dimensionVarianceCombos = new List<int[]>();
 
-                foreach (var item in gen.Iterator())
+                foreach (var item in gen.GetWords())
                 {
                     if (!item.All(x => x == 0))
                     {
@@ -74,10 +76,12 @@
                 ProcessPuzzleInput(_input);
 
                 _dimensionCount = 4;
-                ComboGenerator<int> gen = new ComboGenerator<int>(_neighborVariance, _dimensionCount);
+                _neighborVariance = WordComboGenerator<int>.GetFixedAlphabet(new int[3] { -1, 0, 1 }, _dimensionCount);
+
+                WordComboGenerator<int> gen = new WordComboGenerator<int>(_neighborVariance, _dimensionCount);
                 _dimensionVarianceCombos = new List<int[]>();
 
-                foreach (var item in gen.Iterator())
+                foreach (var item in gen.GetWords())
                 {
                     if (!item.All(x => x == 0))
                     {
