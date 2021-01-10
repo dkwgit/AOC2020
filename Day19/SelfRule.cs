@@ -1,7 +1,5 @@
 ﻿namespace AOC2020.Day19
 {
-    using System;
-
     internal record SelfRule : IAbstractRule
     {
         public bool IsVariableLength { get; } = false;
@@ -20,7 +18,7 @@
 
         public SelfRule(IAbstractRule parent, int id, string generatingExpression) => (Parent, Id, GeneratingExpression, Value, MatchLength) = (parent, id, generatingExpression, parent, 0);
 
-        public bool Valid(ReadOnlySpan<char> expression)
+        public bool Valid(string expression)
         {
             return true;
         }

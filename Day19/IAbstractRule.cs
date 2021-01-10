@@ -1,6 +1,6 @@
 ﻿namespace AOC2020.Day19
 {
-    using System;
+    using System.Collections.Generic;
 
     internal interface IAbstractRule
     {
@@ -16,6 +16,6 @@
 
         string GeneratingExpression { get; init; }
 
-        bool Valid(ReadOnlySpan<char> expression);
+        bool Valid(string expression);
     }
 }

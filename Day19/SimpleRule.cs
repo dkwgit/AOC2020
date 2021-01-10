@@ -1,6 +1,6 @@
 ﻿namespace AOC2020.Day19
 {
-    using System;
+    using System.Collections.Generic;
 
     internal record SimpleRule : IAbstractRule
     {
@@ -32,7 +32,7 @@
 
         public SimpleRule(IAbstractRule parent, int id, string generatingExpression, IAbstractRule value) => (Parent, Id, GeneratingExpression, Value) = (parent, id, generatingExpression, value);
 
-        public bool Valid(ReadOnlySpan<char> expression)
+        public bool Valid(string expression)
         {
             return Value.Valid(expression);
         }
