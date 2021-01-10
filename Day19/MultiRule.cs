@@ -32,13 +32,13 @@
 
         public int Id { get; init; }
 
-        public string GeneratingExpression { get; init; }
+        public ReadOnlyMemory<char> GeneratingExpression { get; init; }
 
         public List<IAbstractRule> Value { get; init; }
 
         public int MatchLength { get; set; }
 
-        public MultiRule(IAbstractRule parent, int id, string generatingExpression, List<IAbstractRule> value) => (Parent, Id, GeneratingExpression, Value) = (parent, id, generatingExpression, value);
+        public MultiRule(IAbstractRule parent, int id, ReadOnlyMemory<char> generatingExpression, List<IAbstractRule> value) => (Parent, Id, GeneratingExpression, Value) = (parent, id, generatingExpression, value);
 
         public bool Valid(ReadOnlySpan<char> expression)
         {
@@ -73,14 +73,14 @@
             {
                 List<bool> comboResult = new ();
 
-                int startingStringIndex = 0;
+                int startingIndex = 0;
                 for (int i = 0; i < combo.Length; i++)
                 {
                     (IAbstractRule rule, _) = rulesWithExpansions[i];
 
                     int expressionLength = rule.MatchLength + combo[i];
-                    comboResult.Add(rule.Valid(expression.Slice(startingStringIndex, expressionLength)));
-                    startingStringIndex += expressionLength;
+                    comboResult.Add(rule.Valid(expression.Slice(startingIndex, expressionLength)));
+                    startingIndex += expressionLength;
                 }
 
                 comboResults.Add(comboResult);
@@ -95,9 +95,25 @@
             return false;
         }
 
-        public static MultiRule Create(Puzzle p, IAbstractRule parent, int id, string expression)
+        public static MultiRule Create(Puzzle p, IAbstractRule parent, int id, ReadOnlyMemory<char> expression)
         {
-            var ruleIdList = expression.Split(' ').Select(x => int.Parse(x));
+            List<int> ruleIdList = new ();
+
+            ReadOnlySpan<char> span = expression.Span;
+            int start = 0;
+            for (int i = 0; i < span.Length; i++)
+            {
+                if (span[i] == ' ')
+                {
+                    ruleIdList.Add(int.Parse(span.Slice(start, i - start)));
+                    start = i + 1;
+                }
+
+                if (i == span.Length - 1)
+                {
+                    ruleIdList.Add(int.Parse(span.Slice(start, i - start + 1)));
+                }
+            }
 
             List<IAbstractRule> rules = new ();
             foreach (var ruleId in ruleIdList)

@@ -12,13 +12,13 @@
 
         public int Id { get; init; }
 
-        public string GeneratingExpression { get; init; }
+        public ReadOnlyMemory<char> GeneratingExpression { get; init; }
 
         public IAbstractRule Value { get; init; }
 
         public int MatchLength { get; set; }
 
-        public SelfRule(IAbstractRule parent, int id, string generatingExpression) => (Parent, Id, GeneratingExpression, Value, MatchLength) = (parent, id, generatingExpression, parent, 0);
+        public SelfRule(IAbstractRule parent, int id, ReadOnlyMemory<char> generatingExpression) => (Parent, Id, GeneratingExpression, Value, MatchLength) = (parent, id, generatingExpression, parent, 0);
 
         public bool Valid(ReadOnlySpan<char> expression)
         {
