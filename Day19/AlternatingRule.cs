@@ -31,23 +31,38 @@
 
         public int Id { get; init; }
 
-        public string GeneratingExpression { get; init; }
+        public ReadOnlyMemory<char> GeneratingExpression { get; init; }
 
         public (IAbstractRule Either, IAbstractRule Or) Value { get; init; }
 
         public int MatchLength { get; set; }
 
-        public AlternatingRule(IAbstractRule parent, int id, string generatingExpression, (IAbstractRule, IAbstractRule) value) => (Parent, Id, GeneratingExpression, Value) = (parent, id, generatingExpression, value);
+        public AlternatingRule(IAbstractRule parent, int id, ReadOnlyMemory<char> generatingExpression, (IAbstractRule, IAbstractRule) value)
+        {
+            Parent = parent;
+            Id = id;
+            GeneratingExpression = generatingExpression;
+            Value = value;
+        }
 
         public bool Valid(ReadOnlySpan<char> expression)
         {
             return Value.Either.Valid(expression) || Value.Or.Valid(expression);
         }
 
-        public static AlternatingRule Create(Puzzle p, IAbstractRule parent, int id, string expression)
+        public static AlternatingRule Create(Puzzle p, IAbstractRule parent, int id, ReadOnlyMemory<char> expression)
         {
-            string expressionOne = expression.Split('|')[0].Trim();
-            string expressionTwo = expression.Split('|')[1].Trim();
+            ReadOnlyMemory<char> expressionOne = null;
+            ReadOnlyMemory<char> expressionTwo = null;
+            ReadOnlySpan<char> span = expression.Span;
+            for (int i = 0; i < expression.Length; i++)
+            {
+                if (span[i] == '|')
+                {
+                    expressionOne = expression.Slice(0, i - 1); // There's a space before the |, and we don't want to 'copy' that
+                    expressionTwo = expression.Slice(i + 2); // There's a space after the |, and we want to point to first non-space after it
+                }
+            }
 
             IAbstractRule first = ResolveSubexpression(p, parent, id, expressionOne);
             IAbstractRule second = ResolveSubexpression(p, parent, id, expressionTwo);
@@ -62,17 +77,17 @@
             return rule;
         }
 
-        public static IAbstractRule ResolveSubexpression(Puzzle p, IAbstractRule parent, int id, string expression)
+        public static IAbstractRule ResolveSubexpression(Puzzle p, IAbstractRule parent, int id, ReadOnlyMemory<char> expression)
         {
             IAbstractRule rule;
 
-            if (expression.Contains(' '))
+            if (expression.Span.Contains(' '))
             {
                 rule = MultiRule.Create(p, parent, id, expression);
             }
             else
             {
-                rule = p.LoadRule(parent, int.Parse(expression));
+                rule = p.LoadRule(parent, int.Parse(expression.Span));
             }
 
             return rule;

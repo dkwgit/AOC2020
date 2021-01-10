@@ -24,22 +24,22 @@
 
         public int Id { get; init; }
 
-        public string GeneratingExpression { get; init; }
+        public ReadOnlyMemory<char> GeneratingExpression { get; init; }
 
         public IAbstractRule Value { get; init; }
 
         public int MatchLength { get; set; }
 
-        public SimpleRule(IAbstractRule parent, int id, string generatingExpression, IAbstractRule value) => (Parent, Id, GeneratingExpression, Value) = (parent, id, generatingExpression, value);
+        public SimpleRule(IAbstractRule parent, int id, ReadOnlyMemory<char> generatingExpression, IAbstractRule value) => (Parent, Id, GeneratingExpression, Value) = (parent, id, generatingExpression, value);
 
         public bool Valid(ReadOnlySpan<char> expression)
         {
             return Value.Valid(expression);
         }
 
-        public static SimpleRule Create(Puzzle p, IAbstractRule parent, int id, string expression)
+        public static SimpleRule Create(Puzzle p, IAbstractRule parent, int id, ReadOnlyMemory<char> expression)
         {
-            int otherRule = int.Parse(expression);
+            int otherRule = int.Parse(expression.Span);
 
             IAbstractRule rule = p.LoadRule(parent, otherRule);
 
