@@ -13,22 +13,24 @@
 
         public int Id { get; init; }
 
-        public ReadOnlyMemory<char> GeneratingExpression { get; init; }
+        public string GeneratingExpression { get; init; }
 
-        public ReadOnlyMemory<char> Value { get; init; }
+        public string Value { get; init; }
 
         public int MatchLength { get; set; }
 
-        public TerminalRule(IAbstractRule parent, int id, ReadOnlyMemory<char> generatingExpression, ReadOnlyMemory<char> value) => (Parent, Id, GeneratingExpression, Value, MatchLength) = (parent, id, generatingExpression, value, 1);
+        public TerminalRule(IAbstractRule parent, int id, string generatingExpression, string value) => (Parent, Id, GeneratingExpression, Value, MatchLength) = (parent, id, generatingExpression, value, 1);
 
         public bool Valid(ReadOnlySpan<char> expression)
         {
-            return expression.Equals(Value.Span, StringComparison.Ordinal);
+            return expression.Equals(Value, StringComparison.Ordinal);
         }
 
-        public static TerminalRule Create(Puzzle _, IAbstractRule parent, int id, ReadOnlyMemory<char> expression)
+        public static TerminalRule Create(Puzzle _, IAbstractRule parent, int id, string expression)
         {
-            return new TerminalRule(parent, id, expression, expression.Slice(1, 1));
+            Debug.Assert(expression.Length == 3 && (expression[1] == 'a' || expression[1] == 'b'), $"Unexpected expression for Terminalrule: {expression}");
+
+            return new TerminalRule(parent, id, expression, expression[1].ToString());
         }
     }
 }

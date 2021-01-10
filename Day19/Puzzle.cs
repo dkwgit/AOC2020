@@ -10,9 +10,9 @@
     {
         private readonly ILogger _logger;
 
-        private readonly Dictionary<int, ReadOnlyMemory<char>> _rules = new ();
+        private readonly Dictionary<int, string> _rules = new ();
 
-        private readonly List<ReadOnlyMemory<char>> _expressions = new ();
+        private readonly List<string> _expressions = new ();
 
         private List<string> _input = null;
 
@@ -29,13 +29,13 @@
         {
             get
             {
-                List<ReadOnlyMemory<char>> validExpressions = new ();
+                List<string> validExpressions = new ();
 
                 IAbstractRule rule = LoadRule(null, 0);
 
                 foreach (var expression in _expressions)
                 {
-                    if (rule.Valid(expression.Span))
+                    if (rule.Valid(expression))
                     {
                         validExpressions.Add(expression);
                     }
@@ -51,16 +51,16 @@
         {
             get
             {
-                _rules[8] = "42 | 42 8".AsMemory();
-                _rules[11] = "42 31 | 42 11 31".AsMemory();
+                _rules[8] = "42 | 42 8";
+                _rules[11] = "42 31 | 42 11 31";
 
-                List<ReadOnlyMemory<char>> validExpressions = new ();
+                List<string> validExpressions = new ();
 
                 IAbstractRule rule = LoadRule(null, 0);
 
                 foreach (var expression in _expressions)
                 {
-                    bool valid = rule.Valid(expression.Span);
+                    bool valid = rule.Valid(expression);
                     if (valid)
                     {
                         validExpressions.Add(expression);
@@ -90,7 +90,7 @@
                         int ruleId = int.Parse(match.Groups[1].Value);
                         string expression = match.Groups[2].Value;
 
-                        _rules.Add(ruleId, expression.AsMemory());
+                        _rules.Add(ruleId, expression);
                     }
                     else
                     {
@@ -102,7 +102,7 @@
                     var lineValue = line.Trim();
                     if (lineValue != string.Empty)
                     {
-                        _expressions.Add(lineValue.AsMemory());
+                        _expressions.Add(lineValue);
                     }
                 }
             }
@@ -110,13 +110,14 @@
 
         internal IAbstractRule LoadRule(IAbstractRule parent, int ruleNumber)
         {
-            IAbstractRule rule = _rules[ruleNumber].Span switch
+            string expression = _rules[ruleNumber];
+            IAbstractRule rule = expression switch
             {
-                ReadOnlySpan<char> e when e.Contains(' ') && e.Contains('|') => AlternatingRule.Create(this, parent, ruleNumber, _rules[ruleNumber]),
-                ReadOnlySpan<char> f when f.Contains(' ') && !f.Contains('|') => MultiRule.Create(this, parent, ruleNumber, _rules[ruleNumber]),
-                ReadOnlySpan<char> g when g.Contains('"') => TerminalRule.Create(this, parent, ruleNumber, _rules[ruleNumber]),
-                ReadOnlySpan<char> h when !h.Contains('"') && !h.Contains(' ') => SimpleRule.Create(this, parent, ruleNumber, _rules[ruleNumber]),
-                _ => throw new InvalidOperationException($"Unexpected expression {_rules[ruleNumber].ToString()}"),
+                string e when e.Contains(' ') && e.Contains('|') => AlternatingRule.Create(this, parent, ruleNumber, expression),
+                string f when f.Contains(' ') && !f.Contains('|') => MultiRule.Create(this, parent, ruleNumber, expression),
+                string g when g.Contains('"') => TerminalRule.Create(this, parent, ruleNumber, expression),
+                string h when !h.Contains('"') && !h.Contains(' ') => SimpleRule.Create(this, parent, ruleNumber, expression),
+                _ => throw new InvalidOperationException($"Unexpected expression {expression}"),
             };
             return rule;
         }

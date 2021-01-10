@@ -14,7 +14,7 @@
 
         int Id { get; init; }
 
-        ReadOnlyMemory<char> GeneratingExpression { get; init; }
+        string GeneratingExpression { get; init; }
 
         bool Valid(ReadOnlySpan<char> expression);
     }
