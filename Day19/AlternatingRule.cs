@@ -1,5 +1,6 @@
 ﻿namespace AOC2020.Day19
 {
+    using System;
     using System.Diagnostics;
     using System.Linq;
 
@@ -38,7 +39,7 @@
 
         public AlternatingRule(IAbstractRule parent, int id, string generatingExpression, (IAbstractRule, IAbstractRule) value) => (Parent, Id, GeneratingExpression, Value) = (parent, id, generatingExpression, value);
 
-        public bool Valid(string expression)
+        public bool Valid(ReadOnlySpan<char> expression)
         {
             return Value.Either.Valid(expression) || Value.Or.Valid(expression);
         }

@@ -1,7 +1,7 @@
 ﻿namespace AOC2020.Day19
 {
+    using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using AOC2020.Utilities;
 
@@ -40,7 +40,7 @@
 
         public MultiRule(IAbstractRule parent, int id, string generatingExpression, List<IAbstractRule> value) => (Parent, Id, GeneratingExpression, Value) = (parent, id, generatingExpression, value);
 
-        public bool Valid(string expression)
+        public bool Valid(ReadOnlySpan<char> expression)
         {
             List<IAbstractRule> rulesToUse = new ();
             rulesToUse.AddRange(Value);
@@ -79,7 +79,7 @@
                     (IAbstractRule rule, _) = rulesWithExpansions[i];
 
                     int expressionLength = rule.MatchLength + combo[i];
-                    comboResult.Add(rule.Valid(expression.Substring(startingStringIndex, expressionLength)));
+                    comboResult.Add(rule.Valid(expression.Slice(startingStringIndex, expressionLength)));
                     startingStringIndex += expressionLength;
                 }
 
@@ -121,7 +121,7 @@
         }
 
         // For each rule, get a list of expansion sizes.  Rules that do not expand will have one expansion of 0
-        private static List<(IAbstractRule rule, List<int> expansions)> GetRulesWithExpansions(List<IAbstractRule> rulesToUse, int baseLength, string expression)
+        private static List<(IAbstractRule rule, List<int> expansions)> GetRulesWithExpansions(List<IAbstractRule> rulesToUse, int baseLength, ReadOnlySpan<char> expression)
         {
             List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions = new ();
             foreach (var item in rulesToUse)
@@ -157,7 +157,7 @@
         }
 
         // Get combos between various rules, by combining the possible lengths of the rules (including expansiosn) to sum up to the length of the expression
-        private static List<int[]> GetCombos(List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions, int baseLength, string expression)
+        private static List<int[]> GetCombos(List<(IAbstractRule rule, List<int> expansions)> rulesWithExpansions, int baseLength, ReadOnlySpan<char> expression)
         {
             int[][] alphabet = new int[rulesWithExpansions.Count][];
             int alphabetSlot = 0;
@@ -173,7 +173,8 @@
             }
 
             var comboGenerator = new WordComboGenerator<int>(alphabet, rulesWithExpansions.Count);
-            var combos = comboGenerator.GetWords().Distinct().Where(x => x.Sum() + baseLength == expression.Length).ToList();
+            int expressionLength = expression.Length;
+            var combos = comboGenerator.GetWords().Distinct().Where(x => x.Sum() + baseLength == expressionLength).ToList();
 
             return combos;
         }

@@ -1,6 +1,6 @@
 ﻿namespace AOC2020.Day19
 {
-    using System.Collections.Generic;
+    using System;
     using System.Diagnostics;
 
     internal record TerminalRule : IAbstractRule
@@ -21,9 +21,9 @@
 
         public TerminalRule(IAbstractRule parent, int id, string generatingExpression, string value) => (Parent, Id, GeneratingExpression, Value, MatchLength) = (parent, id, generatingExpression, value, 1);
 
-        public bool Valid(string expression)
+        public bool Valid(ReadOnlySpan<char> expression)
         {
-            return expression == Value;
+            return expression.Equals(Value, StringComparison.Ordinal);
         }
 
         public static TerminalRule Create(Puzzle _, IAbstractRule parent, int id, string expression)
