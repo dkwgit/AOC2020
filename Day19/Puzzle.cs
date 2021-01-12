@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
     using AOC2020.Utilities;
     using Microsoft.Extensions.Logging;
 
@@ -29,19 +31,19 @@
         {
             get
             {
-                List<ReadOnlyMemory<char>> validExpressions = new ();
-
                 IAbstractRule rule = LoadRule(null, 0);
 
+                List<Task<bool>> tasks = new ();
                 foreach (var expression in _expressions)
                 {
-                    if (rule.Valid(expression.Span))
-                    {
-                        validExpressions.Add(expression);
-                    }
+                    Task<bool> task = new Task<bool>(() => GetValid(rule, expression));
+                    task.Start();
+                    tasks.Add(task);
                 }
 
-                string answer = validExpressions.Count.ToString();
+                Task.WaitAll(tasks.ToArray());
+
+                string answer = tasks.Where(x => x.Result).Count().ToString();
                 _logger.LogInformation("{Day}/Part1: Found {answer} as number of expressions which are valid for rule 0", Day, answer);
                 return answer;
             }
@@ -54,20 +56,19 @@
                 _rules[8] = "42 | 42 8".AsMemory();
                 _rules[11] = "42 31 | 42 11 31".AsMemory();
 
-                List<ReadOnlyMemory<char>> validExpressions = new ();
-
                 IAbstractRule rule = LoadRule(null, 0);
 
+                List<Task<bool>> tasks = new ();
                 foreach (var expression in _expressions)
                 {
-                    bool valid = rule.Valid(expression.Span);
-                    if (valid)
-                    {
-                        validExpressions.Add(expression);
-                    }
+                    Task<bool> task = new Task<bool>(() => GetValid(rule, expression));
+                    task.Start();
+                    tasks.Add(task);
                 }
 
-                string answer = validExpressions.Count.ToString();
+                Task.WaitAll(tasks.ToArray());
+
+                string answer = tasks.Where(x => x.Result).Count().ToString();
                 _logger.LogInformation("{Day}/Part2: Found {answer} as number of expressions that are valid using recursive rules", Day, answer);
                 return answer;
             }
@@ -106,6 +107,11 @@
                     }
                 }
             }
+        }
+
+        internal static bool GetValid(IAbstractRule rule, ReadOnlyMemory<char> expression)
+        {
+            return rule.Valid(expression.Span);
         }
 
         internal IAbstractRule LoadRule(IAbstractRule parent, int ruleNumber)
