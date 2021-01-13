@@ -6,7 +6,7 @@
     {
         MemoryWord GetWord(long location);
 
-        List<MemoryWord> GetMemory();
+        IReadOnlyCollection<MemoryWord> GetMemory();
 
         MemoryWord CreateNewWord(long location);
 

@@ -30,16 +30,9 @@
             return _locations[location];
         }
 
-        public List<MemoryWord> GetMemory()
+        public IReadOnlyCollection<MemoryWord> GetMemory()
         {
-            List<MemoryWord> words = new ();
-
-            foreach (var key in _locations.Keys)
-            {
-                words.Add(_locations[key]);
-            }
-
-            return words;
+            return _locations.Values;
         }
 
         public void SetWordWidth(int wordWidth)

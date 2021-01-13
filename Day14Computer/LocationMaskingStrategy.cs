@@ -22,7 +22,7 @@
                     arr[j] = (i & mask << j) >> j == 1 ? '1' : '0';
                 }
 
-                yield return string.Join(string.Empty, arr);
+                yield return new string(arr);
             }
 
             yield break;
