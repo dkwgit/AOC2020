@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using AOC2020.Utilities;
     using Microsoft.Extensions.DependencyInjection;

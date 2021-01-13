@@ -1,6 +1,7 @@
 ﻿namespace AOC2020.Day19
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -33,17 +34,13 @@
             {
                 IAbstractRule rule = LoadRule(null, 0);
 
-                List<Task<bool>> tasks = new ();
-                foreach (var expression in _expressions)
+                ConcurrentBag<bool> valids = new ();
+                Parallel.ForEach(_expressions, expression =>
                 {
-                    Task<bool> task = new Task<bool>(() => GetValid(rule, expression));
-                    task.Start();
-                    tasks.Add(task);
-                }
+                    valids.Add(GetValid(rule, expression));
+                });
 
-                Task.WaitAll(tasks.ToArray());
-
-                string answer = tasks.Where(x => x.Result).Count().ToString();
+                string answer = valids.Count(x => x == true).ToString();
                 _logger.LogInformation("{Day}/Part1: Found {answer} as number of expressions which are valid for rule 0", Day, answer);
                 return answer;
             }
@@ -58,17 +55,13 @@
 
                 IAbstractRule rule = LoadRule(null, 0);
 
-                List<Task<bool>> tasks = new ();
-                foreach (var expression in _expressions)
+                ConcurrentBag<bool> valids = new ();
+                Parallel.ForEach(_expressions, expression =>
                 {
-                    Task<bool> task = new Task<bool>(() => GetValid(rule, expression));
-                    task.Start();
-                    tasks.Add(task);
-                }
+                    valids.Add(GetValid(rule, expression));
+                });
 
-                Task.WaitAll(tasks.ToArray());
-
-                string answer = tasks.Where(x => x.Result).Count().ToString();
+                string answer = valids.Count(x => x == true).ToString();
                 _logger.LogInformation("{Day}/Part2: Found {answer} as number of expressions that are valid using recursive rules", Day, answer);
                 return answer;
             }

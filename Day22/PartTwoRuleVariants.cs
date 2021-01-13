@@ -10,9 +10,9 @@
     {
         private readonly Dictionary<BigInteger, bool> _history = new ();
 
-        public GameWinInfo CheckHistoryForWinner(Hand deckOne, Hand deckTwo)
+        public GameWinInfo CheckHistoryForWinner(Hand handOne, Hand handTwo)
         {
-            BigInteger composite = (deckOne.Cards << (6 * deckOne.CardCount)) + deckTwo.Cards;
+            BigInteger composite = (handOne.Cards << (6 * handOne.CardCount)) + handTwo.Cards;
 
             if (_history.ContainsKey(composite))
             {
@@ -28,7 +28,7 @@
 
         public RoundWinInfo DecideRound(Game game)
         {
-            if (game.PlayedOne > game.DeckOne.CardCount || game.PlayedTwo > game.DeckTwo.CardCount)
+            if (game.PlayedOne > game.HandOne.CardCount || game.PlayedTwo > game.HandTwo.CardCount)
             {
                 if (game.PlayedOne > game.PlayedTwo)
                 {
@@ -42,10 +42,10 @@
 
             int totalCards = game.PlayedOne + game.PlayedTwo;
 
-            Hand newDeckOne = Hand.DealHand(Hand.GetCards(game.DeckOne.Cards, game.PlayedOne));
-            Hand newDeckTwo = Hand.DealHand(Hand.GetCards(game.DeckTwo.Cards, game.PlayedTwo));
+            Hand newHandOne = Hand.DealHand(Hand.GetCards(game.HandOne.Cards, game.PlayedOne));
+            Hand newHandTwo = Hand.DealHand(Hand.GetCards(game.HandTwo.Cards, game.PlayedTwo));
 
-            Game newGame = new Game(newDeckOne, newDeckTwo, new PartTwoRuleVariants());
+            Game newGame = new Game(newHandOne, newHandTwo, new PartTwoRuleVariants());
             newGame.Play();
 
             if (newGame.WinState == GameWinInfo.PlayerOneWinsGame)

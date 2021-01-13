@@ -1,9 +1,10 @@
 ﻿namespace AOC2020.Map
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
 
     public class Map
     {
@@ -55,10 +56,9 @@
 
         public int ChangeSquares(Func<Square, char> squareChanger)
         {
-            Change[] changes = new Change[_squares.GetLength(0) * _squares.GetLength(1)];
+            ConcurrentBag<Change> changes = new ();
 
-            int changeArrayIndex = 0;
-            for (int i = 0; i < _squares.GetLength(0); i++)
+            Parallel.For(0, _squares.GetLength(0), i =>
             {
                 for (int j = 0; j < _squares.GetLength(1); j++)
                 {
@@ -68,20 +68,20 @@
                         var newValue = squareChanger(s);
                         if (s.Value != newValue)
                         {
-                            changes[changeArrayIndex] = new Change() { I = i, J = j, NewValue = newValue };
-                            changeArrayIndex++;
+                            changes.Add(new Change() { I = i, J = j, NewValue = newValue });
                         }
                     }
                 }
-            }
+            });
 
-            for (int change = 0; change < changeArrayIndex; change++)
+            Change[] arr = changes.ToArray();
+            for (int change = 0; change < arr.Length; change++)
             {
-                var o = changes[change];
+                var o = arr[change];
                 _squares[o.I, o.J].SetValue(o.NewValue);
             }
 
-            return changeArrayIndex; // Number of squares that have changed
+            return arr.Length; // Number of squares that have changed
         }
 
         public List<string> GetTextRepresentation()

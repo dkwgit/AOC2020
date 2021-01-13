@@ -50,10 +50,11 @@
             get
             {
                 Picture picture = new ();
-                picture.SetRegistry(_registry).
-                SetLengths(_tiles[0].Length, _tiles[0].Length - 2, (int)Math.Sqrt(_tiles.Count)).
-                Assemble().// picture.PrintPictureFromTiles();
-                StripBorders();
+                picture.
+                    SetRegistry(_registry).
+                    SetLengths(_tiles[0].Length, _tiles[0].Length - 2, (int)Math.Sqrt(_tiles.Count)).
+                    Assemble().// picture.PrintPictureFromTiles();
+                    StripBorders();
 
                 Pattern p = new ();
 

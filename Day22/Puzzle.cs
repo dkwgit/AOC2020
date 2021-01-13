@@ -10,9 +10,9 @@
 
         private List<string> _input = null;
 
-        private Hand _startingDeckOne;
+        private Hand _startingHandOne;
 
-        private Hand _startingDeckTwo;
+        private Hand _startingHandTwo;
 
         public Puzzle(ILogger<Puzzle> logger)
         {
@@ -28,7 +28,7 @@
             get
             {
                 Setup();
-                Game game = new (_startingDeckOne, _startingDeckTwo, new PartOneRuleVariants());
+                Game game = new (_startingHandOne, _startingHandTwo, new PartOneRuleVariants());
                 game.Play();
                 string answer = game.Score.ToString();
                 _logger.LogInformation("{Day}/Part1: Found {answer} as the score of the winning Deck", Day, answer);
@@ -41,7 +41,7 @@
             get
             {
                 Setup();
-                Game game = new (_startingDeckOne, _startingDeckTwo, new PartTwoRuleVariants());
+                Game game = new (_startingHandOne, _startingHandTwo, new PartTwoRuleVariants());
                 game.Play();
                 string answer = game.Score.ToString();
                 _logger.LogInformation("{Day}/Part2: Found {answer} as the score of the winning Deck", Day, answer);
@@ -87,8 +87,8 @@
                 }
             }
 
-            _startingDeckOne = Hand.DealHand(handOne);
-            _startingDeckTwo = Hand.DealHand(handTwo);
+            _startingHandOne = Hand.DealHand(handOne);
+            _startingHandTwo = Hand.DealHand(handTwo);
         }
     }
 }

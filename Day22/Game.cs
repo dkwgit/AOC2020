@@ -4,18 +4,18 @@
 
     internal class Game
     {
-        public Game(Hand deckOne, Hand deckTwo, IRuleVariants ruleVariants)
+        public Game(Hand handOne, Hand handTwo, IRuleVariants ruleVariants)
         {
-            DeckOne = deckOne;
-            DeckTwo = deckTwo;
+            HandOne = handOne;
+            HandTwo = handTwo;
             RuleVariants = ruleVariants;
         }
 
         public IRuleVariants RuleVariants { get; init; }
 
-        public Hand DeckOne { get; init; }
+        public Hand HandOne { get; init; }
 
-        public Hand DeckTwo { get; init; }
+        public Hand HandTwo { get; init; }
 
         public int PlayedOne { get; set; } = -1;
 
@@ -30,11 +30,11 @@
                 Hand winningDeck;
                 if (WinState == GameWinInfo.PlayerOneWinsGame)
                 {
-                    winningDeck = DeckOne;
+                    winningDeck = HandOne;
                 }
                 else if (WinState == GameWinInfo.PlayerTwoWinsGame)
                 {
-                    winningDeck = DeckTwo;
+                    winningDeck = HandTwo;
                 }
                 else
                 {
@@ -49,7 +49,7 @@
         {
             while (WinState == GameWinInfo.NoWinYet)
             {
-                WinState = RuleVariants.CheckHistoryForWinner(DeckOne, DeckTwo);
+                WinState = RuleVariants.CheckHistoryForWinner(HandOne, HandTwo);
                 if (WinState != GameWinInfo.NoWinYet)
                 {
                     return;
@@ -61,24 +61,24 @@
 
         public void PlayRound()
         {
-            PlayedOne = DeckOne.PlayCard();
-            PlayedTwo = DeckTwo.PlayCard();
+            PlayedOne = HandOne.PlayCard();
+            PlayedTwo = HandTwo.PlayCard();
             if (RuleVariants.DecideRound(this) == RoundWinInfo.PlayerOneWinsRound)
             {
-                DeckOne.AddAtBack(PlayedOne);
-                DeckOne.AddAtBack(PlayedTwo);
+                HandOne.AddAtBack(PlayedOne);
+                HandOne.AddAtBack(PlayedTwo);
             }
             else
             {
-                DeckTwo.AddAtBack(PlayedTwo);
-                DeckTwo.AddAtBack(PlayedOne);
+                HandTwo.AddAtBack(PlayedTwo);
+                HandTwo.AddAtBack(PlayedOne);
             }
 
-            if (DeckOne.CardCount == 0)
+            if (HandOne.CardCount == 0)
             {
                 WinState = GameWinInfo.PlayerTwoWinsGame;
             }
-            else if (DeckTwo.CardCount == 0)
+            else if (HandTwo.CardCount == 0)
             {
                 WinState = GameWinInfo.PlayerOneWinsGame;
             }

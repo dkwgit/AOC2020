@@ -1,7 +1,9 @@
 ﻿namespace AOC2020.Day17
 {
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using AOC2020.Utilities;
     using Microsoft.Extensions.Logging;
 
@@ -202,48 +204,46 @@
 
         private void DoTurn()
         {
-            List<Change> changes = new (100);
+            ConcurrentBag<Change> changes = new ();
 
             int estart = _dimensionCount == 3 ? _estart : 1;
             int elimit = _dimensionCount == 3 ? _estart + 1 : _extra - 1;
 
             // Start one from the edge, so each thing we evaluate has all 26 cube surrounding
-            int changeIndex = 0;
-            for (int y = 1; y < _length - 1; y++)
-            {
-                for (int x = 1; x < _width - 1; x++)
+            Parallel.For(1, _length - 1, y =>
                 {
-                    for (int z = 1; z < _height - 1; z++)
+                    for (int x = 1; x < _width - 1; x++)
                     {
-                        for (int e = estart; e < elimit; e++)
+                        for (int z = 1; z < _height - 1; z++)
                         {
-                            int anc = ActiveNeighborCount(y, x, z, e);
-                            int newValue = _space[y, x, z, e];
+                            for (int e = estart; e < elimit; e++)
+                            {
+                                int anc = ActiveNeighborCount(y, x, z, e);
+                                int newValue = _space[y, x, z, e];
 
-                            if (newValue == 1)
-                            {
-                                if (!(anc >= 2 && anc <= 3))
+                                if (newValue == 1)
                                 {
-                                    changes.Add(new Change() { Y = y, X = x, Z = z, E = e, NewValue = 0 });
-                                    changeIndex++;
+                                    if (!(anc >= 2 && anc <= 3))
+                                    {
+                                        changes.Add(new Change() { Y = y, X = x, Z = z, E = e, NewValue = 0 });
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                if (anc == 3)
+                                else
                                 {
-                                    changes.Add(new Change() { Y = y, X = x, Z = z, E = e, NewValue = 1 });
-                                    changeIndex++;
+                                    if (anc == 3)
+                                    {
+                                        changes.Add(new Change() { Y = y, X = x, Z = z, E = e, NewValue = 1 });
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            }
+                });
 
-            for (int i = 0; i < changeIndex; i++)
+            var arr = changes.ToArray();
+            for (int i = 0; i < arr.Length; i++)
             {
-                Change change = changes[i];
+                Change change = arr[i];
                 _space[change.Y, change.X, change.Z, change.E] = change.NewValue;
             }
         }
