@@ -53,8 +53,10 @@
                 picture.
                     SetRegistry(_registry).
                     SetLengths(_tiles[0].Length, _tiles[0].Length - 2, (int)Math.Sqrt(_tiles.Count)).
-                    Assemble().// picture.PrintPictureFromTiles();
+                    Assemble().
                     StripBorders();
+
+                picture.PrintPictureFromTiles();
 
                 Pattern p = new ();
 
@@ -95,7 +97,7 @@
 
                 int totalFound = picture.FindPatterns(p);
 
-                // picture.PrintInColor();
+                picture.PrintInColor();
                 string answer = (picture.GetOccupiedPointCount() - picture.GetSerpentPointCount()).ToString();
                 _logger.LogInformation("{Day}/Part2: Found {answer} as roughness of water after subtracting {totalFound} sea serpents", Day, answer, totalFound);
                 return answer;
